@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const globby = require('globby');
-const loadJsonFile = require('load-json-file');
+const fs = require("fs");
+const path = require("path");
+const globby = require("globby");
+const loadJsonFile = require("load-json-file");
 
 const loadPackage = packagePath => {
-    const pkgJsonPath = path.join(packagePath, 'package.json');
+    const pkgJsonPath = path.join(packagePath, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         return loadJsonFile.sync(pkgJsonPath);
     }
@@ -19,9 +19,9 @@ const findPackages = (packageSpecs, rootDirectory) => {
                 ...pkgDirs,
                 ...(globby.hasMagic(pkgGlob)
                     ? globby.sync(path.join(rootDirectory, pkgGlob), {
-                        nodir: false,
-                    })
-                    : [path.join(rootDirectory, pkgGlob)]),
+                          nodir: false
+                      })
+                    : [path.join(rootDirectory, pkgGlob)])
             ],
             []
         )
@@ -30,7 +30,7 @@ const findPackages = (packageSpecs, rootDirectory) => {
 };
 
 const getPackages = directory => {
-    const lernaJsonPath = path.join(directory, 'lerna.json');
+    const lernaJsonPath = path.join(directory, "lerna.json");
     if (fs.existsSync(lernaJsonPath)) {
         const lernaJson = loadJsonFile.sync(lernaJsonPath);
         if (!lernaJson.useWorkspaces) {
@@ -38,7 +38,7 @@ const getPackages = directory => {
         }
     }
 
-    const pkgJsonPath = path.join(directory, 'package.json');
+    const pkgJsonPath = path.join(directory, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
         if (pkgJson.workspaces) {

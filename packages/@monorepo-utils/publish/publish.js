@@ -63,17 +63,19 @@ const publish = async ({ dry, skipPrompt, ciMode }) => {
         return log("No need to publish.");
     }
     // confirm: npm publish if skipPrompt is false
-    const answers = skipPrompt ? {
-        publish: true
-    } : await inquirer.prompt([
-        {
-            type: "confirm",
-            name: "publish",
-            message: `Do you publish these packages?
+    const answers = skipPrompt
+        ? {
+              publish: true
+          }
+        : await inquirer.prompt([
+              {
+                  type: "confirm",
+                  name: "publish",
+                  message: `Do you publish these packages?
 ${publishablePackages.map(pkg => pkg.package.name).join(", ")}
 `
-        }
-    ]);
+              }
+          ]);
     if (!answers["publish"]) {
         return log("No publish");
     }
@@ -99,13 +101,13 @@ ${publishablePackages.map(pkg => pkg.package.name).join(", ")}
     );
 };
 
-
 const dryRunMode = !!cli.flags.dry;
 if (dryRunMode) {
     console.log(
         chalk`
     {green.bold dry-run mode}
-    `);
+    `
+    );
 }
 const ciMode = !!cli.flags.ci;
 publish({

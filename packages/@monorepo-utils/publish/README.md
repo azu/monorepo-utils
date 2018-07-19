@@ -45,7 +45,7 @@ CI flag skip interactive mode.
 
 ## UseCase
 
-You can this script for splitting tagging and publishing.
+You can use this script for splitting tagging and publishing.
 
 For example, [@lerna/publish](https://github.com/lerna/lerna/tree/master/commands/publish#readme) does tag and publish together.
 You want to split that process into two phase.

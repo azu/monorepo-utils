@@ -10,7 +10,7 @@ const { asyncFilter } = require("./utils/async-utils");
 const cli = meow(
     `
     Usage
-      $ release-script
+      $ monorepo-utils-publish
 
     Options:
       --dry Enable dry run mode
@@ -19,10 +19,10 @@ const cli = meow(
 
     Examples
       # dry-run mode
-      $ release-script --dry
+      $ monorepo-utils-publish --dry
       # manually publish
       # CI mode
-      $ release-script --ci
+      $ monorepo-utils-publish --ci
 `,
     {
         autoVersion: true,

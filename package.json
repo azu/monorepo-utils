@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "monorepo-utils",
+  "version": "1.0.0",
+  "description": "monorepo utilities monorepo",
+  "engines": {
+    "node": ">=8.0.0",
+    "yarn": ">=1.5.0"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test",
+    "clean": "lerna run clean",
+    "publish": "node scripts/release/publish.js",
+    "publish:ci": "node scripts/release/publish.js --ci",
+    "version_up:major": "lerna publish --skip-npm --conventional-commits --cd-version major",
+    "version_up:minor": "lerna publish --skip-npm --conventional-commits --cd-version minor",
+    "version_up:patch": "lerna publish --skip-npm --conventional-commits --cd-version patch",
+    "version_up": "lerna publish --skip-npm --conventional-commits"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "keywords": [
+    "monorepot"
+  ],
+  "author": "azu",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^2.11.0"
+  }
+}

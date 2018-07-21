@@ -1,35 +1,40 @@
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
 const globby = require("globby");
-const loadJsonFile = require("load-json-file");
+import loadJsonFile = require("load-json-file");
+import * as path from "path";
+import * as fs from "fs";
 
-const loadPackage = packagePath => {
+const loadPackage = (packagePath: string) => {
     const pkgJsonPath = path.join(packagePath, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         return loadJsonFile.sync(pkgJsonPath);
     }
 };
 
-const findPackages = (packageSpecs, rootDirectory) => {
+const findPackages = (packageSpecs: string[], rootDirectory: string) => {
     return packageSpecs
         .reduce(
-            (pkgDirs, pkgGlob) => [
-                ...pkgDirs,
-                ...(globby.hasMagic(pkgGlob)
-                    ? globby.sync(path.join(rootDirectory, pkgGlob), {
-                          nodir: false
+            (pkgDirs, pkgGlob) => {
+                const target = path.join(rootDirectory, pkgGlob);
+                const filePathList = globby.hasMagic(pkgGlob)
+                    ? globby.sync(target, {
+                          onlyFiles: false
                       })
-                    : [path.join(rootDirectory, pkgGlob)])
-            ],
-            []
+                    : [target];
+                return pkgDirs.concat(filePathList);
+            },
+            [] as string[]
         )
-        .map(location => ({ location, package: loadPackage(location) }))
-        .filter(({ package: { name } = {} }) => name);
+        .map((location: string) => {
+            return { location, package: loadPackage(location) };
+        })
+        .filter(res => {
+            return res.package && res.package.name;
+        });
 };
 
-const getPackages = directory => {
+export const getPackages = (directory: string) => {
     const lernaJsonPath = path.join(directory, "lerna.json");
     if (fs.existsSync(lernaJsonPath)) {
         const lernaJson = loadJsonFile.sync(lernaJsonPath);
@@ -42,18 +47,16 @@ const getPackages = directory => {
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
         if (pkgJson.workspaces) {
+            // "workspaces": []
             if (Array.isArray(pkgJson.workspaces)) {
                 return findPackages(pkgJson.workspaces, directory);
             } else if (Array.isArray(pkgJson.workspaces.packages)) {
+                // "workspaces": { "packages": [] }
                 return findPackages(pkgJson.workspaces.packages, directory);
             }
-            throw new Error('"workspaces" field is invalid format in pacakge.json');
         }
     }
 
     // Bail if we don't find any packages
     return [];
 };
-
-module.exports = getPackages;
-exports.default = getPackages;

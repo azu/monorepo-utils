@@ -2,7 +2,7 @@
 
 const chalk = require("chalk");
 const inquirer = require("inquirer");
-const getPackages = require("./utils/get-pacakges");
+const { getPackages } = require("@monorepo-utils/package-utils");
 const canNpmPublish = require("can-npm-publish").canNpmPublish;
 const meow = require("meow");
 const { execRead, log, logPromise, execUnlessDry, getUnexecutedCommands } = require("./utils/utils");

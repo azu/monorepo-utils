@@ -71,11 +71,6 @@ This is alias of [packages/@monorepo-utils/collect-changelog](../packages/@monor
 
 Submit Pull Request and paste the CHANGELOG.
 
-```
-git push --follow-tags
-# open PR
-```
-
 Example: [2018 07 22 release by azu · Pull Request #1 · azu/monorepo-utils](https://github.com/azu/monorepo-utils/pull/1)
 
 **Note**: Reviewers should review it and approve it.
@@ -85,9 +80,13 @@ Example: [2018 07 22 release by azu · Pull Request #1 · azu/monorepo-utils](ht
 Finally, publish new version to npm
 
 ```
+# publish to npm
 yarn run publish
+# push tags to github
+git push --follow-tags
 ```
 
 (not `yarn publish`)
+
 
 FINISH.

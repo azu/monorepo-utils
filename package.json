@@ -9,7 +9,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run test",
+    "test": "lerna run test --no-cache",
     "test:updateSnapshot": "lerna run test:updateSnapshot",
     "build": "lerna run build",
     "clean": "lerna run clean",

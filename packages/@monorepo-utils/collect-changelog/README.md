@@ -17,15 +17,16 @@ Install with [npm](https://www.npmjs.com/):
 ## Usage
 
     Usage
-      $ monorepo-utils-collect-changelog [option] "tag@version"
+      $ collect-changelog-from-tag [option] "tag@version"
 
     Options
       --directory the root directory of monorepo
+      --template  handlebars template path
 
     Examples
-      $ monorepo-utils-collect-changelog --directory /path/to/monorepo-project/ "tag@version"
+      $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
       # current directory is project root
-      $ monorepo-utils-collect-changelog "tag@version"
+      $ collect-changelog-from-tag "tag@version"
 
 ## Example
 

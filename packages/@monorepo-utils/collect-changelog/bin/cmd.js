@@ -11,6 +11,7 @@ const cli = meow(
 
     Options
       --directory the root directory of monorepo
+      --template  handlebars template path
 
     Examples
       $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
@@ -21,6 +22,9 @@ const cli = meow(
         flags: {
             directory: {
                 type: "string"
+            },
+            template: {
+                type: "string"
             }
         },
         autoHelp: true,
@@ -30,7 +34,11 @@ const cli = meow(
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");
 const promises = cli.input.map(tag => {
-    return execute(monorepoDirectory, tag);
+    return execute({
+        directory: monorepoDirectory,
+        lernaTag: tag,
+        templatePath: cli.flags.template
+    });
 });
 // show results
 Promise.all(promises)

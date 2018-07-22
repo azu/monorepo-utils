@@ -19,6 +19,7 @@
     "version_up:minor": "lerna publish --skip-npm --conventional-commits --cd-version minor",
     "version_up:patch": "lerna publish --skip-npm --conventional-commits --cd-version patch",
     "version_up": "lerna publish --skip-npm --conventional-commits",
+    "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "precommit": "lint-staged",
     "postcommit": "git reset"

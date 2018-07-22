@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/publish@1.1.0...@monorepo-utils/publish@1.2.0) (2018-07-22)
+
+
+### Features
+
+* **publish:** add version to publish log ([6c9d70a](https://github.com/azu/monorepo-utils/commit/6c9d70a))
+
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-07-22)
 

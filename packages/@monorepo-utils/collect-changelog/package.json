@@ -37,7 +37,7 @@
     "precommit": "lint-staged",
     "postcommit": "git reset",
     "prepublish": "npm run --if-present build",
-    "test": "jest",
+    "test": "jest --no-cache",
     "test:updateSnapshot": "jest -u",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,css}'",
     "watch": "tsc -p . --watch"

@@ -68,7 +68,7 @@ function filter(changes: Changes) {
     if (filterEmpty(changes.features).length === 0) {
         delete changes.features;
     }
-    if (filterEmpty(changes.fixes).length) {
+    if (filterEmpty(changes.fixes).length === 0) {
         delete changes.fixes;
     }
     return changes;

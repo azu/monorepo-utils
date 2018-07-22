@@ -55,7 +55,8 @@
       "json",
       "node"
     ],
-    "testRegex": "test/.*.tsx?",
+    "testRegex": "./test/.*.ts$",
+    "rootDir": ".",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     }

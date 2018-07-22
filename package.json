@@ -10,6 +10,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
+    "test:updateSnapshot": "lerna run test:updateSnapshot",
     "build": "lerna run build",
     "clean": "lerna run clean",
     "publish": "node scripts/release/publish.js",

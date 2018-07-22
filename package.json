@@ -8,7 +8,7 @@
     "yarn": ">=1.5.0"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && yarn run build",
     "test": "lerna run test",
     "test:updateSnapshot": "lerna run test:updateSnapshot",
     "build": "lerna run build",

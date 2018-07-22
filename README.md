@@ -1,4 +1,4 @@
-# monorepo-utils
+# monorepo-utils [![Build Status](https://travis-ci.org/azu/monorepo-utils.svg?branch=master)](https://travis-ci.org/azu/monorepo-utils)
 
 This repository is utilities for monorepo.
 Also this repository is a monorepo.

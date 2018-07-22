@@ -21,7 +21,7 @@
   ],
   "main": "lib/collect-changelog-from-tag.js",
   "types": "lib/collect-changelog-from-tag.d.ts",
-  "bin":{
+  "bin": {
     "monorepo-utils-collect-changelog": "./bin/cmd.js"
   },
   "directories": {
@@ -46,6 +46,20 @@
     "printWidth": 120,
     "tabWidth": 4
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testRegex": "test/.*.tsx?",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
   "dependencies": {
     "@monorepo-utils/package-utils": "^1.0.0",
     "cclog-parser": "^1.1.0",
@@ -54,37 +68,26 @@
     "meow": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.0",
     "@types/handlebars": "^4.0.38",
+    "@types/jest": "^23.3.0",
     "@types/load-json-file": "^2.0.7",
-    "jest": "^23.4.1",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.0.1",
     "@types/node": "^10.5.2",
     "cross-env": "^5.2.0",
     "husky": "^0.14.3",
+    "jest": "^23.4.1",
     "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.0.1",
     "typescript": "^2.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [
       "prettier --write",
       "git add"
-    ]
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "test/.*.tsx?",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
     ]
   }
 }

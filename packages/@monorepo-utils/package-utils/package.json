@@ -42,6 +42,24 @@
     "singleQuote": false,
     "tabWidth": 4
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testRegex": "test/.*.tsx?",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
+  "dependencies": {
+    "globby": "^8.0.1",
+    "load-json-file": "^5.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^23.3.0",
     "@types/load-json-file": "^2.0.7",
@@ -55,23 +73,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "globby": "^8.0.1",
-    "load-json-file": "^5.0.0"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "test/.*.tsx?",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }

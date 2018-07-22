@@ -1,4 +1,4 @@
-# collect-changelog-from-tag
+# @monorepo-utils/collect-changelog
 
 Collect CHANGELOG from tags.
 
@@ -48,6 +48,12 @@ Install with [npm](https://www.npmjs.com/):
     
     - **textlint:** markdown-to-ast@4 includes some breaking change
 
+Get all changelog at point.
+
+    $ lerna publish --skip-npm
+    # tag each packages
+    $ git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {}
+    # get CHANGELOG from each packages
 
 ## Author
 

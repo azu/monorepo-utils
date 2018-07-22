@@ -72,7 +72,11 @@ const publish = async ({ dry, skipPrompt, ciMode }) => {
                   type: "confirm",
                   name: "publish",
                   message: `Do you publish these packages?
-${publishablePackages.map(pkg => pkg.package.name).join(", ")}
+${publishablePackages
+                      .map(pkg => {
+                          return `- ${pkg.package.name}@${pkg.package.version}`;
+                      })
+                      .join("\n")}
 `
               }
           ]);

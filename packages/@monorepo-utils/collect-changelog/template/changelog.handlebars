@@ -1,0 +1,26 @@
+{{!--
+{
+"name": "package-name",
+"version": "1.0.0",
+"path": "/path/to/CHANGELOG.md",
+"group": {
+  "fixes": [
+    "fixa ([17c2c43](https://abc/commit/abc))",
+    "fixb ([17c2c43](https://abc/commit/abc))"
+  ],
+  "features": [
+    "feata ([17c2c43](https://abc/commit/abc))",
+    "featb ([17c2c43](https://abc/commit/abc))"
+  ]
+}
+--}}
+## {{name}}@{{version}}
+
+{{#each changes}}
+### {{@key}}
+
+{{#each this}}
+- {{this}}
+{{/each}}
+
+{{/each}}

@@ -1,13 +1,13 @@
 {
-  "name": "@monorepo-utils/package-utils",
+  "name": "@monorepo-utils/collect-changelog",
   "version": "1.0.0",
-  "description": "Package utility for monorepo.",
+  "description": "Collect CHANGELOG from tags.",
   "keywords": [
+    "changelog",
     "lerna",
-    "monorepo",
-    "util"
+    "monorepo"
   ],
-  "homepage": "https://github.com/azu/monorepo-utils/tree/master/packages/@monorepo-utils/package-utils/",
+  "homepage": "https://github.com/azu/monorepo-utils",
   "bugs": {
     "url": "https://github.com/azu/monorepo-utils/issues"
   },
@@ -16,10 +16,14 @@
   "files": [
     "bin/",
     "lib/",
-    "src/"
+    "src/",
+    "template/"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/collect-changelog-from-tag.js",
+  "types": "lib/collect-changelog-from-tag.d.ts",
+  "bin":{
+    "monorepo-utils-collect-changelog": "./bin/cmd.js"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -30,35 +34,44 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production tsc -p .",
-    "clean": "rimraf lib/",
+    "precommit": "lint-staged",
+    "postcommit": "git reset",
     "prepublish": "npm run --if-present build",
     "test": "jest",
     "test:updateSnapshot": "jest -u",
-    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,css}'",
     "watch": "tsc -p . --watch"
   },
   "prettier": {
     "printWidth": 120,
-    "singleQuote": false,
     "tabWidth": 4
+  },
+  "dependencies": {
+    "@monorepo-utils/package-utils": "^1.0.0",
+    "cclog-parser": "^1.1.0",
+    "changelog-parser": "^2.1.0",
+    "handlebars": "^4.0.11",
+    "meow": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.0",
+    "@types/handlebars": "^4.0.38",
     "@types/load-json-file": "^2.0.7",
-    "@types/node": "^10.5.2",
-    "cross-env": "^5.2.0",
     "jest": "^23.4.1",
-    "prettier": "^1.13.7",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.0.1",
+    "@types/node": "^10.5.2",
+    "cross-env": "^5.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.2",
     "typescript": "^2.9.2"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "globby": "^8.0.1",
-    "load-json-file": "^5.0.0"
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "jest": {
     "transform": {

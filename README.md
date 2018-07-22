@@ -28,7 +28,7 @@ You can do release to use [@monorepo-utils/publish](./packages/@monorepo-utils/p
 1. Bump version and generate CHANGELOG
 2. Submit Pull Request
 3. Review the CHANGELOG
-4. **Actual** publish to npm
+4. Publish to npm
 5. Merge
 
 For more details, see [Release flow](https://github.com/azu/monorepo-utils/blob/master/.github/CONTRIBUTING.md#release-flow) on this repository.

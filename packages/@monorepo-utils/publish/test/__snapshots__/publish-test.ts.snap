@@ -2,9 +2,9 @@
 
 exports[`publish should publish packages 1`] = `
 "
-LOG [32m✓[39m textlint@1000.0.0-test
-LOG [32m✓[39m @textlint/ast-node-types@1000.0.0-test
-LOG [32m✓[39m @textlint/kernel@1000.0.0-test
-LOG [32m✓[39m @textlint/linter-formatter@1000.0.0-test
-LOG [32m✓[39m @textlint/markdown-to-ast@1000.0.0-test"
+LOG ✓ textlint@1000.0.0-test
+LOG ✓ @textlint/ast-node-types@1000.0.0-test
+LOG ✓ @textlint/kernel@1000.0.0-test
+LOG ✓ @textlint/linter-formatter@1000.0.0-test
+LOG ✓ @textlint/markdown-to-ast@1000.0.0-test"
 `;

@@ -1,6 +1,7 @@
 import * as path from "path";
 import { publish } from "../src/publish";
 
+const stripAnsi = require("strip-ansi");
 const makeConsoleMock = require("consolemock");
 describe("publish", () => {
     let consoleMock: any;
@@ -20,6 +21,6 @@ describe("publish", () => {
             dry: true,
             ciMode: true
         });
-        expect(consoleMock.printHistory()).toMatchSnapshot();
+        expect(stripAnsi(consoleMock.printHistory())).toMatchSnapshot();
     });
 });

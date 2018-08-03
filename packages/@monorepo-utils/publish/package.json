@@ -10,7 +10,7 @@
   "main": "lib/publish.js",
   "types": "lib/publish.d.ts",
   "bin": {
-    "monorepo-utils-publish": "publish.js"
+    "monorepo-utils-publish": "./bin/cmd.js"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production tsc -p .",

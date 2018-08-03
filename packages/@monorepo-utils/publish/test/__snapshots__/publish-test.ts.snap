@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`publish should publish packages 1`] = `
+"
+LOG ✓ textlint@1000.0.0-test
+LOG ✓ @textlint/ast-node-types@1000.0.0-test
+LOG ✓ @textlint/kernel@1000.0.0-test
+LOG ✓ @textlint/linter-formatter@1000.0.0-test
+LOG ✓ @textlint/markdown-to-ast@1000.0.0-test"
+`;

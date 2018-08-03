@@ -4,22 +4,19 @@ const { dots } = require("cli-spinners");
 const logUpdate = require("log-update");
 const { exec, spawn } = require("child-process-promise");
 
-const execRead = async (command, options) => {
+const execRead = async (command: string, options?: string[]) => {
     const { stdout } = await exec(command, options);
 
     return stdout.trim();
 };
 
-const unexecutedCommands = [];
+const unexecutedCommands: string[] = [];
 
 /**
- *
- * @param {string} command
- * @param {string} cwd
- * @param {boolean} dry
- * @returns {Promise<void>}
+ * execute if needed
+ * if dry is true, it does not execute and log it
  */
-const execUnlessDry = async (command, { cwd, dry }) => {
+const execUnlessDry = async (command: string, { cwd, dry }: { cwd: string; dry: boolean }): Promise<void> => {
     if (dry) {
         unexecutedCommands.push(`${command} # {cwd: ${cwd}}`);
     } else {
@@ -28,14 +25,14 @@ const execUnlessDry = async (command, { cwd, dry }) => {
 };
 
 /**
- *
- * @param {string} command
- * @param {string[]} args
- * @param {string} cwd
- * @param {boolean} dry
- * @returns {Promise<void>}
+ * spawn if needed
+ * if dry is true, it does not spawn and log it
  */
-const spawnUnlessDry = async (command, args, { cwd, dry }) => {
+const spawnUnlessDry = async (
+    command: string,
+    args: string[],
+    { cwd, dry }: { cwd: string; dry: boolean }
+): Promise<void> => {
     if (dry) {
         unexecutedCommands.push(`${command} # {cwd: ${cwd}}`);
     } else {
@@ -62,7 +59,7 @@ const getUnexecutedCommands = () => {
 /**
  * @param {string} text
  */
-const log = text => {
+const log = (text: string) => {
     console.log(`${chalk.green("✓")} ${text}`);
 };
 
@@ -72,7 +69,11 @@ const log = text => {
  * @param {{isLongRunningTask: boolean, ciMode: boolean }} [options]
  * @returns {Promise<*>}
  */
-const logPromise = async (promise, title, options = {}) => {
+const logPromise = async (
+    promise: Promise<any>,
+    title: string,
+    options: { isLongRunningTask?: boolean; ciMode?: boolean } = {}
+): Promise<any> => {
     const { frames, interval } = dots;
     const ciMode = options.ciMode !== undefined ? options.ciMode : false;
     const isLongRunningTask = options.isLongRunningTask !== undefined ? options.isLongRunningTask : false;
@@ -107,15 +108,8 @@ const logPromise = async (promise, title, options = {}) => {
     }
 };
 
-const runYarnTask = async (args, { cwd, dry }) => {
+const runYarnTask = async (args: string[], { cwd, dry }: { cwd: string; dry: boolean }) => {
     return spawnUnlessDry(`yarn`, args, { cwd, dry });
 };
 
-module.exports = {
-    execRead,
-    execUnlessDry,
-    getUnexecutedCommands,
-    runYarnTask,
-    log,
-    logPromise
-};
+export { execRead, execUnlessDry, getUnexecutedCommands, runYarnTask, log, logPromise };

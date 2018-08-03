@@ -1,6 +1,6 @@
 {
   "name": "@monorepo-utils/publish",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Publish packages to npm if needed. ",
   "license": "MIT",
   "files": [

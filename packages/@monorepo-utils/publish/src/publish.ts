@@ -11,12 +11,14 @@ export const publish = async ({
     projectDir,
     dry,
     skipPrompt,
-    ciMode
+    ciMode,
+    distTag
 }: {
     projectDir: string;
     dry: boolean;
     skipPrompt: boolean;
     ciMode: boolean;
+    distTag?: string;
 }): Promise<void> => {
     const packages = getPackages(projectDir);
     const publishablePackages = await asyncFilter(packages, async (pkg: any) => {
@@ -55,11 +57,20 @@ ${publishablePackages
     await publishablePackages.reduce((promise: Promise<any>, pkg: any) => {
         return promise.then(() => {
             const location = pkg.location;
-            const task = execUnlessDry(`npm publish`, {
+            const args: string[] = [];
+            if (distTag) {
+                args.push("--tag", distTag);
+            }
+
+            const task = execUnlessDry(`npm publish ` + args.join(" "), {
                 cwd: location,
                 dry
             });
-            return logPromise(task, `${pkg.package.name}@${pkg.package.version}`, {
+            let message = `${pkg.package.name}@${pkg.package.version}`;
+            if (distTag) {
+                message += `, distTag: @${distTag}`;
+            }
+            return logPromise(task, message, {
                 ciMode: ciMode
             });
         });

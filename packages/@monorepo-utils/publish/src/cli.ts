@@ -15,8 +15,15 @@ const cli = meow(
       --dry Enable dry run mode
       --yes Yes all
       --ci  CI mode includes --yes flag
+      --dist-tag dist-tag for npm
 
     Examples
+      # publish 
+      $ monorepo-utils-publish --dry
+      # publish with --tag
+      # https://docs.npmjs.com/cli/publish
+      $ monorepo-utils-publish --dist-tag next
+      
       # dry-run mode
       $ monorepo-utils-publish --dry
       # manually publish
@@ -35,6 +42,9 @@ const cli = meow(
             },
             ci: {
                 type: "boolean"
+            },
+            distTag: {
+                type: "string"
             }
         }
     }
@@ -52,11 +62,13 @@ if (dryRunMode) {
 export async function run() {
     const projectDir = await execRead("git rev-parse --show-toplevel");
     const ciMode = !!cli.flags.ci;
+    const distTag = cli.flags.distTag;
     await publish({
         projectDir,
         dry: dryRunMode,
         skipPrompt: ciMode ? true : !!cli.flags.yes,
-        ciMode: ciMode
+        ciMode: ciMode,
+        distTag
     });
     console.log(
         chalk`

@@ -1,8 +1,9 @@
 "use strict";
-const asyncMap = async function asyncMap(array, operation) {
+export const asyncMap = async function asyncMap<T, R>(array: T[], operation: (item: T) => Promise<R>) {
     return Promise.all(array.map(async item => await operation(item)));
 };
-const asyncFilter = async (array, predicate) => {
+
+export const asyncFilter = async <T>(array: T[], predicate: (item: T) => Promise<boolean>) => {
     const evaluateds = await asyncMap(array, async item => {
         const shouldExist = await predicate(item);
         return {
@@ -11,8 +12,4 @@ const asyncFilter = async (array, predicate) => {
         };
     });
     return evaluateds.filter(evaluated => evaluated.shouldExist).map(evaluated => evaluated.item);
-};
-module.exports = {
-    asyncMap,
-    asyncFilter
 };

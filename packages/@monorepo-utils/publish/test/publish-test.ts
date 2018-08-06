@@ -23,4 +23,14 @@ describe("publish", () => {
         });
         expect(stripAnsi(consoleMock.printHistory())).toMatchSnapshot();
     });
+    it("should publish packages with --distTag", async () => {
+        await publish({
+            projectDir: path.join(__dirname, "fixtures"),
+            skipPrompt: true,
+            dry: true,
+            ciMode: true,
+            distTag: "next"
+        });
+        expect(stripAnsi(consoleMock.printHistory())).toMatchSnapshot();
+    });
 });

@@ -15,13 +15,21 @@ Publish packages to npm if needed.
       --dry Enable dry run mode
       --yes Yes all
       --ci  CI mode includes --yes flag
+      --dist-tag dist-tag for npm
 
     Examples
+      # publish 
+      $ monorepo-utils-publish --dry
+      # publish with --tag
+      # https://docs.npmjs.com/cli/publish
+      $ monorepo-utils-publish --dist-tag next
+      
       # dry-run mode
       $ monorepo-utils-publish --dry
       # manually publish
       # CI mode
       $ monorepo-utils-publish --ci
+
 
 ## Publish
 

@@ -8,3 +8,12 @@ LOG ✓ @textlint/kernel@1000.0.0-test
 LOG ✓ @textlint/linter-formatter@1000.0.0-test
 LOG ✓ @textlint/markdown-to-ast@1000.0.0-test"
 `;
+
+exports[`publish should publish packages with --distTag 1`] = `
+"
+LOG ✓ textlint@1000.0.0-test, distTag: @next
+LOG ✓ @textlint/ast-node-types@1000.0.0-test, distTag: @next
+LOG ✓ @textlint/kernel@1000.0.0-test, distTag: @next
+LOG ✓ @textlint/linter-formatter@1000.0.0-test, distTag: @next
+LOG ✓ @textlint/markdown-to-ast@1000.0.0-test, distTag: @next"
+`;

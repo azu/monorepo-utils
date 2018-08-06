@@ -4,8 +4,9 @@
   "description": "Publish packages to npm if needed. ",
   "license": "MIT",
   "files": [
-    "publish.js",
-    "utils"
+    "bin",
+    "lib",
+    "src"
   ],
   "main": "lib/publish.js",
   "types": "lib/publish.d.ts",

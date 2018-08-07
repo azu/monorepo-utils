@@ -10,7 +10,17 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-- [ ] Write usage instructions
+### `getPackages(rootDirectory: string): PackageResult[]`
+
+```ts
+export interface PackageResult {
+    // path to package's directory
+    location: string;
+    // package.json content
+    packageJSON: any;
+}
+export declare const getPackages: (rootDirectory: string) => PackageResult[];
+```
 
 ## Changelog
 
@@ -42,3 +52,5 @@ For bugs and feature requests, [please create an issue](https://github.com/azu/m
 ## License
 
 MIT © azu
+
+Thanks to [azz/get-monorepo-packages: Get a list of packages from a monorepo](https://github.com/azz/get-monorepo-packages)

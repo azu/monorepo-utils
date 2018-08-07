@@ -1,5 +1,6 @@
 "use strict";
-
+// Based on https://github.com/azz/get-monorepo-packages
+// MIT (c) 2018 Lucas Azzola
 const globby = require("globby");
 import loadJsonFile = require("load-json-file");
 import * as path from "path";
@@ -27,32 +28,39 @@ const findPackages = (packageSpecs: string[], rootDirectory: string) => {
             [] as string[]
         )
         .map((location: string) => {
-            return { location, package: loadPackage(location) };
+            return { location, packageJSON: loadPackage(location) };
         })
         .filter(res => {
-            return res.package && res.package.name;
+            return res.packageJSON && res.packageJSON.name;
         });
 };
 
-export const getPackages = (directory: string) => {
-    const lernaJsonPath = path.join(directory, "lerna.json");
+export interface PackageResult {
+    // path to package's directory
+    location: string;
+    // package.json content
+    packageJSON: any;
+}
+
+export const getPackages = (rootDirectory: string): PackageResult[] => {
+    const lernaJsonPath = path.join(rootDirectory, "lerna.json");
     if (fs.existsSync(lernaJsonPath)) {
         const lernaJson = loadJsonFile.sync(lernaJsonPath);
         if (!lernaJson.useWorkspaces) {
-            return findPackages(lernaJson.packages, directory);
+            return findPackages(lernaJson.packages, rootDirectory);
         }
     }
 
-    const pkgJsonPath = path.join(directory, "package.json");
+    const pkgJsonPath = path.join(rootDirectory, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
         if (pkgJson.workspaces) {
             // "workspaces": []
             if (Array.isArray(pkgJson.workspaces)) {
-                return findPackages(pkgJson.workspaces, directory);
+                return findPackages(pkgJson.workspaces, rootDirectory);
             } else if (Array.isArray(pkgJson.workspaces.packages)) {
                 // "workspaces": { "packages": [] }
-                return findPackages(pkgJson.workspaces.packages, directory);
+                return findPackages(pkgJson.workspaces.packages, rootDirectory);
             }
         }
     }

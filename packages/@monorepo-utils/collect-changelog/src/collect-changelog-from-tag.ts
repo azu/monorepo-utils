@@ -93,7 +93,7 @@ export function findChangelog(projectRootDirectory: string, lernaTag: string): P
         throw new Error("It is not lerna tag" + lernaTag);
     }
     const matchPackage = getPackages(projectRootDirectory).find(value => {
-        return value.package.name === meta.name;
+        return value.packageJSON.name === meta.name;
     });
     if (!matchPackage) {
         throw new Error(`Not found match package: ${meta.name}@${meta.version}`);

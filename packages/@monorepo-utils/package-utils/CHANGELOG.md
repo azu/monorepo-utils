@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/package-utils@2.0.0...@monorepo-utils/package-utils@2.0.1) (2018-08-07)
+
+
+
+
+**Note:** Version bump only for package @monorepo-utils/package-utils
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/package-utils@1.1.0...@monorepo-utils/package-utils@2.0.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* **package-utils:** change `package` to `packageJSON` ([ae6ddf3](https://github.com/azu/monorepo-utils/commit/ae6ddf3))
+
+
+### BREAKING CHANGES
+
+* **package-utils:** the result `package` to be `packageJSON`
+
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-07-22)
 

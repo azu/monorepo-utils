@@ -44,6 +44,7 @@ export interface PackageResult {
 
 export const getPackages = (rootDirectory: string): PackageResult[] => {
     const lernaJsonPath = path.join(rootDirectory, "lerna.json");
+    // prefer to use yarn workspace instead of lerna.json
     if (fs.existsSync(lernaJsonPath)) {
         const lernaJson = loadJsonFile.sync(lernaJsonPath);
         if (!lernaJson.useWorkspaces) {

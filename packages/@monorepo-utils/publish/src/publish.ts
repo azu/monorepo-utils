@@ -46,7 +46,7 @@ export const publish = async ({
                   message: `Do you publish these packages?
 ${publishablePackages
                       .map((pkg: any) => {
-                          let item = `${pkg.package.name}@${pkg.package.version}`;
+                          let item = `${pkg.packageJSON.name}@${pkg.packageJSON.version}`;
                           if (distTag) {
                               item += `, distTag: @${distTag}`;
                           }
@@ -63,7 +63,7 @@ ${publishablePackages
     await publishablePackages.reduce((promise: Promise<any>, pkg: any) => {
         return promise.then(() => {
             const location = pkg.location;
-            const newVersion = pkg.package.version;
+            const newVersion = pkg.packageJSON.version;
             const args: string[] = [];
             // yarn should use --new-version argument for publishing
             // https://github.com/lerna/lerna/issues/896
@@ -82,7 +82,7 @@ ${publishablePackages
                 cwd: location,
                 dry
             });
-            let message = `${pkg.package.name}@${pkg.package.version}`;
+            let message = `${pkg.packageJSON.name}@${pkg.packageJSON.version}`;
             if (distTag) {
                 message += `, distTag: @${distTag}`;
             }

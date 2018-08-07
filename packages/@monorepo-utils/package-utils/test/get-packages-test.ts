@@ -13,13 +13,13 @@ describe("getPackages", () => {
 Array [
   Object {
     "location": "<cwd>/test/fixtures/lerna/packages/bar",
-    "package": Object {
+    "packageJSON": Object {
       "name": "bar",
     },
   },
   Object {
     "location": "<cwd>/test/fixtures/lerna/packages/foo",
-    "package": Object {
+    "packageJSON": Object {
       "name": "foo",
     },
   },
@@ -32,21 +32,21 @@ Array [
 Array [
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-old/packages/bar",
-    "package": Object {
+    "packageJSON": Object {
       "name": "bar",
       "version": "0.0.0",
     },
   },
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-old/packages/foo",
-    "package": Object {
+    "packageJSON": Object {
       "name": "foo",
       "version": "0.0.0",
     },
   },
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-old/package-2",
-    "package": Object {
+    "packageJSON": Object {
       "name": "package-2",
       "version": "0.0.0",
     },
@@ -60,21 +60,21 @@ Array [
 Array [
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-new/packages/bar",
-    "package": Object {
+    "packageJSON": Object {
       "name": "bar",
       "version": "0.0.0",
     },
   },
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-new/packages/foo",
-    "package": Object {
+    "packageJSON": Object {
       "name": "foo",
       "version": "0.0.0",
     },
   },
   Object {
     "location": "<cwd>/test/fixtures/yarn-workspaces-new/package-2",
-    "package": Object {
+    "packageJSON": Object {
       "name": "package-2",
       "version": "0.0.0",
     },

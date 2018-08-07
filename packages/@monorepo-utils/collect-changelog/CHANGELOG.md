@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.0.0...@monorepo-utils/collect-changelog@2.0.1) (2018-08-07)
+
+
+
+
+**Note:** Version bump only for package @monorepo-utils/collect-changelog
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@1.2.0...@monorepo-utils/collect-changelog@2.0.0) (2018-08-07)
 

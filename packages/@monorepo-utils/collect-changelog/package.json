@@ -1,6 +1,6 @@
 {
   "name": "@monorepo-utils/collect-changelog",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Collect CHANGELOG from tags.",
   "keywords": [
     "changelog",
@@ -62,7 +62,7 @@
     }
   },
   "dependencies": {
-    "@monorepo-utils/package-utils": "^2.0.0",
+    "@monorepo-utils/package-utils": "^2.0.1",
     "cclog-parser": "^1.1.0",
     "changelog-parser": "^2.1.0",
     "handlebars": "^4.0.11",

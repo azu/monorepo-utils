@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/publish@2.0.0...@monorepo-utils/publish@2.0.1) (2018-08-07)
+
+
+### Bug Fixes
+
+* **publish:** update timeout length ([fc2d4ce](https://github.com/azu/monorepo-utils/commit/fc2d4ce))
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/publish@1.3.2...@monorepo-utils/publish@2.0.0) (2018-08-07)
 

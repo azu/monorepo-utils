@@ -9,7 +9,9 @@ Also this repository is a monorepo.
 
 [@monorepo-utils/publish](./packages/@monorepo-utils/publish) help npm publish.
 
-This script split `lerna publish` into tagging and publishing.
+This script split `lerna publish`(lerna 2) into tagging and publishing.
+
+:memo: lerna 3 support `lerna version` and `lerna publish`
 
 ### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
 

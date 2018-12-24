@@ -23,7 +23,7 @@ It help to collect changelog in lerna's [Independent mode](https://github.com/le
 
 These utils aim to make release flow more flexible.
 
-:memo: Sidenote: [lerna publish](https://github.com/lerna/lerna/blob/master/commands/publish#readme) do all things at once.
+:memo: Note: [lerna@2 publish](https://github.com/lerna/lerna/blob/master/commands/publish#readme) do all things at once.
 
 You can do release to use [@monorepo-utils/publish](./packages/@monorepo-utils/publish) and [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) by following steps: 
 

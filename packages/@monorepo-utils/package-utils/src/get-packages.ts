@@ -51,7 +51,6 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
         const hasNotWorkspacesInLernaJson = (v: any): v is { packages: string[] } => {
             return !("useWorkspaces" in v);
         };
-        console.warn(lernaJson);
         if (hasNotWorkspacesInLernaJson(lernaJson)) {
             return findPackages(lernaJson.packages, rootDirectory);
         }

@@ -1,0 +1,48 @@
+{
+  "name": "@textlint/feature-flag",
+  "version": "3.0.4",
+  "description": "textlint internal feature flag manager.",
+  "keywords": [
+    "textlint"
+  ],
+  "homepage": "https://github.com/textlint/textlint/tree/master/packages/@textlint/feature-flag/",
+  "bugs": {
+    "url": "https://github.com/textlint/textlint/issues"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/"
+  ],
+  "main": "lib/textlint-feature-flag.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/textlint/textlint.git"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "clean": "rimraf lib/",
+    "prepublish": "npm run --if-present build",
+    "test": "mocha \"test/**/*.{js,ts}\"",
+    "watch": "babel src --out-dir lib --watch --source-maps"
+  },
+  "dependencies": {
+    "map-like": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-jsdoc-to-assert": "^4.0.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.24.1",
+    "cross-env": "^5.0.0",
+    "mocha": "^5.1.1",
+    "power-assert": "^1.4.2",
+    "rimraf": "^2.6.2"
+  }
+}

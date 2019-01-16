@@ -20,5 +20,5 @@ export async function execute(options: ExecuteOptions) {
     const code = fs.readFileSync(templatePath, "utf-8");
     const template = Handlebars.compile(code);
     const changelog = await findChangelog(options.directory, options.lernaTag);
-    return template(changelog);
+    return template(changelog).trim();
 }

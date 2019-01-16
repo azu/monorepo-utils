@@ -20,9 +20,7 @@
     "version_up:patch": "lerna publish --skip-npm --conventional-commits --cd-version patch",
     "version_up": "lerna publish --skip-npm --conventional-commits",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
-    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "precommit": "lint-staged",
-    "postcommit": "git reset"
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
   },
   "workspaces": {
     "packages": [
@@ -36,10 +34,10 @@
   "author": "azu",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^0.14.3",
+    "husky": "^1.3.1",
     "lerna": "^2.11.0",
-    "lint-staged": "^7.2.0",
-    "prettier": "^1.9.2"
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3"
   },
   "prettier": {
     "singleQuote": false,
@@ -51,5 +49,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git reset",
+      "pre-commit": "lint-staged"
+    }
   }
 }

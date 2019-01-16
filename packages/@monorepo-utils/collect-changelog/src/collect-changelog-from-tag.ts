@@ -25,6 +25,8 @@ export interface ChangLogResult {
     name: string;
     version: string;
     changes: Changes;
+    // if has changes at least one, set true
+    hasChanges: boolean;
 }
 
 function getChangelog(filePath: string) {
@@ -61,7 +63,7 @@ function filterEmpty(array?: string[]) {
     return array.filter(item => item.trim().length !== 0);
 }
 
-function filter(changes: Changes) {
+function filter(changes: Changes): Changes {
     if (filterEmpty(changes.breakingChanges).length === 0) {
         delete changes.breakingChanges;
     }
@@ -75,16 +77,18 @@ function filter(changes: Changes) {
 }
 
 export function convertCClogToResult(name: string, version: string, changes: Changes): ChangLogResult {
+    const filteredChanges = filter(changes);
     return {
         name,
         version,
-        changes: filter(changes)
+        changes: filteredChanges,
+        hasChanges: Object.keys(filteredChanges).length > 0
     };
 }
 
 /**
  * Find changelog and return
- * @param projectRootDirectory project root directory that has lerna.json or pacakge.json
+ * @param projectRootDirectory project root directory that has lerna.json or package.json
  * @param lernaTag package@version string
  */
 export function findChangelog(projectRootDirectory: string, lernaTag: string): Promise<ChangLogResult> {

@@ -17,6 +17,7 @@ Object {
       "**textlint:** check textlintrc option exists for internal use ([744da23](https://github.com/textlint/textlint/commit/744da23))",
     ],
   },
+  "hasChanges": true,
   "name": "textlint",
   "version": "10.2.0",
 }
@@ -41,6 +42,7 @@ Object {
       "**textlint-formatter:** Update API ([8f4901f](https://github.com/textlint/textlint/commit/8f4901f))",
     ],
   },
+  "hasChanges": true,
   "name": "@textlint/linter-formatter",
   "version": "3.0.0",
 }

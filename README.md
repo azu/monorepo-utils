@@ -5,19 +5,21 @@ Also this repository is a monorepo.
 
 ## packages
 
-### [@monorepo-utils/publish](./packages/@monorepo-utils/publish)
-
-[@monorepo-utils/publish](./packages/@monorepo-utils/publish) help npm publish.
-
-This script split `lerna publish`(lerna 2) into tagging and publishing.
-
-:memo: lerna 3 support `lerna version` and `lerna publish`
-
 ### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
 
 [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) get change from each package's `CHANGELOG.md`.
 It help to collect changelog in lerna's [Independent mode](https://github.com/lerna/lerna#independent-mode---independent).
 
+### **Deprecated** <del>[@monorepo-utils/publish](./packages/@monorepo-utils/publish)</del>
+
+[@monorepo-utils/publish](./packages/@monorepo-utils/publish) help npm publish.
+
+This script split `lerna publish`(lerna 2) into tagging and publishing.
+
+:warning: Notes:
+
+lerna 3 support `lerna version` and `lerna publish`.
+You should use lerna 3 directly.
 
 ## UseCase
 
@@ -25,7 +27,7 @@ These utils aim to make release flow more flexible.
 
 :memo: Note: [lerna@2 publish](https://github.com/lerna/lerna/blob/master/commands/publish#readme) do all things at once.
 
-You can do release to use [@monorepo-utils/publish](./packages/@monorepo-utils/publish) and [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) by following steps: 
+You can do release to use <del>[@monorepo-utils/publish](./packages/@monorepo-utils/publish)</del><ins>lerna 3</ins> and [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) by following steps:
 
 1. Bump version and generate CHANGELOG
 2. Submit Pull Request

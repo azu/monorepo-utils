@@ -13,12 +13,11 @@
     "test:updateSnapshot": "lerna run test:updateSnapshot",
     "build": "lerna run build",
     "clean": "lerna run clean",
-    "publish": "monorepo-utils-publish",
-    "publish:ci": "monorepo-utils-publish --ci",
-    "version_up:major": "lerna publish --skip-npm --conventional-commits --cd-version major",
-    "version_up:minor": "lerna publish --skip-npm --conventional-commits --cd-version minor",
-    "version_up:patch": "lerna publish --skip-npm --conventional-commits --cd-version patch",
-    "version_up": "lerna publish --skip-npm --conventional-commits",
+    "versionup": "lerna version --conventional-commits",
+    "versionup:patch": "lerna version patch --conventional-commits",
+    "versionup:minor": "lerna version minor --conventional-commits",
+    "versionup:major": "lerna version minor --conventional-commits",
+    "realse": "lerna publish from-package",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
   },
@@ -35,7 +34,7 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^1.3.1",
-    "lerna": "^2.11.0",
+    "lerna": "^3.10.5",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3"
   },

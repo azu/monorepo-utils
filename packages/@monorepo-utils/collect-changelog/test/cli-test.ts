@@ -1,7 +1,7 @@
 import * as path from "path";
 import { execute } from "../src/cli";
 
-const fixturesDir = path.join(__dirname, "snapshots");
+const fixturesDir = path.join(__dirname, "fixtures");
 describe("Snapshot testing", () => {
     it("textlint@10.2.0 should has changelog ", async () => {
         const fixtureDir = path.join(fixturesDir, "example");

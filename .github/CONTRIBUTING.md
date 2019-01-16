@@ -38,23 +38,24 @@ This document describe release flow for maintainer.
 
 ```
 git checkout -b date-release
+git push origin HEAD -u
 ```
 
 2. Bump version and tag
 
 Run one of following command.
 
-Recommend: `yarn run version_up`
+Recommend: `yarn run versionup`
 
 ```
 # major update for all
-yarn run version_up:major
+yarn run versionup:major
 # minor update for all
-yarn run version_up:minor
+yarn run versionup:minor
 # path update for all
-yarn run version_up:patch
+yarn run versionup:patch
 # automatic versioning
-yarn run version_up
+yarn run versionup
 ```
 
 3. Copy Changelog
@@ -63,6 +64,7 @@ Copy CHANGELOG from the bump tags.
 
 ```
 yarn run copy-changelog
+# git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy
 ```
 
 This is alias of [packages/@monorepo-utils/collect-changelog](../packages/@monorepo-utils/collect-changelog).
@@ -81,9 +83,7 @@ Finally, publish new version to npm
 
 ```
 # publish to npm
-yarn run publish
-# push tags to github
-git push --follow-tags
+yarn run release
 ```
 
 (not `yarn publish`)

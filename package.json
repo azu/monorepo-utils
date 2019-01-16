@@ -20,9 +20,7 @@
     "version_up:patch": "lerna publish --skip-npm --conventional-commits --cd-version patch",
     "version_up": "lerna publish --skip-npm --conventional-commits",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
-    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "precommit": "lint-staged",
-    "postcommit": "git reset"
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
   },
   "workspaces": {
     "packages": [
@@ -51,5 +49,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git reset",
+      "pre-commit": "lint-staged"
+    }
   }
 }

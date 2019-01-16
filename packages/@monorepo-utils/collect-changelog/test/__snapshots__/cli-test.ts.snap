@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshot testing @textlint/kernel@2.0.0-next. should has changelog  1`] = `
+exports[`cli @textlint/kernel@2.0.0-next. should has changelog  1`] = `
 "## @textlint/kernel@2.0.0-next.0
 
 ### fixes
@@ -9,7 +9,7 @@ exports[`Snapshot testing @textlint/kernel@2.0.0-next. should has changelog  1`]
 - **textlint-fixer-formatter:** use paths ([734806f](https://github.com/textlint/textlint/commit/734806f))"
 `;
 
-exports[`Snapshot testing textlint@10.2.0 should has changelog  1`] = `
+exports[`cli textlint@10.2.0 should has changelog  1`] = `
 "## textlint@10.2.0
 
 ### fixes

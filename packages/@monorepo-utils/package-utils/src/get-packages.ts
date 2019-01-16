@@ -6,11 +6,12 @@ import loadJsonFile = require("load-json-file");
 import * as path from "path";
 import * as fs from "fs";
 
-const loadPackage = (packagePath: string) => {
+const loadPackage = (packagePath: string): object => {
     const pkgJsonPath = path.join(packagePath, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         return loadJsonFile.sync(pkgJsonPath);
     }
+    return {};
 };
 
 const findPackages = (packageSpecs: string[], rootDirectory: string) => {
@@ -31,7 +32,7 @@ const findPackages = (packageSpecs: string[], rootDirectory: string) => {
             return { location, packageJSON: loadPackage(location) };
         })
         .filter(res => {
-            return res.packageJSON && res.packageJSON.name;
+            return res.packageJSON && "name" in res.packageJSON;
         });
 };
 
@@ -47,7 +48,11 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     // prefer to use yarn workspace instead of lerna.json
     if (fs.existsSync(lernaJsonPath)) {
         const lernaJson = loadJsonFile.sync(lernaJsonPath);
-        if (!lernaJson.useWorkspaces) {
+        const hasNotWorkspacesInLernaJson = (v: any): v is { packages: string[] } => {
+            return !("useWorkspaces" in v);
+        };
+        console.warn(lernaJson);
+        if (hasNotWorkspacesInLernaJson(lernaJson)) {
             return findPackages(lernaJson.packages, rootDirectory);
         }
     }
@@ -55,7 +60,14 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     const pkgJsonPath = path.join(rootDirectory, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
-        if (pkgJson.workspaces) {
+        const hasWorkspacesInPackageJson = (
+            v: any
+        ): v is {
+            workspaces: { packages: string[] } | string[];
+        } => {
+            return "workspaces" in v;
+        };
+        if (hasWorkspacesInPackageJson(pkgJson)) {
             // "workspaces": []
             if (Array.isArray(pkgJson.workspaces)) {
                 return findPackages(pkgJson.workspaces, rootDirectory);

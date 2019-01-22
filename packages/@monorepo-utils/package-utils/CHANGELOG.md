@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/package-utils@2.0.2...@monorepo-utils/package-utils@2.0.3) (2019-01-22)
+
+**Note:** Version bump only for package @monorepo-utils/package-utils
+
+
+
+
+
 ## [2.0.2](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/package-utils@2.0.0...@monorepo-utils/package-utils@2.0.2) (2019-01-16)
 
 

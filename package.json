@@ -17,7 +17,7 @@
     "versionup:patch": "lerna version patch --conventional-commits",
     "versionup:minor": "lerna version minor --conventional-commits",
     "versionup:major": "lerna version minor --conventional-commits",
-    "realse": "lerna publish from-package",
+    "release": "lerna publish from-package",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
   },

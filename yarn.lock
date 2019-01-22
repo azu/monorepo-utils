@@ -1294,9 +1294,10 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-cclog-parser@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/cclog-parser/-/cclog-parser-1.1.0.tgz#2643d9fe24966b9e8616448ae4570bc1877841f7"
+cclog-parser@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/cclog-parser/-/cclog-parser-1.1.1.tgz#44425a21a458f44985121c04912e5e02d1f04fab"
+  integrity sha512-IsnWRC1zqs7h5+Xoocw7cYmlL5t2ysB0/SQB6C3Arr+S2pc2Rbhzp0hXaK36Ew+428in1085slsGtxsJwQB9RA==
 
 center-align@^0.1.1:
   version "0.1.3"

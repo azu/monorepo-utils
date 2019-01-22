@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.1.0...@monorepo-utils/collect-changelog@2.1.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* **collect-changelog:** fix cmd to use correct option ([17a2db1](https://github.com/azu/monorepo-utils/commit/17a2db1))
+
+
+
+
+
 # [2.1.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.0.2...@monorepo-utils/collect-changelog@2.1.0) (2019-01-22)
 
 

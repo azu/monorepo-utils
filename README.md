@@ -14,7 +14,7 @@ It help to collect changelog in lerna's [Independent mode](https://github.com/le
 
 [@monorepo-utils/publish](./packages/@monorepo-utils/publish) help npm publish.
 
-This script split `lerna publish`(lerna 2) into tagging and publishing.
+This script split `lerna publish`(lerna 2) into versioning and publishing.
 
 :warning: Notes:
 

@@ -2,7 +2,7 @@ import * as path from "path";
 import { findChangelog } from "../src/collect-changelog-from-tag";
 describe("collect-changelog-from-tag", () => {
     it("should match package@version", async () => {
-        const fixtures = path.join(__dirname, "fixtures");
+        const fixtures = path.join(__dirname, "fixtures/independent");
         const change = await findChangelog(fixtures, "textlint@10.2.0");
         expect(change).toMatchInlineSnapshot(`
 Object {
@@ -24,7 +24,7 @@ Object {
 `);
     });
     it("should match @scope/package@version", async () => {
-        const fixtures = path.join(__dirname, "fixtures");
+        const fixtures = path.join(__dirname, "fixtures/independent");
         const change = await findChangelog(fixtures, "@textlint/linter-formatter@3.0.0");
         expect(change).toMatchInlineSnapshot(`
 Object {

@@ -10,17 +10,24 @@ const cli = meow(
       $ collect-changelog-from-tag [option] "tag@version"
 
     Options
+      --changelog the file path of CHANGELOG.md
       --directory the root directory of monorepo
       --template  handlebars template path
 
     Examples
       $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
-      # current directory is project root
+      # current directory is project root for independent mode
       $ collect-changelog-from-tag "tag@version"
+      # get changelog content from specific CHANGELOG.md for fixed mode
+      $ collect-changelog-from-tag --changelog ./CHANGELOG.md "tag@version"
+      
 `,
     {
         flags: {
             directory: {
+                type: "string"
+            },
+            changelog: {
                 type: "string"
             },
             template: {
@@ -33,8 +40,10 @@ const cli = meow(
 );
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");
+const changelogFilePath = cli.flags.changelog ? path.resolve(process.cwd(), cli.flags.changelog || "") : undefined;
 const promises = cli.input.map(tag => {
     return execute({
+        changelogFilePath,
         directory: monorepoDirectory,
         lernaTag: tag,
         templatePath: cli.flags.template

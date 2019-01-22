@@ -20,13 +20,16 @@ Install with [npm](https://www.npmjs.com/):
       $ collect-changelog-from-tag [option] "tag@version"
 
     Options
+      --changelog the file path of CHANGELOG.md
       --directory the root directory of monorepo
       --template  handlebars template path
 
     Examples
       $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
-      # current directory is project root
+      # current directory is project root for independent mode
       $ collect-changelog-from-tag "tag@version"
+      # get changelog content from specific CHANGELOG.md for fixed mode
+      $ collect-changelog-from-tag --changelog ./CHANGELOG.md "tag@version"
 
 ## Example
 

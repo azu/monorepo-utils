@@ -45,7 +45,7 @@ const promises = cli.input.map(tag => {
     return execute({
         changelogFilePath,
         directory: monorepoDirectory,
-        lernaTag: tag,
+        tag: tag,
         templatePath: cli.flags.template
     });
 });

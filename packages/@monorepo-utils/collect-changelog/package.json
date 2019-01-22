@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@monorepo-utils/package-utils": "^2.0.2",
-    "cclog-parser": "^1.1.0",
+    "cclog-parser": "^1.1.1",
     "changelog-parser": "^2.6.0",
     "handlebars": "^4.0.12",
     "meow": "^5.0.0"

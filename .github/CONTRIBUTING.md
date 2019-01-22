@@ -37,7 +37,7 @@ This document describe release flow for maintainer.
 1. Checkout release branch
 
 ```
-git checkout -b date-release
+git checkout -b release-date
 git push origin HEAD -u
 ```
 

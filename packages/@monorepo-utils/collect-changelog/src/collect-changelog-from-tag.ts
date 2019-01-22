@@ -15,6 +15,11 @@ interface ChangesByVersion {
     [index: string]: Changes;
 }
 
+export interface PackageMeta {
+    name: string;
+    version: string;
+}
+
 export type Changes = {
     fixes?: string[];
     features?: string[];
@@ -29,7 +34,7 @@ export interface ChangLogResult {
     hasChanges: boolean;
 }
 
-function getChangelog(filePath: string) {
+function loadChangelog(filePath: string) {
     return new Promise<CclogObject>((resolve, reject) => {
         if (!fs.existsSync(filePath)) {
             return reject(new Error(`${filePath} is not found`));
@@ -39,8 +44,8 @@ function getChangelog(filePath: string) {
     });
 }
 
-function getLog(changelogFilePath: string, { name, version }: { name: string; version: string }): Promise<Changes> {
-    return getChangelog(changelogFilePath).then((result: CclogObject) => {
+function getLog(changelogFilePath: string, { name, version }: PackageMeta): Promise<Changes> {
+    return loadChangelog(changelogFilePath).then((result: CclogObject) => {
         if (!result.changes[version]) {
             throw new Error(`Not found that version: ${name}@${version}`);
         }
@@ -87,7 +92,7 @@ export function convertCClogToResult(name: string, version: string, changes: Cha
 }
 
 /**
- * Find changelog and return
+ * Find changelog and return ChangLogResult
  * @param projectRootDirectory project root directory that has lerna.json or package.json
  * @param lernaTag package@version string
  */
@@ -102,7 +107,16 @@ export function findChangelog(projectRootDirectory: string, lernaTag: string): P
     if (!matchPackage) {
         throw new Error(`Not found match package: ${meta.name}@${meta.version}`);
     }
-    return getLog(`${path.join(matchPackage.location)}/CHANGELOG.md`, meta).then(changes => {
+    return getChangelog(`${path.join(matchPackage.location)}/CHANGELOG.md`, meta);
+}
+
+/**
+ * Get changelog and return ChangLogResult
+ * @param changelogFilePath changelog file path
+ * @param meta
+ */
+export function getChangelog(changelogFilePath: string, meta: PackageMeta): Promise<ChangLogResult> {
+    return getLog(changelogFilePath, meta).then(changes => {
         return convertCClogToResult(meta.name, meta.version, changes);
     });
 }

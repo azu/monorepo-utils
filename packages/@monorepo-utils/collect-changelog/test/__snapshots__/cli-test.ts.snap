@@ -1,29 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cli @textlint/kernel@2.0.0-next. should has changelog  1`] = `
-"## @textlint/kernel@2.0.0-next.0
-
-### fixes
-
-- **textlint:** fix kernel test ([#374](https://github.com/textlint/textlint/issues/374)) ([d6953cc](https://github.com/textlint/textlint/commit/d6953cc))
-- **textlint-fixer-formatter:** use paths ([734806f](https://github.com/textlint/textlint/commit/734806f))"
-`;
-
-exports[`cli textlint@10.2.0 should has changelog  1`] = `
-"## textlint@10.2.0
-
-### fixes
-
-- **textlint:** check textlintrc option exists for internal use ([744da23](https://github.com/textlint/textlint/commit/744da23))
-
-### features
-
-- **textlint:** support --no-textlintrc ([466e257](https://github.com/textlint/textlint/commit/466e257))
-- **textlint:** add tests for --no-textlintrc ([289deb3](https://github.com/textlint/textlint/commit/289deb3))
-- **textlint:** pass textlintrc options for failure tests ([bc0804d](https://github.com/textlint/textlint/commit/bc0804d))
-- **textlint:** simplify textlint --help test ([0d2114d](https://github.com/textlint/textlint/commit/0d2114d))"
-`;
-
 exports[`cli when fixed mode get 0.13.0 from CHANGELOG.md 1`] = `
 "## project@0.13.0
 

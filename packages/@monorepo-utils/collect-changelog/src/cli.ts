@@ -10,6 +10,7 @@ import Handlebars = require("handlebars");
 export interface ExecuteOptions {
     directory: string;
     changelogFilePath?: string;
+    name?: string;
     tag: string;
     templatePath?: string;
 }
@@ -22,7 +23,7 @@ export async function execute(options: ExecuteOptions) {
     const template = Handlebars.compile(code);
     if (options.changelogFilePath) {
         const changelog = await getChangelog(options.changelogFilePath, {
-            name: "project", // no name
+            name: options.name ?? "package", // no name
             version: options.tag
         });
         return template(changelog).trim();

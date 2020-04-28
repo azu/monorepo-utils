@@ -30,13 +30,13 @@
     "meow": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.12",
+    "@types/jest": "^25.2.1",
     "@types/node": "^10.12.18",
     "consolemock": "^1.1.0",
     "cross-env": "^5.2.0",
-    "jest": "^23.6.0",
+    "jest": "^25.4.0",
     "strip-ansi": "^4.0.0",
-    "ts-jest": "^23.10.5",
+    "ts-jest": "^25.4.0",
     "typescript": "^3.2.2"
   },
   "publishConfig": {

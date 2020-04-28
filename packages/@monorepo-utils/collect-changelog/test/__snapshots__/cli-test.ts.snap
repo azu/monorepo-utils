@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cli when fixed mode get 0.13.0 from CHANGELOG.md 1`] = `
-"## project@0.13.0
+"## package@0.13.0
 
 ### fixes
 

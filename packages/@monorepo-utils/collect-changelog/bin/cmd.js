@@ -13,6 +13,7 @@ const cli = meow(
       --changelog the file path of CHANGELOG.md
       --directory the root directory of monorepo
       --template  handlebars template path
+      --name set package name if it not defined
 
     Examples
       $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
@@ -32,6 +33,9 @@ const cli = meow(
             },
             template: {
                 type: "string"
+            },
+            name: {
+                type: "string"
             }
         },
         autoHelp: true,
@@ -40,11 +44,13 @@ const cli = meow(
 );
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");
+const name = cli.flags.name;
 const changelogFilePath = cli.flags.changelog ? path.resolve(process.cwd(), cli.flags.changelog || "") : undefined;
 const promises = cli.input.map(tag => {
     return execute({
         changelogFilePath,
         directory: monorepoDirectory,
+        name: name,
         tag: tag,
         templatePath: cli.flags.template
     });

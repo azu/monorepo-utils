@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.1.1...@monorepo-utils/collect-changelog@2.2.0) (2020-04-28)
+
+
+### Features
+
+* **collect-changelog:** support --name ([c5e4549](https://github.com/azu/monorepo-utils/commit/c5e45494a5b42fd280962e1c5c6b371d9b95b549))
+
+
+
+
+
 ## [2.1.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.1.0...@monorepo-utils/collect-changelog@2.1.1) (2019-01-22)
 
 

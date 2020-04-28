@@ -1,6 +1,6 @@
 {
   "name": "@monorepo-utils/package-utils",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Package utility for monorepo.",
   "keywords": [
     "lerna",
@@ -56,7 +56,9 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "modulePathIgnorePatterns": ["<rootDir>/test/fixtures"]
+    "modulePathIgnorePatterns": [
+      "<rootDir>/test/fixtures"
+    ]
   },
   "dependencies": {
     "globby": "^9.0.0",

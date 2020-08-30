@@ -66,7 +66,7 @@
     "cclog-parser": "^1.1.1",
     "changelog-parser": "^2.6.0",
     "handlebars": "^4.0.12",
-    "meow": "^5.0.0"
+    "meow": "^7.1.1"
   },
   "devDependencies": {
     "@types/handlebars": "^4.0.40",

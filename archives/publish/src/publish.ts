@@ -45,14 +45,14 @@ export const publish = async ({
                   name: "publish",
                   message: `Do you publish these packages?
 ${publishablePackages
-                      .map((pkg: any) => {
-                          let item = `${pkg.packageJSON.name}@${pkg.packageJSON.version}`;
-                          if (distTag) {
-                              item += `, distTag: @${distTag}`;
-                          }
-                          return `- ${item}`;
-                      })
-                      .join("\n")}
+    .map((pkg: any) => {
+        let item = `${pkg.packageJSON.name}@${pkg.packageJSON.version}`;
+        if (distTag) {
+            item += `, distTag: @${distTag}`;
+        }
+        return `- ${item}`;
+    })
+    .join("\n")}
 `
               }
           ]);

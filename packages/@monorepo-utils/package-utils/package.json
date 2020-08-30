@@ -61,8 +61,8 @@
     ]
   },
   "dependencies": {
-    "globby": "^9.0.0",
-    "load-json-file": "^5.1.0"
+    "globby": "^11.0.1",
+    "load-json-file": "^6.2.0"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",

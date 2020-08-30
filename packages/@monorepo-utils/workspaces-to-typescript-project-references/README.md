@@ -55,7 +55,7 @@ This tool provides updating feature and testing feature.
 For example, [monorepo-utils](https://github.com/azu/monorepo-utils) it-self use this tool.
 [monorepo-utils](https://github.com/azu/monorepo-utils) use lerna and yarn workspaces.
 
-- workspaces: https://github.com/azu/monorepo-utils/blob/99fcc68078fae56a8c84f4a9bf4bdff7a3d4cc76/package.json#L26-L31
+- [workspaces definition](https://github.com/azu/monorepo-utils/blob/99fcc68078fae56a8c84f4a9bf4bdff7a3d4cc76/package.json#L26-L31) on root's package.json
 
 ```json
   "workspaces": {

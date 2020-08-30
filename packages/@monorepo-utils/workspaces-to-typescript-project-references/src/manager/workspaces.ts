@@ -3,6 +3,7 @@ import { getPackages } from "@monorepo-utils/package-utils";
 import { PackageResult } from "@monorepo-utils/package-utils";
 
 export const plugin: PackageManagerPlugin = (options) => {
+    // getPackages support "workspaces" and lerna.json
     const monorepoPackages = getPackages(options.rootDir);
     return {
         supports(): boolean {

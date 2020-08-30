@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.0...@monorepo-utils/workspaces-to-typescript-project-references@2.3.1) (2020-08-30)
+
+
+### Bug Fixes
+
+* **workspaces-to-typescript-project-references:** skip non-ts package ([53b9ca1](https://github.com/azu/monorepo-utils/commit/53b9ca1254dba94a3968b42898c9f4f53db5c375))
+
+
+
+
+
 # 2.3.0 (2020-08-30)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.7...@monorepo-utils/workspaces-to-typescript-project-references@2.4.0) (2020-08-30)
+
+
+### Features
+
+* **workspaces:** support --tsconfigPath ([59e0155](https://github.com/azu/monorepo-utils/commit/59e01558fdfa632800ef82eb093ee578bf1ad071))
+
+
+
+
+
 ## [2.3.7](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.6...@monorepo-utils/workspaces-to-typescript-project-references@2.3.7) (2020-08-30)
 
 **Note:** Version bump only for package @monorepo-utils/workspaces-to-typescript-project-references

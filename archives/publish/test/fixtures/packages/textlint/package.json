@@ -39,7 +39,7 @@
     "url": "https://github.com/textlint/textlint.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -b .",
+    "build": "tsc -b .",
     "clean": "rimraf out/ lib/",
     "prepublish": "npm run build",
     "test": "npm-run-all test:unit",

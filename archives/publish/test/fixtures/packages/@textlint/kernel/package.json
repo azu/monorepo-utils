@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "npm-run-all build:src",
-    "build:src": "cross-env NODE_ENV=production tsc -b .",
+    "build:src": "tsc -b .",
     "clean": "rimraf out/ lib/ es_modules/",
     "prepublish": "npm run --if-present build",
     "test": "mocha \"test/**/*.{js,ts}\""

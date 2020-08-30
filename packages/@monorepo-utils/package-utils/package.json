@@ -29,7 +29,7 @@
     "url": "https://github.com/azu/monorepo-utils.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -b .",
+    "build": "tsc -b .",
     "clean": "rimraf lib/",
     "prepublish": "npm run --if-present build",
     "test": "jest --no-cache",

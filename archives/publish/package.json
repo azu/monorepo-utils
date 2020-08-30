@@ -14,7 +14,7 @@
     "monorepo-utils-publish": "./bin/cmd.js"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -b .",
+    "build": "tsc -b .",
     "prepublish": "npm run --if-present build",
     "test": "jest",
     "watch": "tsc -b . --watch"

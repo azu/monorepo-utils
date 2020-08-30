@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "monorepo utilities monorepo",
   "engines": {
-    "node": ">=8.0.0",
+    "node": ">=10.0.0",
     "yarn": ">=1.5.0"
   },
   "scripts": {

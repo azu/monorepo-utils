@@ -33,7 +33,7 @@
     "url": "https://github.com/azu/monorepo-utils.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -b .",
+    "build": "tsc -b .",
     "precommit": "lint-staged",
     "postcommit": "git reset",
     "prepublish": "npm run --if-present build",

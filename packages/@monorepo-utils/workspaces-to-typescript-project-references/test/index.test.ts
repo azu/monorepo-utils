@@ -22,8 +22,6 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(false);
-        expect(result.aggregateError?.message).toMatchInlineSnapshot(
-            `"Can not update Project References, because found 2 errors"`
-        );
+        expect(result.aggregateError?.message).toMatchInlineSnapshot(`"Found 2 errors"`);
     });
 });

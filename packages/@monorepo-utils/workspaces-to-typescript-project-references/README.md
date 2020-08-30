@@ -8,11 +8,13 @@ This monorepo use this tool as self-integration.
 
 ## Supports
 
-- Lerna(`lerna.json`)
-- Yarn's workspaces
-- npm v7+'s workspaces
+- [x] [Lerna](https://github.com/lerna/lerna)(`lerna.json`)
+- [x] [Yarn's workspaces](https://classic.yarnpkg.com/en/docs/workspaces/))
+    - [ ] [Workspace ranges (workspace:)](https://yarnpkg.com/features/workspaces#workspace-ranges-workspace)
+- [x] [npm's workspaces](https://github.com/npm/rfcs/blob/26e8ac6ee176943d6522d5d057fab05e37655e1c/accepted/0000-workspaces.md)
 - [ ] pnpm workspaces. refer to <https://github.com/Bessonov/set-project-references>
-- [ ] Custom workspaces
+- [x] Custom workspaces
+    - Plugin support
 
 ## Install
 

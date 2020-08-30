@@ -8,7 +8,7 @@ This monorepo use this tool as self-integration.
 
 ## Features
 
-- Convert workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html)
+- Sync between monorepo workspaces and [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html)
 - Preserve `tsconfig.json`'s comments
 - Custom Plugin support
 

@@ -54,8 +54,9 @@ For example, [Bolt](https://github.com/boltpkg/bolt) has a workspaces, but a bit
 Bolt require [`bolt.workspaces` in `package.json`](https://github.com/boltpkg/bolt#configuration).
 
 [get-monorepo-packages](https://github.com/azz/get-monorepo-packages) support bolt's `workspaces`.
-So, you can write `bolt-plugin` as following.
+So, you can write `bolt-plugin.js` as following.
 
+`bolt-plugin.js`:
 ```js
 const getPackages = require("get-monorepo-packages");
 module.exports = (options) => {

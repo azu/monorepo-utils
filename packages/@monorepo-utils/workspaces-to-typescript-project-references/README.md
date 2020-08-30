@@ -1,8 +1,7 @@
 # @monorepo-utils/workspaces-to-typescript-project-references
 
-This tool convert lerna/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
-
-This tool allows you to update `tsconfig.json`'s `references` property and test it. 
+This tool convert lerna/npm/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
+You can keep package dependencies synchronized between lerna/npm/yarn workspaces and TypeScript.
 
 This monorepo use this tool as self-integration.
 
@@ -53,9 +52,42 @@ This tool provides updating feature and testing feature.
 
 ## Examples
 
-Following project use this tools.
+For example, [monorepo-utils](https://github.com/azu/monorepo-utils) it-self use this tool.
+[monorepo-utils](https://github.com/azu/monorepo-utils) use lerna and yarn workspaces.
 
-- [monorepo-utils](https://github.com/azu/monorepo-utils) it-self
+- workspaces: https://github.com/azu/monorepo-utils/blob/99fcc68078fae56a8c84f4a9bf4bdff7a3d4cc76/package.json#L26-L31
+
+```json
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/@monorepo-utils/*"
+    ]
+  },
+```
+
+- `@monorepo-utils/workspaces-to-typescript-project-references` has [dependencies](https://github.com/azu/monorepo-utils/blob/39b7bacee6094096adca5ac5c9c2d2a759a38419/packages/@monorepo-utils/workspaces-to-typescript-project-references/package.json#L71) to [@monorepo-utils/package-utils](../package-utils)
+
+```json
+  "dependencies": {
+    "@monorepo-utils/package-utils": "^2.2.0",
+    "comment-json": "^3.0.3",
+    "meow": "^7.1.1"
+  }
+```
+
+To run `workspaces-to-typescript-project-references` and update [tsconfig.json](https://github.com/azu/monorepo-utils/blob/e83e457371bc30d3332da3082ecc5a4de848e128/packages/%40monorepo-utils/workspaces-to-typescript-project-references/tsconfig.json#L38-L42) 
+
+```json
+  "references": [
+    {
+      "path": "../package-utils"
+    }
+  ]
+```
+
+As another examples, Following project use this tools.
+
 - [textlint](https://github.com/textlint/textlint)
 
 ## Changelog

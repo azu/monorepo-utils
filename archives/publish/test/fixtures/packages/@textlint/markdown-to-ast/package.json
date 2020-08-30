@@ -21,7 +21,7 @@
     "url": "https://github.com/textlint/textlint.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "build": "babel src --out-dir lib --source-maps",
     "clean": "rimraf lib/",
     "example:build": "browserify example/js/index.js -o example/app/app.js",
     "prepublish": "npm run --if-present build",

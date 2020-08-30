@@ -1,0 +1,7 @@
+{
+  "name": "@example/b",
+  "version": "1.0.0",
+  "dependencies": {
+    "@example/b": "^1.0.0"
+  }
+}

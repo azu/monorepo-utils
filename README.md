@@ -1,4 +1,4 @@
-# monorepo-utils [![Build Status](https://travis-ci.org/azu/monorepo-utils.svg?branch=master)](https://travis-ci.org/azu/monorepo-utils)
+# monorepo-utils [![Actions Status: test](https://github.com/azu/monorepo-utils/workflows/test/badge.svg)](https://github.com/azu/monorepo-utils/actions?query=workflow%3A"test")
 
 This repository is utilities for monorepo.
 Also, this repository is a monorepo.
@@ -14,6 +14,12 @@ Supports following package manager's workspaces.
 - Lerna(`lerna.json`)
 - Yarn's workspaces
 - npm v7+'s workspaces
+
+### [@monorepo-utils/workspaces-to-typescript-project-references](./packages/@monorepo-utils/workspaces-to-typescript-project-references)
+
+This tool convert `lerna.json`/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
+
+This tool allows you to update `tsconfig.json`'s `references` property and test it. 
 
 ### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
 

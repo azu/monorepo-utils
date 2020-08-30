@@ -24,7 +24,8 @@ export type ToProjectReferencesResult =
           };
       };
 export const toProjectReferences = (options: Options) => {
-    const plugins = options.plugins ?? [npmPlugin, yarnPlugin];
+    const plugins =
+        Array.isArray(options.plugins) && options.plugins.length > 0 ? options.plugins : [npmPlugin, yarnPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
     // use first plugin
     const supportPlugin = pluginImplementations.find((plugin) => {

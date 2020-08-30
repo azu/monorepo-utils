@@ -1,4 +1,5 @@
 import meow from "meow";
+import path from "path";
 import { toProjectReferences } from "./index";
 
 export const cli = meow(
@@ -46,7 +47,9 @@ export const run = async (
     _input = cli.input,
     flags = cli.flags
 ): Promise<{ exitStatus: number; stdout: string | null; stderr: string | null }> => {
-    const plugins = flags.plugin ? flags.plugin.map((pluginPath) => require(pluginPath)) : undefined;
+    const plugins = Array.isArray(flags.plugin)
+        ? flags.plugin.map((pluginPath) => require(path.join(process.cwd(), pluginPath)))
+        : undefined;
     const result = toProjectReferences({
         rootDir: flags.root,
         checkOnly: flags.check,

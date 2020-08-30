@@ -7,7 +7,7 @@
     "newLine": "LF",
     "outDir": "./lib/",
     "rootDir": "./src",
-    "target": "es5",
+    "target": "ES2015",
     "sourceMap": true,
     "declaration": true,
     "jsx": "preserve",

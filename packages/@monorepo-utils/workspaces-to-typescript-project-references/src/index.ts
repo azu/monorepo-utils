@@ -4,11 +4,13 @@ import commentJSON from "comment-json";
 import { plugin as npmPlugin } from "./manager/npm";
 import { plugin as yarnPlugin } from "./manager/yarn";
 import assert from "assert";
+import { PackageManagerPlugin } from "./manager/PackageManagerPlugin";
 
 export type Options = {
     rootDir: string;
-    tsConfigPathFinder?(location: string): string;
     checkOnly: boolean;
+    plugins?: PackageManagerPlugin[];
+    tsConfigPathFinder?(location: string): string;
 };
 export type ToProjectReferencesResult =
     | {
@@ -22,7 +24,7 @@ export type ToProjectReferencesResult =
           };
       };
 export const toProjectReferences = (options: Options) => {
-    const plugins = [npmPlugin, yarnPlugin];
+    const plugins = options.plugins ?? [npmPlugin, yarnPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
     // use first plugin
     const supportPlugin = pluginImplementations.find((plugin) => {

@@ -16,8 +16,7 @@ export const plugin: PackageManagerPlugin = (options) => {
             const devDependencies = Object.entries(packageJSON.devDependencies ?? {});
             return [...dependencies, devDependencies].map((dep) => {
                 return {
-                    name: dep[0] as string,
-                    version: dep[1] as undefined | string
+                    name: dep[0] as string
                 };
             });
         },

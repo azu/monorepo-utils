@@ -1,12 +1,11 @@
 import { PackageResult } from "@monorepo-utils/package-utils";
 
-export type Dependencies = {
-    [index: string]: string;
-};
 export type PackageManagerPluginOptions = {
     rootDir: string;
 };
-export type PackageReference = { name: string; version: undefined | string };
+export type PackageReference = {
+    name: string;
+};
 export type PackageManagerPluginImplementation = {
     /**
      * Return true if support the project
@@ -27,4 +26,11 @@ export type PackageManagerPluginImplementation = {
      */
     resolve(reference: PackageReference): string | null;
 };
+/**
+ * Plugin should implement this interface and export it as `plugin`
+ * @example
+ * ```ts
+ * export const plugin: PackageManagerPlugin = () => { ...your plugin implementation... }
+ * ```
+ */
 export type PackageManagerPlugin = (options: PackageManagerPluginOptions) => PackageManagerPluginImplementation;

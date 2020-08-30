@@ -34,6 +34,9 @@ This tool provides updating feature and testing feature.
       --check            If set the flag, check only differences of tsconfig.json and does not update tsconfig.json.
                          If the check is failed, exit status 1. It is useful for testing.
        
+      --plugin           [Path:string] Path to plugin script.
+                         Load the plugin script as module and use it. 
+                           
     Examples
       # Update project references in tsconfig.json
       $ workspaces-to-typescript-project-references
@@ -42,7 +45,15 @@ This tool provides updating feature and testing feature.
 
 ## Plugin
 
-- [ ] We will support to plugin for custom resolution
+- [ ] Add a document about `--plugin` and Plugin implementation
+- We need to support to plugin for custom resolution
+- For more details, See [Plugin interface](./src/manager/PackageManagerPlugin.ts)
+
+## Examples
+
+Following project use this tools.
+
+- [textlint](https://github.com/textlint/textlint)
 
 ## Changelog
 

@@ -1,6 +1,10 @@
 # @monorepo-utils/workspaces-to-typescript-project-references
 
-Convert Workspaces to TypeScript&#39;s Project References
+This tool convert `lerna.json`/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
+
+This tool allows you to update `tsconfig.json`'s `references` property and test it. 
+
+This monorepo use this tool as self-integration.
 
 ## Install
 
@@ -10,7 +14,23 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-- [ ] Write usage instructions
+This tool provides updating feature and testing feature.
+
+    Usage
+      $ workspaces-to-typescript-project-references
+ 
+
+    Options
+      --root             [Path:string] Root directory of the monorepo. 
+                         Default: current working directory
+      --check            If set the flag, check only differences of tsconfig.json and does not update tsconfig.json.
+                         If the check is failed, exit status 1. It is useful for testing.
+       
+    Examples
+      # Update project references in tsconfig.json
+      $ workspaces-to-typescript-project-references --write
+      # Test on CI
+      $ workspaces-to-typescript-project-references --check
 
 ## Changelog
 

@@ -144,6 +144,10 @@ As another examples, Following project use this tools.
 
 - [textlint](https://github.com/textlint/textlint)
 
+## Related
+
+- [Infer project references from common monorepo patterns / tools · Issue #25376 · microsoft/TypeScript](https://github.com/microsoft/TypeScript/issues/25376)
+
 ## Changelog
 
 See [Releases page](https://github.com/azu/monorepo-utils/releases).

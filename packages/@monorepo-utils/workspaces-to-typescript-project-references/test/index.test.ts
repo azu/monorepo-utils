@@ -22,22 +22,8 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(false);
-        expect(result.aggregateError).toMatchInlineSnapshot(`
-            Object {
-              "errors": Array [
-                [Error: [packages/b] Self dependencies is something wrong: packages/b refer to packages/b],
-                [Error: [packages/b] Expected values to be strictly deep-equal:
-            + actual - expected
-
-            + []
-            - [
-            -   {
-            -     path: ''
-            -   }
-            - ]],
-              ],
-              "message": "Can not update Project References, because found 2 errors",
-            }
-        `);
+        expect(result.aggregateError?.message).toMatchInlineSnapshot(
+            `"Can not update Project References, because found 2 errors"`
+        );
     });
 });

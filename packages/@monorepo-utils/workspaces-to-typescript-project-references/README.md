@@ -6,6 +6,14 @@ This tool allows you to update `tsconfig.json`'s `references` property and test 
 
 This monorepo use this tool as self-integration.
 
+## Supports
+
+- Lerna(`lerna.json`)
+- Yarn's workspaces
+- npm v7+'s workspaces
+- [ ] pnpm workspace. refer to <https://github.com/Bessonov/set-project-references>
+- [ ] Custom workspace
+
 ## Install
 
 Install with [npm](https://www.npmjs.com/):

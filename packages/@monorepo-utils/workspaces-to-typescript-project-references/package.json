@@ -20,9 +20,12 @@
   "license": "MIT",
   "author": "azu",
   "sideEffects": false,
-  "main": "lib/workspaces-to-typescript-project-references.js",
-  "module": "module/workspaces-to-typescript-project-references.js",
-  "types": "lib/workspaces-to-typescript-project-references.d.ts",
+  "main": "lib/index.js",
+  "module": "module/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "workspaces-to-typescript-project-references": "./bin/cmd.js"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -65,14 +68,15 @@
     ]
   },
   "dependencies": {
+    "@monorepo-utils/package-utils": "^2.1.0",
     "comment-json": "^3.0.3",
-    "@monorepo-utils/package-utils": "^2.1.0"
+    "meow": "^7.1.1"
   },
   "devDependencies": {
     "@types/comment-json": "^1.1.1",
-    "jest": "^26.4.2",
-    "@types/node": "^14.6.2",
     "@types/jest": "^26.0.10",
+    "@types/node": "^14.6.2",
+    "jest": "^26.4.2",
     "prettier": "^2.1.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.0.2"

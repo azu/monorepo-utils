@@ -36,7 +36,7 @@ This tool provides updating feature and testing feature.
        
     Examples
       # Update project references in tsconfig.json
-      $ workspaces-to-typescript-project-references --write
+      $ workspaces-to-typescript-project-references
       # Test on CI
       $ workspaces-to-typescript-project-references --check
 

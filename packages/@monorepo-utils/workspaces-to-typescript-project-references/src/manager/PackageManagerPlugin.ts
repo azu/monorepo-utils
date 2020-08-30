@@ -13,6 +13,9 @@ export type PackageManagerPluginOptions = {
 };
 export type PackageReference = { name: string; version: undefined | string };
 export type PackageManagerPluginImplementation = {
+    /**
+     * Return true if support the project
+     */
     supports(): boolean;
     /**
      * Return monorepo packages

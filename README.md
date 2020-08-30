@@ -1,4 +1,4 @@
-# monorepo-utils [![Build Status](https://travis-ci.org/azu/monorepo-utils.svg?branch=master)](https://travis-ci.org/azu/monorepo-utils)
+# monorepo-utils [![Actions Status: test](https://github.com/azu/monorepo-utils/workflows/test/badge.svg)](https://github.com/azu/monorepo-utils/actions?query=workflow%3A"test")
 
 This repository is utilities for monorepo.
 Also, this repository is a monorepo.

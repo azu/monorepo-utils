@@ -1,0 +1,83 @@
+{
+  "name": "@monorepo-utils/workspaces-to-typescript-project-references",
+  "version": "1.0.0",
+  "description": "Convert Workspaces to TypeScript's Project References",
+  "keywords": [
+    "yarn",
+    "npm",
+    "workspaces",
+    "typescript",
+    "project-reference"
+  ],
+  "homepage": "https://github.com/azu/monorepo-utils/tree/master/packages/@monorepo-utils/workspaces-to-typescript-project-references/",
+  "bugs": {
+    "url": "https://github.com/azu/monorepo-utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/monorepo-utils.git"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "sideEffects": false,
+  "main": "lib/workspaces-to-typescript-project-references.js",
+  "module": "module/workspaces-to-typescript-project-references.js",
+  "types": "lib/workspaces-to-typescript-project-references.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "module"
+  ],
+  "scripts": {
+    "build": "tsc -p . && tsc --project ./tsconfig.module.json",
+    "clean": "rimraf lib/ module/",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prepublish": "npm run clean && npm run build",
+    "test": "jest",
+    "watch": "tsc -p . --watch"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "none"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testRegex": "./test/.*.ts$",
+    "rootDir": ".",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/test/fixtures"
+    ]
+  },
+  "dependencies": {
+    "comment-json": "^3.0.3",
+    "@monorepo-utils/package-utils": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/comment-json": "^1.1.1",
+    "jest": "^26.4.2",
+    "@types/node": "^14.6.2",
+    "@types/jest": "^26.0.10",
+    "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

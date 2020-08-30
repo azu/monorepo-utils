@@ -100,7 +100,7 @@ export const toProjectReferences = (options: Options) => {
         return {
             ok: false,
             aggregateError: {
-                message: `Can not update Project References, because found ${errors.length} errors`,
+                message: `Found ${errors.length} errors`,
                 errors
             }
         };

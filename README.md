@@ -17,7 +17,7 @@ Supports following package manager's workspaces.
 
 ### [@monorepo-utils/workspaces-to-typescript-project-references](./packages/@monorepo-utils/workspaces-to-typescript-project-references)
 
-This tool convert `lerna.json`/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
+This tool convert lerna/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
 
 You can keep package dependencies synchronized between lerna/npm/yarn workspaces and TypeScript.
 

@@ -33,6 +33,7 @@
     "url": "https://github.com/azu/monorepo-utils.git"
   },
   "scripts": {
+    "clean": "rimraf lib && tsc -b --clean",
     "build": "tsc -b .",
     "precommit": "lint-staged",
     "postcommit": "git reset",

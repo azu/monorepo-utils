@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "tsc -b .",
-    "clean": "rimraf lib/",
+    "clean": "rimraf lib/ && tsc -b --clean",
     "prepublish": "npm run --if-present build",
     "test": "jest --no-cache",
     "test:updateSnapshot": "jest -u",

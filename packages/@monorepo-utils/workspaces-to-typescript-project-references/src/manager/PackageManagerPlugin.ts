@@ -3,11 +3,6 @@ import { PackageResult } from "@monorepo-utils/package-utils";
 export type Dependencies = {
     [index: string]: string;
 };
-export type PackageJSON = {
-    name: string;
-    dependencies?: Dependencies;
-    devDependencies?: Dependencies;
-};
 export type PackageManagerPluginOptions = {
     rootDir: string;
 };

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import commentJSON from "comment-json";
 import { plugin as npmPlugin } from "./manager/npm";
+import { plugin as yarnPlugin } from "./manager/yarn";
 import assert from "assert";
 
 export type Options = {
@@ -21,7 +22,7 @@ export type ToProjectReferencesResult =
           };
       };
 export const toProjectReferences = (options: Options) => {
-    const plugins = [npmPlugin];
+    const plugins = [npmPlugin, yarnPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
     // use first plugin
     const supportPlugin = pluginImplementations.find((plugin) => {

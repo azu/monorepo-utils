@@ -11,8 +11,8 @@ This monorepo use this tool as self-integration.
 - Lerna(`lerna.json`)
 - Yarn's workspaces
 - npm v7+'s workspaces
-- [ ] pnpm workspace. refer to <https://github.com/Bessonov/set-project-references>
-- [ ] Custom workspace
+- [ ] pnpm workspaces. refer to <https://github.com/Bessonov/set-project-references>
+- [ ] Custom workspaces
 
 ## Install
 

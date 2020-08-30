@@ -16,22 +16,19 @@ const loadPackage = (packagePath: string): object => {
 
 const findPackages = (packageSpecs: string[], rootDirectory: string) => {
     return packageSpecs
-        .reduce(
-            (pkgDirs, pkgGlob) => {
-                const target = path.join(rootDirectory, pkgGlob);
-                const filePathList = globby.hasMagic(pkgGlob)
-                    ? globby.sync(target, {
-                          onlyFiles: false
-                      })
-                    : [target];
-                return pkgDirs.concat(filePathList);
-            },
-            [] as string[]
-        )
+        .reduce((pkgDirs, pkgGlob) => {
+            const target = path.join(rootDirectory, pkgGlob);
+            const filePathList = globby.hasMagic(pkgGlob)
+                ? globby.sync(target, {
+                      onlyFiles: false,
+                  })
+                : [target];
+            return pkgDirs.concat(filePathList);
+        }, [] as string[])
         .map((location: string) => {
             return { location, packageJSON: loadPackage(location) };
         })
-        .filter(res => {
+        .filter((res) => {
             return res.packageJSON && "name" in res.packageJSON;
         });
 };

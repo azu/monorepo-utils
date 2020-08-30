@@ -24,7 +24,7 @@ export async function execute(options: ExecuteOptions) {
     if (options.changelogFilePath) {
         const changelog = await getChangelog(options.changelogFilePath, {
             name: options.name ?? "package", // no name
-            version: options.tag
+            version: options.tag,
         });
         return template(changelog).trim();
     } else {

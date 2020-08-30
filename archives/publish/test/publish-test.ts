@@ -20,7 +20,7 @@ describe("publish", () => {
             projectDir: path.join(__dirname, "fixtures"),
             skipPrompt: true,
             dry: true,
-            ciMode: true
+            ciMode: true,
         });
         expect(stripAnsi(consoleMock.printHistory())).toMatchSnapshot();
     });
@@ -30,7 +30,7 @@ describe("publish", () => {
             skipPrompt: true,
             dry: true,
             ciMode: true,
-            distTag: "next"
+            distTag: "next",
         });
         expect(stripAnsi(consoleMock.printHistory())).toMatchSnapshot();
     });

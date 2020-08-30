@@ -9,7 +9,7 @@ describe("cli", () => {
             const actual = await execute({
                 directory: fixedDir,
                 changelogFilePath: path.join(fixedDir, "CHANGELOG.md"),
-                tag: "0.13.0"
+                tag: "0.13.0",
             });
             expect(actual).toMatchSnapshot();
         });
@@ -18,21 +18,21 @@ describe("cli", () => {
         it("textlint@10.2.0 should has changelog ", async () => {
             const actual = await execute({
                 directory: independentDir,
-                tag: "textlint@10.2.0"
+                tag: "textlint@10.2.0",
             });
             expect(actual).toMatchSnapshot();
         });
         it("@textlint/kernel@2.0.0-next. should has changelog ", async () => {
             const actual = await execute({
                 directory: independentDir,
-                tag: "@textlint/kernel@2.0.0-next.0"
+                tag: "@textlint/kernel@2.0.0-next.0",
             });
             expect(actual).toMatchSnapshot();
         });
         it("@textlint/ast-tester@2.0.7 should be empty ", async () => {
             const actual = await execute({
                 directory: independentDir,
-                tag: "@textlint/ast-tester@2.0.7"
+                tag: "@textlint/ast-tester@2.0.7",
             });
             expect(actual).toBe("");
         });

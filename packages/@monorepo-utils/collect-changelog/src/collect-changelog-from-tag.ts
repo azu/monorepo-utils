@@ -57,7 +57,7 @@ function splitLernaTag(lernaTag: string) {
     const splitIndex = lernaTag.lastIndexOf("@");
     return {
         name: lernaTag.slice(0, splitIndex),
-        version: lernaTag.slice(splitIndex + 1)
+        version: lernaTag.slice(splitIndex + 1),
     };
 }
 
@@ -65,7 +65,7 @@ function filterEmpty(array?: string[]) {
     if (!array) {
         return [];
     }
-    return array.filter(item => item.trim().length !== 0);
+    return array.filter((item) => item.trim().length !== 0);
 }
 
 function filter(changes: Changes): Changes {
@@ -87,7 +87,7 @@ export function convertCClogToResult(name: string, version: string, changes: Cha
         name,
         version,
         changes: filteredChanges,
-        hasChanges: Object.keys(filteredChanges).length > 0
+        hasChanges: Object.keys(filteredChanges).length > 0,
     };
 }
 
@@ -101,7 +101,7 @@ export function findChangelog(projectRootDirectory: string, lernaTag: string): P
     if (!meta.name || !meta.version) {
         throw new Error("It is not lerna tag" + lernaTag);
     }
-    const matchPackage = getPackages(projectRootDirectory).find(value => {
+    const matchPackage = getPackages(projectRootDirectory).find((value) => {
         return value.packageJSON.name === meta.name;
     });
     if (!matchPackage) {
@@ -116,7 +116,7 @@ export function findChangelog(projectRootDirectory: string, lernaTag: string): P
  * @param meta
  */
 export function getChangelog(changelogFilePath: string, meta: PackageMeta): Promise<ChangLogResult> {
-    return getLog(changelogFilePath, meta).then(changes => {
+    return getLog(changelogFilePath, meta).then((changes) => {
         return convertCClogToResult(meta.name, meta.version, changes);
     });
 }

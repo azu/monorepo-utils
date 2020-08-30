@@ -35,18 +35,18 @@ const cli = meow(
         autoHelp: true,
         flags: {
             dry: {
-                type: "boolean"
+                type: "boolean",
             },
             yes: {
-                type: "boolean"
+                type: "boolean",
             },
             ci: {
-                type: "boolean"
+                type: "boolean",
             },
             distTag: {
-                type: "string"
-            }
-        }
+                type: "string",
+            },
+        },
     }
 );
 
@@ -68,7 +68,7 @@ export async function run() {
         dry: dryRunMode,
         skipPrompt: ciMode ? true : !!cli.flags.yes,
         ciMode: ciMode,
-        distTag
+        distTag,
     });
     console.log(
         chalk`

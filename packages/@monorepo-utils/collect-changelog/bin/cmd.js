@@ -26,43 +26,43 @@ const cli = meow(
     {
         flags: {
             directory: {
-                type: "string"
+                type: "string",
             },
             changelog: {
-                type: "string"
+                type: "string",
             },
             template: {
-                type: "string"
+                type: "string",
             },
             name: {
-                type: "string"
-            }
+                type: "string",
+            },
         },
         autoHelp: true,
-        autoVersion: true
+        autoVersion: true,
     }
 );
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");
 const name = cli.flags.name;
 const changelogFilePath = cli.flags.changelog ? path.resolve(process.cwd(), cli.flags.changelog || "") : undefined;
-const promises = cli.input.map(tag => {
+const promises = cli.input.map((tag) => {
     return execute({
         changelogFilePath,
         directory: monorepoDirectory,
         name: name,
         tag: tag,
-        templatePath: cli.flags.template
+        templatePath: cli.flags.template,
     });
 });
 // show results
 Promise.all(promises)
-    .then(results => {
-        results.forEach(result => {
+    .then((results) => {
+        results.forEach((result) => {
             console.log(result);
         });
     })
-    .catch(error => {
+    .catch((error) => {
         console.error(error);
         process.exit(1);
     });

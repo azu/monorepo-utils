@@ -46,9 +46,57 @@ This tool provides updating feature and testing feature.
 
 ## Plugin
 
-- [ ] Add a document about `--plugin` and Plugin implementation
-- We need to support to plugin for custom resolution
-- For more details, See [Plugin interface](./src/manager/PackageManagerPlugin.ts)
+[@monorepo-utils/workspaces-to-typescript-project-references](https://github.com/azu/monorepo-utils/tree/master/packages/@monorepo-utils/workspaces-to-typescript-project-references) support to plugin for custom resolution.
+
+You can write a plugin for own monorepo tools.
+
+For example, [Bolt](https://github.com/boltpkg/bolt) has a workspaces, but a bit different with lerna/yarn style.
+Bolt require [`bolt.workspaces` in `package.json`](https://github.com/boltpkg/bolt#configuration).
+
+[get-monorepo-packages](https://github.com/azz/get-monorepo-packages) support bolt's `workspaces`.
+So, you can write `bolt-plugin` as following.
+
+```js
+const getPackages = require("get-monorepo-packages");
+module.exports = (options) => {
+    const monorepoPackages = getPackages(options.rootDir);
+    return {
+        supports() {
+            return monorepoPackages.length > 0;
+        },
+        getAllPackages() {
+            return monorepoPackages;
+        },
+        getDependencies(packageJSON) {
+            const dependencies = Object.entries(packageJSON.dependencies ?? {});
+            const devDependencies = Object.entries(packageJSON.devDependencies ?? {});
+            return [...dependencies, ...devDependencies].map((dep) => {
+                return {
+                    name: dep[0]
+                };
+            });
+        },
+        resolve({ name }) {
+            const matchPkg = monorepoPackages.find((info) => {
+                return info.package.name === name;
+            });
+            if (!matchPkg) {
+                return null;
+            }
+            return matchPkg.location;
+        }
+    };
+};
+```
+
+You can use this plugin via `--plugin` flag.
+
+```
+$ npm install @monorepo-utils/workspaces-to-typescript-project-references -g
+$ workspaces-to-typescript-project-references --plugin ./bolt-plugin.js
+```
+ 
+For more details, See [Plugin interface](./src/manager/PackageManagerPlugin.ts)
 
 ## Examples
 

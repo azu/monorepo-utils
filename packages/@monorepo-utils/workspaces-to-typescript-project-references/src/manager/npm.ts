@@ -14,7 +14,7 @@ export const plugin: PackageManagerPlugin = (options) => {
         getDependencies(packageJSON: PackageResult["packageJSON"]): PackageReference[] {
             const dependencies = Object.entries(packageJSON.dependencies ?? {});
             const devDependencies = Object.entries(packageJSON.devDependencies ?? {});
-            return [...dependencies, devDependencies].map((dep) => {
+            return [...dependencies, ...devDependencies].map((dep) => {
                 return {
                     name: dep[0] as string
                 };

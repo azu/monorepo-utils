@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.2.0...@monorepo-utils/collect-changelog@2.3.0) (2020-08-30)
+
+
+### Bug Fixes
+
+* project config ([d9a25d9](https://github.com/azu/monorepo-utils/commit/d9a25d938b52bdabc0eecf37e870eaa0bf4ddda4))
+
+
+### Features
+
+* self use workspaces-to-typescript-project-references ([ccde789](https://github.com/azu/monorepo-utils/commit/ccde7895aec4b634d08de1fab60de174d1f72b1f))
+
+
+
+
+
 # [2.2.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/collect-changelog@2.1.1...@monorepo-utils/collect-changelog@2.2.0) (2020-04-28)
 
 

@@ -40,6 +40,10 @@ This tool provides updating feature and testing feature.
       # Test on CI
       $ workspaces-to-typescript-project-references --check
 
+## Plugin
+
+- [ ] We will support to plugin for custom resolution
+
 ## Changelog
 
 See [Releases page](https://github.com/azu/monorepo-utils/releases).

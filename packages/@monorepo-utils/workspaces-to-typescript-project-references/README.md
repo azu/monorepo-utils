@@ -6,6 +6,12 @@ You can keep package dependencies synchronized between lerna/npm/yarn workspaces
 
 This monorepo use this tool as self-integration.
 
+## Features
+
+- Convert workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html)
+- Preserve `tsconfig.json`'s comments
+- Custom Plugin support
+
 ## Supports
 
 - [x] [Lerna](https://github.com/lerna/lerna)(`lerna.json`)

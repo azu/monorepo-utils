@@ -33,12 +33,16 @@ This tool provides updating feature and testing feature.
     Options
       --root             [Path:string] Root directory of the monorepo. 
                          Default: current working directory
+
       --check            If set the flag, check only differences of tsconfig.json and does not update tsconfig.json.
                          If the check is failed, exit status 1. It is useful for testing.
        
       --plugin           [Path:string] Path to plugin script.
                          Load the plugin script as module and use it. 
                            
+      --tsconfigPath     [Path:string] Use alternative config path inside the package. e.g.: tsconfig.test.json
+                         Default: tsconfig.json
+
     Examples
       # Update project references in tsconfig.json
       $ workspaces-to-typescript-project-references

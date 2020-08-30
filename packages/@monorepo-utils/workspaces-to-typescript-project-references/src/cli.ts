@@ -11,12 +11,16 @@ export const cli = meow(
     Options
       --root             [Path:string] Root directory of the monorepo. 
                          Default: current working directory
+
       --check            If set the flag, check only differences of tsconfig.json and does not update tsconfig.json.
                          If the check is failed, exit status 1. It is useful for testing.
        
       --plugin           [Path:string] Path to plugin script.
                          Load the plugin script as module and use it. 
                            
+      --tsconfigPath     [Path:string] Use alternative config path inside the package. e.g.: tsconfig.test.json
+                         Default: tsconfig.json
+
     Examples
       # Update project references in tsconfig.json
       $ workspaces-to-typescript-project-references
@@ -36,6 +40,10 @@ export const cli = meow(
             plugin: {
                 type: "string",
                 isMultiple: true
+            },
+            tsconfigPath: {
+                type: "string",
+                default: "tsconfig.json"
             }
         },
         autoHelp: true,
@@ -56,10 +64,14 @@ export const run = async (
               return plugin.plugin;
           })
         : undefined;
+    const customTsConfigFinder = (location: string) => {
+        return path.join(location, flags.tsconfigPath);
+    };
     const result = toProjectReferences({
         rootDir: flags.root,
         checkOnly: flags.check,
-        plugins
+        plugins,
+        tsConfigPathFinder: flags.tsconfigPath ? customTsConfigFinder : undefined
     });
     if (result.ok) {
         return {

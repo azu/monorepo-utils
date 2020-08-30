@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.4](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.3...@monorepo-utils/workspaces-to-typescript-project-references@2.3.4) (2020-08-30)
+
+
+### Bug Fixes
+
+* **workspaces:** fix plugin loading logic ([e83e457](https://github.com/azu/monorepo-utils/commit/e83e457371bc30d3332da3082ecc5a4de848e128))
+
+
+
+
+
 ## [2.3.3](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.2...@monorepo-utils/workspaces-to-typescript-project-references@2.3.3) (2020-08-30)
 
 **Note:** Version bump only for package @monorepo-utils/workspaces-to-typescript-project-references

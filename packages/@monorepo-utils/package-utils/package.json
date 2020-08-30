@@ -29,13 +29,13 @@
     "url": "https://github.com/azu/monorepo-utils.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -p .",
+    "build": "cross-env NODE_ENV=production tsc -b .",
     "clean": "rimraf lib/",
     "prepublish": "npm run --if-present build",
     "test": "jest --no-cache",
     "test:updateSnapshot": "jest -u",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "watch": "tsc -p . --watch"
+    "watch": "tsc -b . --watch"
   },
   "prettier": {
     "printWidth": 120,

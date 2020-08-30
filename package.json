@@ -9,8 +9,10 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap && yarn run build",
-    "test": "lerna run test",
-    "test:updateSnapshot": "lerna run test:updateSnapshot",
+    "test": "npm run reference:test && lerna run test",
+    "updateSnapshot": "lerna run test:updateSnapshot",
+    "reference:update": "workspaces-to-typescript-project-references",
+    "reference:test": "workspaces-to-typescript-project-references --check",
     "build": "lerna run build",
     "clean": "lerna run clean",
     "versionup": "lerna version --conventional-commits",

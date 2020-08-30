@@ -14,10 +14,10 @@
     "monorepo-utils-publish": "./bin/cmd.js"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production tsc -p .",
+    "build": "cross-env NODE_ENV=production tsc -b .",
     "prepublish": "npm run --if-present build",
     "test": "jest",
-    "watch": "tsc -p . --watch"
+    "watch": "tsc -b . --watch"
   },
   "dependencies": {
     "@monorepo-utils/package-utils": "^2.1.0",

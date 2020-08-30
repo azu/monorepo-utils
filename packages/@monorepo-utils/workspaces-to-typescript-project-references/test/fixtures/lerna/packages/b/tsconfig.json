@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "ESNext",
-        "strict": true
-    },
-    "references": [
-        {
-            "path": "../a"
-        }
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "strict": true
+  },
+  "references": [
+    {
+      "path": "../a"
+    }
+  ]
 }

@@ -24,7 +24,8 @@
     /* Report error when not all code paths in function return a value. */
     "noImplicitReturns": true,
     /* Report errors for fallthrough cases in switch statement. */
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "composite": true
   },
   "include": [
     "src/**/*"
@@ -32,5 +33,10 @@
   "exclude": [
     ".git",
     "node_modules"
+  ],
+  "references": [
+    {
+      "path": "../package-utils"
+    }
   ]
 }

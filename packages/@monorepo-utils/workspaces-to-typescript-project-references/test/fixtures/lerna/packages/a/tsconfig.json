@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "ESNext",
-        "strict": true
-    },
-    "references": []
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "strict": true
+  },
+  "references": []
 }

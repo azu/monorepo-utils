@@ -53,6 +53,7 @@ This tool provides updating feature and testing feature.
 
 Following project use this tools.
 
+- [monorepo-utils](https://github.com/azu/monorepo-utils) it-self
 - [textlint](https://github.com/textlint/textlint)
 
 ## Changelog

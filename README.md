@@ -11,9 +11,9 @@ Collect package file path in the monorepo.
 
 Supports following package manager's workspaces.
 
-- Lerna
-- Yarn
-- npm v7+
+- Lerna(`lerna.json`)
+- Yarn's workspaces
+- npm v7+'s workspaces
 
 ### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
 

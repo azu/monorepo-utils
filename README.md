@@ -15,6 +15,12 @@ Supports following package manager's workspaces.
 - Yarn's workspaces
 - npm v7+'s workspaces
 
+### [@monorepo-utils/workspaces-to-typescript-project-references](./packages/@monorepo-utils/workspaces-to-typescript-project-references)
+
+This tool convert `lerna.json`/npm workspaces/yarn workspaces to [TypeScript's Project References](https://www.typescriptlang.org/docs/handbook/project-references.html).
+
+This tool allows you to update `tsconfig.json`'s `references` property and test it. 
+
 ### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
 
 [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) get change from each package's `CHANGELOG.md`.

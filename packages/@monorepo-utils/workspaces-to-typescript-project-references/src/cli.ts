@@ -48,7 +48,13 @@ export const run = async (
     flags = cli.flags
 ): Promise<{ exitStatus: number; stdout: string | null; stderr: string | null }> => {
     const plugins = Array.isArray(flags.plugin)
-        ? flags.plugin.map((pluginPath) => require(path.join(process.cwd(), pluginPath)))
+        ? flags.plugin.map((pluginPath) => {
+              const plugin = require(path.join(process.cwd(), pluginPath));
+              if (typeof plugin.plugin !== "string") {
+                  throw new Error("plugin should export { plugin }.");
+              }
+              return plugin.plugin;
+          })
         : undefined;
     const result = toProjectReferences({
         rootDir: flags.root,

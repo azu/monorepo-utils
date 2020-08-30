@@ -40,7 +40,8 @@ export const toProjectReferences = (options: Options) => {
         const tsconfigFilePath =
             options.tsConfigPathFinder?.(packageInfo.location) ?? path.join(packageInfo.location, "tsconfig.json");
         if (!fs.existsSync(tsconfigFilePath)) {
-            throw new Error(`Not found tsconfig.json: ${tsconfigFilePath}`);
+            // Skip has not tsconfig.json
+            return;
         }
         const tsconfigJSON = commentJSON.parse(fs.readFileSync(tsconfigFilePath, "utf-8"));
         const references = supportPlugin.getDependencies(packageInfo.packageJSON);

@@ -28,9 +28,7 @@ See [Releases page](https://github.com/azu/monorepo-utils/releases).
 
 ## Running tests
 
-Install devDependencies and Run `npm test`:
-
-    npm i -d && npm test
+    yarn test
 
 ## Contributing
 

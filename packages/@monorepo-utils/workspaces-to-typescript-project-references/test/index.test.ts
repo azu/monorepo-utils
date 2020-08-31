@@ -22,6 +22,13 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(false);
-        expect(result.aggregateError?.message).toMatchInlineSnapshot(`"Found 2 errors"`);
+        expect(result.aggregateError?.message).toMatchInlineSnapshot(`
+            "workspaces-to-typescript-project-references found 2 errors.
+
+            Please update your tsconfig.json via following command.
+
+            $ workspaces-to-typescript-project-references
+            "
+        `);
     });
 });

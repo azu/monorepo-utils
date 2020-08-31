@@ -58,7 +58,7 @@ export const run = async (
     const plugins = Array.isArray(flags.plugin)
         ? flags.plugin.map((pluginPath) => {
               const plugin = require(path.join(process.cwd(), pluginPath));
-              if (typeof plugin.plugin !== "string") {
+              if (typeof plugin.plugin !== "function") {
                   throw new Error("plugin should export { plugin }.");
               }
               return plugin.plugin;

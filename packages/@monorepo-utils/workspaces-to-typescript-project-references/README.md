@@ -70,7 +70,7 @@ So, you can write `bolt-plugin.js` as following.
 `bolt-plugin.js`:
 ```js
 const getPackages = require("get-monorepo-packages");
-module.exports = (options) => {
+const plugin = (options) => {
     const monorepoPackages = getPackages(options.rootDir);
     return {
         supports() {
@@ -99,6 +99,7 @@ module.exports = (options) => {
         }
     };
 };
+module.exports.plugin = plugin;
 ```
 
 You can use this plugin via `--plugin` flag.

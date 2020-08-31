@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.4.0...@monorepo-utils/workspaces-to-typescript-project-references@2.4.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* **workspaces:** add message and how to fix ([1efaee4](https://github.com/azu/monorepo-utils/commit/1efaee47a35809ba96acad5244a6cf3da6f3668a))
+
+
+
+
+
 # [2.4.0](https://github.com/azu/monorepo-utils/compare/@monorepo-utils/workspaces-to-typescript-project-references@2.3.7...@monorepo-utils/workspaces-to-typescript-project-references@2.4.0) (2020-08-30)
 
 

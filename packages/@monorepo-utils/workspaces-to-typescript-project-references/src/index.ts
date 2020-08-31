@@ -98,7 +98,12 @@ export const toProjectReferences = (options: Options) => {
         return {
             ok: false,
             aggregateError: {
-                message: `Found ${errors.length} errors`,
+                message: `workspaces-to-typescript-project-references found ${errors.length} errors.
+
+Please update your tsconfig.json via following command.
+
+$ workspaces-to-typescript-project-references
+`,
                 errors
             }
         };

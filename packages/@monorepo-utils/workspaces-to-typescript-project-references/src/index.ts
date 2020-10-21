@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import path from "upath";
 import commentJSON from "comment-json";
 import { plugin as workspacesPlugin } from "./manager/workspaces";
 import assert from "assert";

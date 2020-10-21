@@ -1,4 +1,4 @@
-import * as path from "path";
+import * as path from "upath";
 import { findChangelog } from "../src/collect-changelog-from-tag";
 describe("collect-changelog-from-tag", () => {
     it("should match package@version", async () => {

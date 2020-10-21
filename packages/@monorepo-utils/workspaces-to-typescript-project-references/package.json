@@ -70,7 +70,8 @@
   "dependencies": {
     "@monorepo-utils/package-utils": "^2.2.0",
     "comment-json": "^3.0.3",
-    "meow": "^7.1.1"
+    "meow": "^7.1.1",
+    "upath": "^2.0.0"
   },
   "devDependencies": {
     "@types/comment-json": "^1.1.1",

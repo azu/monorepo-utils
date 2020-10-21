@@ -1,4 +1,4 @@
-import * as path from "path";
+import * as path from "upath";
 import { getPackages } from "../src";
 
 expect.addSnapshotSerializer({

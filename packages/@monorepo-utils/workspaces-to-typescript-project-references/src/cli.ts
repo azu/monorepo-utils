@@ -1,5 +1,5 @@
 import meow from "meow";
-import path from "path";
+import path from "upath";
 import { toProjectReferences } from "./index";
 
 export const cli = meow(

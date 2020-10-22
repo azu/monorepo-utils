@@ -1,4 +1,4 @@
-import path from "path";
+import path from "upath";
 import { toProjectReferences } from "../src";
 
 describe("toProjectReferences", function () {

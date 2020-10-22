@@ -3,7 +3,7 @@
 // MIT (c) 2018 Lucas Azzola
 const globby = require("globby");
 import loadJsonFile = require("load-json-file");
-import * as path from "path";
+import * as path from "upath";
 import * as fs from "fs";
 
 const loadPackage = (packagePath: string): object => {

@@ -63,7 +63,7 @@
   "dependencies": {
     "globby": "^11.0.1",
     "load-json-file": "^6.2.0",
-    "upath": "^2.0.0"
+    "upath": "^2.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

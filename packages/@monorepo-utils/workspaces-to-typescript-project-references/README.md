@@ -18,7 +18,8 @@ This monorepo use this tool as self-integration.
 - [x] [Yarn's workspaces](https://classic.yarnpkg.com/en/docs/workspaces/))
     - [ ] [Workspace ranges (workspace:)](https://yarnpkg.com/features/workspaces#workspace-ranges-workspace) [#29](https://github.com/azu/monorepo-utils/issues/29)
 - [x] [npm's workspaces](https://github.com/npm/rfcs/blob/26e8ac6ee176943d6522d5d057fab05e37655e1c/accepted/0000-workspaces.md)
-- [ ] pnpm workspaces. refer to <https://github.com/Bessonov/set-project-references>
+- [ ] pnpm workspaces
+    - Refer to <https://github.com/Bessonov/set-project-references>
 - [x] Custom workspaces
     - Plugin support
 
@@ -41,8 +42,7 @@ This tool provides updating feature and testing feature.
                          Default: current working directory
 
       --check            If set the flag, check only differences of tsconfig.json and does not update tsconfig.json.
-                         If the check is failed, exit status 1. It is useful for testing.
-       
+                         If the check is failed, exit status 1. It is useful for testing.       
       --plugin           [Path:string] Path to plugin script.
                          Load the plugin script as module and use it. 
                            

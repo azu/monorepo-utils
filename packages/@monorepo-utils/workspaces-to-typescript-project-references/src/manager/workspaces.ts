@@ -1,3 +1,4 @@
+import semverMatch from "semver-match";
 import { PackageManagerPlugin, PackageReference } from "./PackageManagerPlugin";
 import { getPackages } from "@monorepo-utils/package-utils";
 import { PackageResult } from "@monorepo-utils/package-utils";
@@ -17,13 +18,15 @@ export const plugin: PackageManagerPlugin = (options) => {
             const devDependencies = Object.entries(packageJSON.devDependencies ?? {});
             return [...dependencies, ...devDependencies].map((dep) => {
                 return {
-                    name: dep[0] as string
+                    name: dep[0] as string,
+                    version: dep[1] as string
                 };
             });
         },
-        resolve({ name }): string | null {
+        resolve({ name, version }): string | null {
             const matchPkg = monorepoPackages.find((info) => {
-                return info.packageJSON.name === name;
+                if (info.packageJSON.name !== name) return false;
+                return !!semverMatch(version, [info.packageJSON.version]);
             });
             if (!matchPkg) {
                 return null;

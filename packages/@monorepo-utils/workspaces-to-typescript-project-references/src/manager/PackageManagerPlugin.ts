@@ -5,6 +5,7 @@ export type PackageManagerPluginOptions = {
 };
 export type PackageReference = {
     name: string;
+    version: string;
 };
 export type PackageManagerPluginImplementation = {
     /**

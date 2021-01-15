@@ -67,8 +67,9 @@ export const toProjectReferences = (options: Options) => {
                         )
                     );
                 }
+                const resolvePath = path.dirname(path.resolve(packageInfo.location, tsconfigFilePath));
                 return {
-                    path: path.relative(packageInfo.location, absolutePathOrNull)
+                    path: path.relative(resolvePath, absolutePathOrNull)
                 };
             })
             .filter((r) => Boolean(r));

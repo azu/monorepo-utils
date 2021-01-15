@@ -1,4 +1,6 @@
-# Change Log
+Please see https://github.com/azu/monorepo-utils/blob/master/README.md
+
+# Old Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.

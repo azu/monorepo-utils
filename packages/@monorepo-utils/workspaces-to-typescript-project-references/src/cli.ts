@@ -1,6 +1,6 @@
 import meow from "meow";
 import path from "upath";
-import { toProjectReferences } from "./index";
+import { toProjectReferences, DEFAULT_TSCONFIGPATH } from "./index";
 
 export const cli = meow(
     `
@@ -43,7 +43,7 @@ export const cli = meow(
             },
             tsconfigPath: {
                 type: "string",
-                default: "tsconfig.json"
+                default: DEFAULT_TSCONFIGPATH
             }
         },
         autoHelp: true,
@@ -71,6 +71,7 @@ export const run = async (
         rootDir: flags.root,
         checkOnly: flags.check,
         plugins,
+        tsConfigPath: flags.tsconfigPath,
         tsConfigPathFinder: flags.tsconfigPath ? customTsConfigFinder : undefined
     });
     if (result.ok) {

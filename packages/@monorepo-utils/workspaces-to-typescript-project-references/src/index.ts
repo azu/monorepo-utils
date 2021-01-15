@@ -5,10 +5,13 @@ import { plugin as workspacesPlugin } from "./manager/workspaces";
 import assert from "assert";
 import { PackageManagerPlugin } from "./manager/PackageManagerPlugin";
 
+export const DEFAULT_TSCONFIGPATH = "tsconfig.json";
+
 export type Options = {
     rootDir: string;
     checkOnly: boolean;
     plugins?: PackageManagerPlugin[];
+    tsConfigPath?: string;
     tsConfigPathFinder?(location: string): string;
 };
 export type ToProjectReferencesResult =
@@ -39,7 +42,7 @@ export const toProjectReferences = (options: Options) => {
     const errors: Error[] = [];
     allPackages.forEach((packageInfo) => {
         const tsconfigFilePath =
-            options.tsConfigPathFinder?.(packageInfo.location) ?? path.join(packageInfo.location, "tsconfig.json");
+            options.tsConfigPathFinder?.(packageInfo.location) ?? path.join(packageInfo.location, DEFAULT_TSCONFIGPATH);
         if (!fs.existsSync(tsconfigFilePath)) {
             // Skip has not tsconfig.json
             return;
@@ -52,24 +55,26 @@ export const toProjectReferences = (options: Options) => {
                 if (!absolutePathOrNull) {
                     return;
                 }
-                if (!path.isAbsolute(absolutePathOrNull)) {
+                const tsConfigDirName = path.dirname(options.tsConfigPath ?? DEFAULT_TSCONFIGPATH);
+                const absolutePath = path.join(absolutePathOrNull, tsConfigDirName);
+                if (!path.isAbsolute(absolutePath)) {
                     throw new Error(
-                        `Plugin#resolve should return absolute path: ${absolutePathOrNull}, plugin: ${supportPlugin}`
+                        `Plugin#resolve should return absolute path: ${absolutePath}, plugin: ${supportPlugin}`
                     );
                 }
-                if (packageInfo.location === absolutePathOrNull) {
+                if (packageInfo.location === absolutePath) {
                     const selfName = relativeName(packageInfo.location);
                     errors.push(
                         new Error(
                             `[${selfName}] Self dependencies is something wrong: ${selfName} refer to ${relativeName(
-                                absolutePathOrNull
+                                absolutePath
                             )}`
                         )
                     );
                 }
                 const resolvePath = path.dirname(path.resolve(packageInfo.location, tsconfigFilePath));
                 return {
-                    path: path.relative(resolvePath, absolutePathOrNull)
+                    path: path.relative(resolvePath, absolutePath)
                 };
             })
             .filter((r) => Boolean(r));

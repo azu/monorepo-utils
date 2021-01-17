@@ -91,7 +91,8 @@ export const toProjectReferences = (options: Options) => {
             // update
             if (errors.length === 0) {
                 tsconfigJSON["references"] = newProjectReferences;
-                fs.writeFileSync(tsconfigFilePath, commentJSON.stringify(tsconfigJSON, null, 2), "utf-8");
+                const contents = commentJSON.stringify(tsconfigJSON, null, 2);
+                fs.writeFileSync(tsconfigFilePath, `${contents}\n`, "utf-8");
             }
         }
     });

@@ -39,3 +39,10 @@ This script split `lerna publish`(lerna 2) into versioning and publishing.
 lerna 3 support `lerna version` and `lerna publish`.
 You should use lerna 3 directly.
 
+## Release Flow
+
+Following command release changed packaged and created release note to [Releases](https://github.com/azu/monorepo-utils/releases).
+
+```
+$ GH_TOKEN="${YOUR_GITHUB_TOKEN}" npm run versionup -- --create-release=github && npm run release --yes
+```

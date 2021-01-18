@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.5](https://github.com/azu/monorepo-utils/compare/v2.4.4...v2.4.5) (2021-01-18)
+
+
+### Bug Fixes
+
+* **project-references:**  add newline at end of tsconfig.json ([#40](https://github.com/azu/monorepo-utils/issues/40)) ([d7c0973](https://github.com/azu/monorepo-utils/commit/d7c0973ffb7cc80a2189cde59c1b6eaa61142766))
+* **project-refereneces:** append dirname of tsconfigPath to project reference paths ([#39](https://github.com/azu/monorepo-utils/issues/39)) ([3968fac](https://github.com/azu/monorepo-utils/commit/3968facbb94c6a2dce407a333e8e2d65d4f6907f))
+
+
+
+
+
 ## 2.4.4 (2021-01-15)
 
 

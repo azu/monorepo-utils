@@ -26,6 +26,7 @@ export const plugin: PackageManagerPlugin = (options) => {
         resolve({ name, version }): string | null {
             const matchPkg = monorepoPackages.find((info) => {
                 if (info.packageJSON.name !== name) return false;
+                if (version.startsWith("workspace:")) return true;
                 return !!semverMatch(version, [info.packageJSON.version]);
             });
             if (!matchPkg) {

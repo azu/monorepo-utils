@@ -29,6 +29,13 @@ describe("toProjectReferences", function () {
         });
         expect(result.ok).toBe(true);
     });
+    it("support yarn v2 workspaces", () => {
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/yarn-v2-workspaces"),
+            checkOnly: true
+        });
+        expect(result.ok).toBe(true);
+    });
     it("ok: false when some package has self-dependency", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/error.self-dependency"),

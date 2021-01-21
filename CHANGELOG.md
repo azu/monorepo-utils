@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/azu/monorepo-utils/compare/v2.4.5...v2.5.0) (2021-01-21)
+
+
+### Features
+
+* **project-refereneces:** Add Yarn v2 (Berry) support ([#42](https://github.com/azu/monorepo-utils/issues/42)) ([0a73093](https://github.com/azu/monorepo-utils/commit/0a73093683840c9a7ce53792f238387c442d9422))
+
+
+
+
+
 ## [2.4.5](https://github.com/azu/monorepo-utils/compare/v2.4.4...v2.4.5) (2021-01-18)
 
 

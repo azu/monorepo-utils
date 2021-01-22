@@ -7,6 +7,15 @@ import { PackageManagerPlugin } from "./manager/PackageManagerPlugin";
 
 export const DEFAULT_TSCONFIGPATH = "tsconfig.json";
 
+// https://www.typescriptlang.org/docs/handbook/project-references.html
+type ProjectReference = {
+    path: string;
+    prepend?: boolean;
+};
+const sortReferences = (references: ProjectReference[]) => {
+    return references.slice().sort((refA, refB) => (refA.path > refB.path ? 1 : -1));
+};
+
 export type Options = {
     rootDir: string;
     checkOnly: boolean;
@@ -14,17 +23,7 @@ export type Options = {
     tsConfigPath?: string;
     tsConfigPathFinder?(location: string): string;
 };
-export type ToProjectReferencesResult =
-    | {
-          ok: true;
-      }
-    | {
-          ok: false;
-          aggregateError: {
-              message: string;
-              errors: Error[];
-          };
-      };
+
 export const toProjectReferences = (options: Options) => {
     const plugins = Array.isArray(options.plugins) && options.plugins.length > 0 ? options.plugins : [workspacesPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
@@ -77,7 +76,7 @@ export const toProjectReferences = (options: Options) => {
                     path: path.relative(resolvePath, absolutePath)
                 };
             })
-            .filter((r) => Boolean(r));
+            .filter((r) => Boolean(r)) as ProjectReference[];
         const currentProjectReferences: { path: string }[] = tsconfigJSON["references"] ?? [];
         if (options.checkOnly) {
             // check
@@ -86,7 +85,12 @@ export const toProjectReferences = (options: Options) => {
                 const cleanCurrentProjectReferences = JSON.parse(
                     JSON.stringify(commentJSON.parse(commentJSON.stringify(currentProjectReferences), undefined, true))
                 );
-                assert.deepStrictEqual(cleanCurrentProjectReferences, newProjectReferences);
+                // TODO: move sorting to updating logic when next major release
+                // https://github.com/azu/monorepo-utils/issues/44
+                assert.deepStrictEqual(
+                    sortReferences(cleanCurrentProjectReferences),
+                    sortReferences(newProjectReferences)
+                );
             } catch (error) {
                 const selfName = relativeName(packageInfo.location);
                 errors.push(new Error(`[${selfName}] ${error.message}`));

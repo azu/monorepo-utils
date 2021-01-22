@@ -13,7 +13,7 @@ type ProjectReference = {
     prepend?: boolean;
 };
 const sortReferences = (references: ProjectReference[]) => {
-    return references.sort((refA, refB) => (refA.path > refB.path ? 1 : -1));
+    return references.slice().sort((refA, refB) => (refA.path > refB.path ? 1 : -1));
 };
 
 export type Options = {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/azu/monorepo-utils/compare/v2.5.0...v2.5.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **project-references:** relax asserting ([#45](https://github.com/azu/monorepo-utils/issues/45)) ([cb2843d](https://github.com/azu/monorepo-utils/commit/cb2843df2716d7e6d09ff4022715293df72877e5))
+
+
+
+
+
 # [2.5.0](https://github.com/azu/monorepo-utils/compare/v2.4.5...v2.5.0) (2021-01-21)
 
 

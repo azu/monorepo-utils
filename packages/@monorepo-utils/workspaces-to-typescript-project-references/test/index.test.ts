@@ -29,6 +29,19 @@ describe("toProjectReferences", function () {
         });
         expect(result.ok).toBe(true);
     });
+    it("support yarn workspaces with tsConfigPath with filename that is not tsconfig.json", () => {
+        const tsconfigPath = "tsconfig-esm.json";
+        const customTsConfigFinder = (location: string) => {
+            return path.join(location, tsconfigPath);
+        };
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/yarn-workspaces-tsconfigPath"),
+            checkOnly: true,
+            tsConfigPath: tsconfigPath,
+            tsConfigPathFinder: customTsConfigFinder
+        });
+        expect(result.ok).toBe(true);
+    });
     it("support yarn v2 workspaces", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/yarn-v2-workspaces"),

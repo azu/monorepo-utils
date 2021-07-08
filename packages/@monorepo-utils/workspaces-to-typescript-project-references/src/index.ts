@@ -54,8 +54,18 @@ export const toProjectReferences = (options: Options) => {
                 if (!absolutePathOrNull) {
                     return;
                 }
-                const tsConfigDirName = path.dirname(options.tsConfigPath ?? DEFAULT_TSCONFIGPATH);
-                const absolutePath = path.join(absolutePathOrNull, tsConfigDirName);
+                const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
+                const tsConfigDirName = path.dirname(tsConfigPath);
+                const pathComponents = [absolutePathOrNull, tsConfigDirName];
+
+                // If the file name is not tsconfig.json (the default),
+                // then append it to the generated path
+                const tsConfigFileName = path.basename(tsConfigPath);
+                if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
+                    pathComponents.push(tsConfigPath);
+                }
+
+                const absolutePath = path.join(...pathComponents);
                 if (!path.isAbsolute(absolutePath)) {
                     throw new Error(
                         `Plugin#resolve should return absolute path: ${absolutePath}, plugin: ${supportPlugin}`

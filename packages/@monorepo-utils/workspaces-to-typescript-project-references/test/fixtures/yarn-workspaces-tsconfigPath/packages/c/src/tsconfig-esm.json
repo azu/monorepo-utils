@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig-esm.json",
+  "references": [
+    {
+      "path": "../../a/src/tsconfig-esm.json"
+    },
+    {
+      "path": "../../b/src/tsconfig-esm.json"
+    }
+  ]
+}

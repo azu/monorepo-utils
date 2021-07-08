@@ -62,7 +62,7 @@ export const toProjectReferences = (options: Options) => {
                 // then append it to the generated path
                 const tsConfigFileName = path.basename(tsConfigPath);
                 if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
-                    pathComponents.push(tsConfigPath);
+                    pathComponents.push(tsConfigFileName);
                 }
 
                 const absolutePath = path.join(...pathComponents);

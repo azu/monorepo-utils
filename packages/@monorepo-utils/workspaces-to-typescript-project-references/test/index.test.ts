@@ -30,7 +30,7 @@ describe("toProjectReferences", function () {
         expect(result.ok).toBe(true);
     });
     it("support yarn workspaces with tsConfigPath with filename that is not tsconfig.json", () => {
-        const tsconfigPath = "tsconfig-esm.json";
+        const tsconfigPath = "src/tsconfig-esm.json";
         const customTsConfigFinder = (location: string) => {
             return path.join(location, tsconfigPath);
         };

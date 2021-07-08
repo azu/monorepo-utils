@@ -4,10 +4,5 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "strict": true
-  },
-  "references": [
-    {
-      "path": "../a/tsconfig-esm.json"
-    }
-  ]
+  }
 }

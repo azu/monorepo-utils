@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/azu/monorepo-utils/compare/v2.5.1...v2.6.0) (2021-07-08)
+
+
+### Features
+
+* append tsconfigPath filename to path if not tsconfig.json ([#47](https://github.com/azu/monorepo-utils/issues/47)) ([589891f](https://github.com/azu/monorepo-utils/commit/589891f3b6c700471680d3d5daef67b717f5337f))
+
+
+
+
+
 ## [2.5.1](https://github.com/azu/monorepo-utils/compare/v2.5.0...v2.5.1) (2021-01-22)
 
 

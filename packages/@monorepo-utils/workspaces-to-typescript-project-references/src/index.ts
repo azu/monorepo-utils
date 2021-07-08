@@ -61,7 +61,7 @@ export const toProjectReferences = (options: Options) => {
                 // If the file name is not tsconfig.json (the default),
                 // then append it to the generated path
                 const tsConfigFileName = path.basename(tsConfigPath);
-                if (tsConfigFileName !== "tsconfig.json") {
+                if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
                     pathComponents.push(tsConfigPath);
                 }
 

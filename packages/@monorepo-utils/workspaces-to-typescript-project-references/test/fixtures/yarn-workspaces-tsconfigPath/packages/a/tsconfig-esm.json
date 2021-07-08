@@ -4,6 +4,5 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "strict": true
-  },
-  "references": []
+  }
 }

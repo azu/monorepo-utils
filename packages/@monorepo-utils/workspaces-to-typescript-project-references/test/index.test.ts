@@ -1,5 +1,4 @@
 import path from "upath";
-import fs from "fs";
 import { toProjectReferences } from "../src";
 
 describe("toProjectReferences", function () {
@@ -49,15 +48,6 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(true);
-    });
-    it("does not write if the contents will be the same", () => {
-        const rootDir = path.join(__dirname, "fixtures/yarn-workspaces");
-        const tsConfigPathA = path.join(rootDir, "packages/a/tsconfig.json");
-        const initialMtime = fs.statSync(tsConfigPathA).mtime;
-        const result = toProjectReferences({ rootDir, checkOnly: false });
-        expect(result.ok).toBe(true);
-        const newMTime = fs.statSync(tsConfigPathA).mtime;
-        expect(newMTime).toEqual(initialMtime);
     });
     it("ok: false when some package has self-dependency", () => {
         const result = toProjectReferences({

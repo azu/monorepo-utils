@@ -110,10 +110,14 @@ export const toProjectReferences = (options: Options) => {
             // update
             if (errors.length === 0) {
                 tsconfigJSON["references"] = newProjectReferences;
-                const oldContents = fs.readFileSync(tsconfigFilePath, { encoding: "utf-8" });
-                const newContents = `${commentJSON.stringify(tsconfigJSON, null, 2)}\n`;
+                const oldContents = commentJSON.stringify(
+                    commentJSON.parse(fs.readFileSync(tsconfigFilePath, { encoding: "utf-8" })),
+                    null,
+                    2
+                );
+                const newContents = commentJSON.stringify(tsconfigJSON, null, 2);
                 if (newContents !== oldContents) {
-                    fs.writeFileSync(tsconfigFilePath, newContents, "utf-8");
+                    fs.writeFileSync(tsconfigFilePath, `${newContents}\n`, "utf-8");
                 }
             }
         }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.3](https://github.com/azu/monorepo-utils/compare/v2.6.2...v2.6.3) (2021-10-14)
+
+
+### Bug Fixes
+
+* improve check for changes ([#51](https://github.com/azu/monorepo-utils/issues/51)) ([a097b44](https://github.com/azu/monorepo-utils/commit/a097b4403c91c75ee0e86527bfefcc8da152c2a2))
+
+
+
+
+
 ## [2.6.2](https://github.com/azu/monorepo-utils/compare/v2.6.1...v2.6.2) (2021-07-14)
 
 

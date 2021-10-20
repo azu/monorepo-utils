@@ -28,13 +28,9 @@
     "composite": true,
     "noEmit": true
   },
-  "include": [
-    "**/*"
-  ],
-  "exclude": [
-    ".git",
-    "node_modules"
-  ],
+  "files": [],
+  "include": [],
+  "exclude": [],
   "references": [
     {
       "path": "packages/@monorepo-utils/collect-changelog"

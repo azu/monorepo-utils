@@ -74,6 +74,9 @@ For example. You can update `<root>/tsconfig.json` to following.
   "compilerOptions": {
     // ...
   },
+  "files": [],
+  "include": [],
+  "exclude": [],
   "references": [
     {
       "path": "packages/@monorepo-utils/collect-changelog"

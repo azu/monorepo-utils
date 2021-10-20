@@ -49,11 +49,50 @@ This tool provides updating feature and testing feature.
       --tsconfigPath     [Path:string] Use alternative config path inside the package. e.g.: tsconfig.test.json
                          Default: tsconfig.json
 
+      --includesRoot     If set the flag, generate <root>/tsconfig.json that includes all references.
+                         It is useful to check all packages at once.
+
+
     Examples
       # Update project references in tsconfig.json
       $ workspaces-to-typescript-project-references
       # Test on CI
       $ workspaces-to-typescript-project-references --check
+
+      # Update <root>/tsconfig.json that includes all references to packages
+      $ workspaces-to-typescript-project-references --includesRoot
+      $ workspaces-to-typescript-project-references --includesRoot --check
+
+:memo: Tips `--includesRoot`
+
+If `--includesRoot` is passed, this tool also update `references` in `<root>/tsconfig.json`.
+
+For example. You can update `<root>/tsconfig.json` to following.
+
+```json5
+{
+  "compilerOptions": {
+    // ...
+  },
+  "references": [
+    {
+      "path": "packages/@monorepo-utils/collect-changelog"
+    },
+    {
+      "path": "packages/@monorepo-utils/package-utils"
+    },
+    {
+      "path": "packages/@monorepo-utils/workspaces-to-typescript-project-references"
+    }
+  ]
+}
+```
+
+You can build all packages at once by `tsc --build .` in root dir.
+
+- Example: [package.json](./package.json) and [tsconfig.json](./tsconfig.json)
+- [Optimizing multi-package apps with TypeScript Project References | by Mirko Kruschke | eBay Tech Berlin](https://ebaytech.berlin/optimizing-multi-package-apps-with-typescript-project-references-d5c57a3b4440)
+- [Migrating Large TypeScript Codebases To Project References — Developer Tooling (2021)](https://shopify.engineering/migrating-large-typescript-codebases-project-references)
 
 ## Plugin
 

@@ -101,7 +101,7 @@ export const toProjectReferences = (options: Options) => {
                     sortReferences(cleanCurrentProjectReferences),
                     sortReferences(newProjectReferences)
                 );
-            } catch (error) {
+            } catch (error: any) {
                 const selfName = relativeName(packageInfo.location);
                 errors.push(new Error(`[${selfName}] ${error.message}`));
             }
@@ -131,6 +131,78 @@ export const toProjectReferences = (options: Options) => {
 Please update your tsconfig.json via following command.
 
 $ workspaces-to-typescript-project-references
+`,
+                errors
+            }
+        };
+    }
+    return {
+        ok: true
+    };
+};
+
+export const toRootProjectReferences = (options: Options) => {
+    const plugins = Array.isArray(options.plugins) && options.plugins.length > 0 ? options.plugins : [workspacesPlugin];
+    const pluginImplementations = plugins.map((plugin) => plugin(options));
+    // use first plugin
+    const supportPlugin = pluginImplementations.find((plugin) => {
+        return plugin.supports();
+    });
+    if (!supportPlugin) {
+        throw new Error("Not found supported plugin");
+    }
+    const allPackages = supportPlugin.getAllPackages();
+    const errors: Error[] = [];
+    const rootTsconfigFilePath =
+        options.tsConfigPathFinder?.(options.rootDir) ?? path.join(options.rootDir, DEFAULT_TSCONFIGPATH);
+    if (!fs.existsSync(rootTsconfigFilePath)) {
+        return {
+            ok: false,
+            aggregateError: {
+                message: `Not found tsconfig.json in ${rootTsconfigFilePath}`,
+                errors
+            }
+        };
+    }
+    const tsconfigJSON = commentJSON.parse(fs.readFileSync(rootTsconfigFilePath, "utf-8"));
+    const projectReferences = allPackages.map((pkg) => {
+        return {
+            path: path.relative(options.rootDir, pkg.location)
+        };
+    });
+    if (options.checkOnly) {
+        // check
+        try {
+            const currentProjectReferences: { path: string }[] = tsconfigJSON["references"] ?? [];
+            const cleanCurrentProjectReferences = JSON.parse(
+                JSON.stringify(commentJSON.parse(commentJSON.stringify(currentProjectReferences), undefined, true))
+            );
+            // TODO: move sorting to updating logic when next major release
+            // https://github.com/azu/monorepo-utils/issues/44
+            assert.deepStrictEqual(sortReferences(cleanCurrentProjectReferences), sortReferences(projectReferences));
+        } catch (error: any) {
+            errors.push(new Error(`[root] ${error.message}`));
+        }
+    } else {
+        const updatedTsConfigJSON = {
+            ...tsconfigJSON,
+            references: projectReferences
+        };
+        const oldContents = commentJSON.stringify(projectReferences, null, 2);
+        const newContents = commentJSON.stringify(updatedTsConfigJSON, null, 2);
+        if (newContents !== oldContents) {
+            fs.writeFileSync(rootTsconfigFilePath, `${newContents}\n`, "utf-8");
+        }
+    }
+    if (errors.length > 0) {
+        return {
+            ok: false,
+            aggregateError: {
+                message: `workspaces-to-typescript-project-references found ${errors.length} errors in root tsconfig.
+
+Please update your <root>/tsconfig.json via following command.
+
+$ workspaces-to-typescript-project-references --includesRoot
 `,
                 errors
             }

@@ -11,9 +11,10 @@
     "bootstrap": "lerna bootstrap && yarn run build",
     "test": "npm run reference:test && lerna run test",
     "updateSnapshot": "lerna run test:updateSnapshot",
-    "reference:update": "workspaces-to-typescript-project-references",
-    "reference:test": "workspaces-to-typescript-project-references --check",
+    "reference:update": "workspaces-to-typescript-project-references --includesRoot",
+    "reference:test": "workspaces-to-typescript-project-references --includesRoot --check",
     "build": "lerna run build",
+    "type-check": "tsc -b .",
     "clean": "lerna run clean",
     "versionup": "lerna version --conventional-commits",
     "versionup:patch": "lerna version patch --conventional-commits",
@@ -38,7 +39,8 @@
     "husky": "^4.2.5",
     "lerna": "^3.10.5",
     "lint-staged": "^10.2.13",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.1",
+    "typescript": "^4.4.4"
   },
   "prettier": {
     "singleQuote": false,

@@ -1,7 +1,16 @@
 import path from "upath";
 import fs from "fs";
-import { toProjectReferences } from "../src";
+import { toProjectReferences, toRootProjectReferences } from "../src";
 
+describe("toRootProjectReferences", function () {
+    it("support lerna.json", () => {
+        const result = toRootProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
+            checkOnly: true
+        });
+        expect(result.ok).toBe(true);
+    });
+});
 describe("toProjectReferences", function () {
     it("support lerna.json", () => {
         const result = toProjectReferences({

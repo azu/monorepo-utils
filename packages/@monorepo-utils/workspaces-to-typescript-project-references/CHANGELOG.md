@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/azu/monorepo-utils/compare/v2.7.1...v2.7.2) (2021-10-20)
+
+
+### Bug Fixes
+
+* **workspaces-to-typescript-project-references:** skip non-ts package ([754412a](https://github.com/azu/monorepo-utils/commit/754412a732de18f7a3b788c791ba0c5eebae765f))
+
+
+
+
+
 ## [2.7.1](https://github.com/azu/monorepo-utils/compare/v2.7.0...v2.7.1) (2021-10-20)
 
 **Note:** Version bump only for package @monorepo-utils/workspaces-to-typescript-project-references

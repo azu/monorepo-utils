@@ -165,11 +165,18 @@ export const toRootProjectReferences = (options: Options) => {
         };
     }
     const tsconfigJSON = commentJSON.parse(fs.readFileSync(rootTsconfigFilePath, "utf-8"));
-    const projectReferences = allPackages.map((pkg) => {
-        return {
-            path: path.relative(options.rootDir, pkg.location)
-        };
-    });
+    const projectReferences = allPackages
+        .filter((pkg) => {
+            const tsconfigFilePath =
+                options.tsConfigPathFinder?.(pkg.location) ?? path.join(pkg.location, DEFAULT_TSCONFIGPATH);
+            // Skip if the package has not tsconfig.json
+            return fs.existsSync(tsconfigFilePath);
+        })
+        .map((pkg) => {
+            return {
+                path: path.relative(options.rootDir, pkg.location)
+            };
+        });
     if (options.checkOnly) {
         // check
         try {

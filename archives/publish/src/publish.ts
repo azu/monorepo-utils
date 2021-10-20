@@ -14,7 +14,7 @@ export const publish = async ({
     dry,
     skipPrompt,
     ciMode,
-    distTag,
+    distTag
 }: {
     projectDir: string;
     dry: boolean;
@@ -37,7 +37,7 @@ export const publish = async ({
     // confirm: npm publish if skipPrompt is false
     const answers = skipPrompt
         ? {
-              publish: true,
+              publish: true
           }
         : await inquirer.prompt([
               {
@@ -53,8 +53,8 @@ ${publishablePackages
         return `- ${item}`;
     })
     .join("\n")}
-`,
-              },
+`
+              }
           ]);
     if (!answers["publish"]) {
         return log("No publish");
@@ -80,14 +80,14 @@ ${publishablePackages
             }
             const task = execUnlessDry(`${bin} publish ` + args.join(" "), {
                 cwd: location,
-                dry,
+                dry
             });
             let message = `${pkg.packageJSON.name}@${pkg.packageJSON.version}`;
             if (distTag) {
                 message += `, distTag: @${distTag}`;
             }
             return logPromise(task, message, {
-                ciMode: ciMode,
+                ciMode: ciMode
             });
         });
     }, Promise.resolve());

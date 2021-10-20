@@ -8,7 +8,7 @@ export const asyncFilter = async <T>(array: T[], predicate: (item: T) => Promise
         const shouldExist = await predicate(item);
         return {
             item,
-            shouldExist,
+            shouldExist
         };
     });
     return evaluateds.filter((evaluated) => evaluated.shouldExist).map((evaluated) => evaluated.item);

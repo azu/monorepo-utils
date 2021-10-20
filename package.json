@@ -22,7 +22,8 @@
     "versionup:major": "lerna version minor --conventional-commits",
     "release": "lerna publish from-package",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
-    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prepare": "git config --local core.hooksPath .githooks"
   },
   "workspaces": {
     "packages": [
@@ -36,16 +37,16 @@
   "author": "azu",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^4.2.5",
     "lerna": "^3.10.5",
-    "lint-staged": "^10.2.13",
-    "prettier": "^2.1.1",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
     "typescript": "^4.4.4"
   },
   "prettier": {
     "singleQuote": false,
     "printWidth": 120,
-    "tabWidth": 4
+    "tabWidth": 4,
+    "trailingComma": "none"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [

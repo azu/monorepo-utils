@@ -26,10 +26,11 @@
     "noImplicitReturns": true,
     /* Report errors for fallthrough cases in switch statement. */
     "noFallthroughCasesInSwitch": true,
-    "composite": true
+    "composite": true,
+    "noEmit": true
   },
   "include": [
-    "src/**/*"
+    "**/*"
   ],
   "exclude": [
     ".git",

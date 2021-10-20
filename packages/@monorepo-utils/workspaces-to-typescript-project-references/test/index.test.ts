@@ -6,7 +6,7 @@ describe("toRootProjectReferences", function () {
     it("support lerna.json", () => {
         const result = toRootProjectReferences({
             rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
-            checkOnly: false
+            checkOnly: true
         });
         expect(result.ok).toBe(true);
     });

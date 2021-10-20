@@ -101,7 +101,7 @@ export const toProjectReferences = (options: Options) => {
                     sortReferences(cleanCurrentProjectReferences),
                     sortReferences(newProjectReferences)
                 );
-            } catch (error) {
+            } catch (error: any) {
                 const selfName = relativeName(packageInfo.location);
                 errors.push(new Error(`[${selfName}] ${error.message}`));
             }
@@ -180,7 +180,7 @@ export const toRootProjectReferences = (options: Options) => {
             // TODO: move sorting to updating logic when next major release
             // https://github.com/azu/monorepo-utils/issues/44
             assert.deepStrictEqual(sortReferences(cleanCurrentProjectReferences), sortReferences(projectReferences));
-        } catch (error) {
+        } catch (error: any) {
             errors.push(new Error(`[root] ${error.message}`));
         }
     } else {

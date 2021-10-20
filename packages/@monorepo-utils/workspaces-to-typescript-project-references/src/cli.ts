@@ -95,7 +95,6 @@ export const run = async (
     }
     // Update <root>/tsconfig.json
     if (flags.includesRoot) {
-        console.log("includesRoot", flags.includesRoot);
         const rootProjectResult = toRootProjectReferences({
             rootDir: flags.root,
             checkOnly: flags.check,

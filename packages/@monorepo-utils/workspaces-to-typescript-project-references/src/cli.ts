@@ -21,17 +21,28 @@ export const cli = meow(
       --tsconfigPath     [Path:string] Use alternative config path inside the package. e.g.: tsconfig.test.json
                          Default: tsconfig.json
 
+      --includesRoot     If set the flag, generate <root>/tsconfig.json that includes all references.
+                         It is useful to check all packages at once.
+                         
+
     Examples
       # Update project references in tsconfig.json
       $ workspaces-to-typescript-project-references
       # Test on CI
       $ workspaces-to-typescript-project-references --check
+      # Generate root tsconfig.json that includes all references
+      $ workspaces-to-typescript-project-references --includesRoot
+      $ workspaces-to-typescript-project-references --includesRoot --check
 `,
     {
         flags: {
             root: {
                 type: "string",
                 default: process.cwd()
+            },
+            includesRoot: {
+                type: "boolean",
+                default: false
             },
             check: {
                 type: "boolean",
@@ -74,6 +85,9 @@ export const run = async (
         tsConfigPath: flags.tsconfigPath,
         tsConfigPathFinder: flags.tsconfigPath ? customTsConfigFinder : undefined
     });
+    // Update <root>/tsconfig.json
+    if (flags.includesRoot) {
+    }
     if (result.ok) {
         return {
             exitStatus: 0,

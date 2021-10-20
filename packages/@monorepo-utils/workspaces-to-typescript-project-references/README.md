@@ -90,6 +90,7 @@ For example. You can update `<root>/tsconfig.json` to following.
 
 You can build all packages at once by `tsc --build .` in root dir.
 
+- Example: [package.json](./package.json) and [tsconfig.json](./tsconfig.json)
 - [Optimizing multi-package apps with TypeScript Project References | by Mirko Kruschke | eBay Tech Berlin](https://ebaytech.berlin/optimizing-multi-package-apps-with-typescript-project-references-d5c57a3b4440)
 - [Migrating Large TypeScript Codebases To Project References — Developer Tooling (2021)](https://shopify.engineering/migrating-large-typescript-codebases-project-references)
 

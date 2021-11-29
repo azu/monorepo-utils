@@ -83,4 +83,11 @@ describe("toProjectReferences", function () {
             "
         `);
     });
+    it("should not includes non-ts package", () => {
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/js-ts-mixed-packages"),
+            checkOnly: true
+        });
+        expect(result.ok).toBe(true);
+    });
 });

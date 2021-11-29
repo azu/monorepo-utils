@@ -161,12 +161,14 @@ For example, [monorepo-utils](https://github.com/azu/monorepo-utils) it-self use
 - [workspaces definition](https://github.com/azu/monorepo-utils/blob/99fcc68078fae56a8c84f4a9bf4bdff7a3d4cc76/package.json#L26-L31) on root's package.json
 
 ```json
+{
   "workspaces": {
     "packages": [
       "packages/*",
       "packages/@monorepo-utils/*"
     ]
-  },
+  }
+}
 ```
 
 - `@monorepo-utils/workspaces-to-typescript-project-references` has [dependencies](https://github.com/azu/monorepo-utils/blob/39b7bacee6094096adca5ac5c9c2d2a759a38419/packages/@monorepo-utils/workspaces-to-typescript-project-references/package.json#L71) to [@monorepo-utils/package-utils](../package-utils)

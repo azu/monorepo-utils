@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/azu/monorepo-utils/compare/v2.7.2...v2.7.3) (2021-11-29)
+
+
+### Bug Fixes
+
+* skip to link non-ts package ([#54](https://github.com/azu/monorepo-utils/issues/54)) ([5b142da](https://github.com/azu/monorepo-utils/commit/5b142dafaf87897fe71f0b0dcf511c5115cb7b29)), closes [#53](https://github.com/azu/monorepo-utils/issues/53)
+
+
+
+
+
 ## [2.7.2](https://github.com/azu/monorepo-utils/compare/v2.7.1...v2.7.2) (2021-10-20)
 
 

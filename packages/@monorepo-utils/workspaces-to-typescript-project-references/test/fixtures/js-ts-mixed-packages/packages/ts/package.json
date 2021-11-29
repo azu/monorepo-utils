@@ -1,0 +1,8 @@
+{
+  "name": "@example/ts",
+  "version": "1.0.0",
+  "dependencies": {
+    "@example/js": "^1.0.0",
+    "@example/js-but-has-tsconfig": "^1.0.0"
+  }
+}

@@ -24,6 +24,21 @@ export type Options = {
     tsConfigPathFinder?(location: string): string;
 };
 
+// when tsconfig.json → ../path/to/dir
+// when tsconfig.x.json → ../path/to/dir/tsconfig.x.json
+const getReferencePathToTsConfig = (options: { packageLocation: string; tsConfigPath?: string }) => {
+    const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
+    const tsConfigDirName = path.dirname(tsConfigPath);
+    const pathComponents = [options.packageLocation, tsConfigDirName];
+    // If the file name is not tsconfig.json (the default),
+    // then append it to the generated path
+    const tsConfigFileName = path.basename(tsConfigPath);
+    if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
+        pathComponents.push(tsConfigFileName);
+    }
+    return path.join(...pathComponents);
+};
+
 export const toProjectReferences = (options: Options) => {
     const plugins = Array.isArray(options.plugins) && options.plugins.length > 0 ? options.plugins : [workspacesPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
@@ -54,36 +69,38 @@ export const toProjectReferences = (options: Options) => {
                 if (!absolutePathOrNull) {
                     return;
                 }
-                const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
-                const tsConfigDirName = path.dirname(tsConfigPath);
-                const pathComponents = [absolutePathOrNull, tsConfigDirName];
-
-                // If the file name is not tsconfig.json (the default),
-                // then append it to the generated path
-                const tsConfigFileName = path.basename(tsConfigPath);
-                if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
-                    pathComponents.push(tsConfigFileName);
-                }
-
-                const absolutePath = path.join(...pathComponents);
-                if (!path.isAbsolute(absolutePath)) {
+                if (!path.isAbsolute(absolutePathOrNull)) {
                     throw new Error(
-                        `Plugin#resolve should return absolute path: ${absolutePath}, plugin: ${supportPlugin}`
+                        `Plugin#resolve should return absolute path: ${absolutePathOrNull}, plugin: ${supportPlugin}`
                     );
                 }
-                if (packageInfo.location === absolutePath) {
+                // Should ignore no-ts package
+                // https://github.com/azu/monorepo-utils/issues/53
+                const referencePackageTsConfigFilePath = path.resolve(
+                    absolutePathOrNull,
+                    options.tsConfigPath ?? DEFAULT_TSCONFIGPATH
+                );
+                if (!fs.existsSync(referencePackageTsConfigFilePath)) {
+                    return;
+                }
+                // { path } value
+                const referenceTsConfigPath = getReferencePathToTsConfig({
+                    packageLocation: absolutePathOrNull,
+                    tsConfigPath: options.tsConfigPath
+                });
+                if (packageInfo.location === referenceTsConfigPath) {
                     const selfName = relativeName(packageInfo.location);
                     errors.push(
                         new Error(
                             `[${selfName}] Self dependencies is something wrong: ${selfName} refer to ${relativeName(
-                                absolutePath
+                                referenceTsConfigPath
                             )}`
                         )
                     );
                 }
-                const resolvePath = path.dirname(path.resolve(packageInfo.location, tsconfigFilePath));
+                const basePackageLocation = path.dirname(path.resolve(packageInfo.location, tsconfigFilePath));
                 return {
-                    path: path.relative(resolvePath, absolutePath)
+                    path: path.relative(basePackageLocation, referenceTsConfigPath)
                 };
             })
             .filter((r) => Boolean(r)) as ProjectReference[];

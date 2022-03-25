@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/azu/monorepo-utils/compare/v2.7.4...v2.7.5) (2022-03-25)
+
+
+### Bug Fixes
+
+* **project-references:** add validation for duplicated deps ([#57](https://github.com/azu/monorepo-utils/issues/57)) ([54e87b3](https://github.com/azu/monorepo-utils/commit/54e87b3b37af0bf0cdfd8ee07879f82abde9dc95))
+
+
+
+
+
 ## [2.7.4](https://github.com/azu/monorepo-utils/compare/v2.7.3...v2.7.4) (2021-11-29)
 
 **Note:** Version bump only for package monorepo-utils

@@ -95,13 +95,7 @@ export const toProjectReferences = (options: Options) => {
         }
         const tsconfigJSON = commentJSON.parse(fs.readFileSync(tsconfigFilePath, "utf-8"));
         const references = supportPlugin.getDependencies(packageInfo.packageJSON);
-        const referenceValidateResult = validateDuplicatedDependencies(references);
-        // early return: https://github.com/azu/monorepo-utils/issues/56
-        if (!referenceValidateResult.ok) {
-            canNotRecoverErrors.push(...referenceValidateResult.errors);
-            return;
-        }
-        const newProjectReferences = references
+        const resolvedReferences = references
             .map((reference) => {
                 const absolutePathOrNull = supportPlugin.resolve(reference);
                 if (!absolutePathOrNull) {
@@ -112,10 +106,26 @@ export const toProjectReferences = (options: Options) => {
                         `Plugin#resolve should return absolute path: ${absolutePathOrNull}, plugin: ${supportPlugin}`
                     );
                 }
+                return {
+                    name: reference.name,
+                    version: reference.version,
+                    absolutePath: absolutePathOrNull
+                };
+            })
+            .filter((r) => Boolean(r)) as (PackageReference & { absolutePath: string })[];
+        const referenceValidateResult = validateDuplicatedDependencies(resolvedReferences);
+        // if found an error, do early return: https://github.com/azu/monorepo-utils/issues/56
+        if (!referenceValidateResult.ok) {
+            canNotRecoverErrors.push(...referenceValidateResult.errors);
+            return;
+        }
+        const newProjectReferences = resolvedReferences
+            .map((reference) => {
+                const absolutePath = reference.absolutePath;
                 // Should ignore no-ts package
                 // https://github.com/azu/monorepo-utils/issues/53
                 const referencePackageTsConfigFilePath = path.resolve(
-                    absolutePathOrNull,
+                    absolutePath,
                     options.tsConfigPath ?? DEFAULT_TSCONFIGPATH
                 );
                 if (!fs.existsSync(referencePackageTsConfigFilePath)) {
@@ -123,7 +133,7 @@ export const toProjectReferences = (options: Options) => {
                 }
                 // { path } value
                 const referenceTsConfigPath = getReferencePathToTsConfig({
-                    packageLocation: absolutePathOrNull,
+                    packageLocation: absolutePath,
                     tsConfigPath: options.tsConfigPath
                 });
                 if (packageInfo.location === referenceTsConfigPath) {

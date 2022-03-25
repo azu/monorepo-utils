@@ -89,7 +89,6 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(false);
-        console.log("result.aggregateError?.message", result.aggregateError?.message);
         expect(result.aggregateError?.message).toMatchInlineSnapshot(`
             "workspaces-to-typescript-project-references found 1 errors.
 

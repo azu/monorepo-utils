@@ -1,0 +1,10 @@
+{
+  "name": "@example/main",
+  "version": "1.0.0",
+  "dependencies": {
+    "@example/invalid": "^1.0.0"
+  },
+  "devDependencies": {
+    "@example/invalid": "^1.0.0"
+  }
+}

@@ -83,6 +83,22 @@ describe("toProjectReferences", function () {
             "
         `);
     });
+    it("ok: false when a same package in `dependencies` and `devDependencies`", () => {
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/error.invalid-dependencies"),
+            checkOnly: true
+        });
+        expect(result.ok).toBe(false);
+        console.log("result.aggregateError?.message", result.aggregateError?.message);
+        expect(result.aggregateError?.message).toMatchInlineSnapshot(`
+            "workspaces-to-typescript-project-references found 1 errors.
+
+            - This package is deduplicated in dependencies and devDependencies: @example/invalid
+
+            Please resolve these error before updates tsconfig.json
+            "
+        `);
+    });
     it("should not includes non-ts package", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/js-ts-mixed-packages"),

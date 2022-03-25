@@ -3,7 +3,7 @@ import path from "upath";
 import commentJSON from "comment-json";
 import { plugin as workspacesPlugin } from "./manager/workspaces";
 import assert from "assert";
-import { PackageManagerPlugin } from "./manager/PackageManagerPlugin";
+import { PackageManagerPlugin, PackageReference } from "./manager/PackageManagerPlugin";
 
 export const DEFAULT_TSCONFIGPATH = "tsconfig.json";
 
@@ -39,6 +39,37 @@ const getReferencePathToTsConfig = (options: { packageLocation: string; tsConfig
     return path.join(...pathComponents);
 };
 
+const validateDuplicatedDependencies = (packageReferences: PackageReference[]) => {
+    const packageNameSet = new Set<string>();
+    const errors: Error[] = [];
+    packageReferences.forEach((ref) => {
+        if (packageNameSet.has(ref.name)) {
+            errors.push(
+                new Error(`This package is deduplicated in dependencies and devDependencies: ${ref.name}
+
+Please remove duplicate dependencies from dependencies or devDependencies.`)
+            );
+            return;
+        }
+        packageNameSet.add(ref.name);
+    });
+    return {
+        ok: errors.length === 0,
+        errors
+    };
+};
+
+export type toProjectReferencesResult =
+    | {
+          ok: true;
+      }
+    | {
+          ok: false;
+          aggregateError: {
+              message: string;
+              errors: Error[];
+          };
+      };
 export const toProjectReferences = (options: Options) => {
     const plugins = Array.isArray(options.plugins) && options.plugins.length > 0 ? options.plugins : [workspacesPlugin];
     const pluginImplementations = plugins.map((plugin) => plugin(options));
@@ -54,6 +85,7 @@ export const toProjectReferences = (options: Options) => {
     };
     const allPackages = supportPlugin.getAllPackages();
     const errors: Error[] = [];
+    const canNotRecoverErrors: Error[] = [];
     allPackages.forEach((packageInfo) => {
         const tsconfigFilePath =
             options.tsConfigPathFinder?.(packageInfo.location) ?? path.join(packageInfo.location, DEFAULT_TSCONFIGPATH);
@@ -63,6 +95,12 @@ export const toProjectReferences = (options: Options) => {
         }
         const tsconfigJSON = commentJSON.parse(fs.readFileSync(tsconfigFilePath, "utf-8"));
         const references = supportPlugin.getDependencies(packageInfo.packageJSON);
+        const referenceValidateResult = validateDuplicatedDependencies(references);
+        // early return: https://github.com/azu/monorepo-utils/issues/56
+        if (!referenceValidateResult.ok) {
+            canNotRecoverErrors.push(...referenceValidateResult.errors);
+            return;
+        }
         const newProjectReferences = references
             .map((reference) => {
                 const absolutePathOrNull = supportPlugin.resolve(reference);
@@ -139,6 +177,20 @@ export const toProjectReferences = (options: Options) => {
             }
         }
     });
+    if (canNotRecoverErrors.length > 0) {
+        return {
+            ok: false,
+            aggregateError: {
+                message: `workspaces-to-typescript-project-references found ${canNotRecoverErrors.length} errors.
+
+- ${canNotRecoverErrors.map((error) => error.message.split("\n")[0]).join("\n- ")}
+
+Please resolve these error before updates tsconfig.json
+`,
+                errors: canNotRecoverErrors
+            }
+        };
+    }
     if (errors.length > 0) {
         return {
             ok: false,

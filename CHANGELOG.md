@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/azu/monorepo-utils/compare/v2.8.0...v2.8.1) (2022-05-16)
+
+
+### Bug Fixes
+
+* **package-util:** expose findPackages ([f0b6851](https://github.com/azu/monorepo-utils/commit/f0b6851c86efae8fd7a57c056a72f88c77490732))
+
+
+
+
+
 # [2.8.0](https://github.com/azu/monorepo-utils/compare/v2.7.6...v2.8.0) (2022-05-16)
 
 

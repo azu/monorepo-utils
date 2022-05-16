@@ -14,7 +14,7 @@ const loadPackage = (packagePath: string): object => {
     return {};
 };
 
-const findPackages = (packageSpecs: string[], rootDirectory: string) => {
+export const findPackages = (packageSpecs: string[], rootDirectory: string): PackageResult[] => {
     return packageSpecs
         .reduce((pkgDirs, pkgGlob) => {
             const target = path.join(rootDirectory, pkgGlob);

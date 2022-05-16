@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/azu/monorepo-utils/compare/v2.7.6...v2.8.0) (2022-05-16)
+
+
+### Features
+
+* **package-util:** export findPackages ([#61](https://github.com/azu/monorepo-utils/issues/61)) ([327ed19](https://github.com/azu/monorepo-utils/commit/327ed196603f2d6126f249b46e731c1e8cf6c34e))
+
+
+
+
+
 # [2.7.0](https://github.com/azu/monorepo-utils/compare/v2.6.3...v2.7.0) (2021-10-20)
 
 

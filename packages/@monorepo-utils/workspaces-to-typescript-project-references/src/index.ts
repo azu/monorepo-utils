@@ -235,10 +235,11 @@ export const toRootProjectReferences = (options: Options) => {
     const rootTsconfigFilePath =
         options.tsConfigPathFinder?.(options.rootDir) ?? path.join(options.rootDir, DEFAULT_TSCONFIGPATH);
     if (!fs.existsSync(rootTsconfigFilePath)) {
+        const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
         return {
             ok: false,
             aggregateError: {
-                message: `Not found tsconfig.json in ${rootTsconfigFilePath}`,
+                message: `Not found ${tsConfigPath} in ${rootTsconfigFilePath}`,
                 errors
             }
         };
@@ -252,8 +253,16 @@ export const toRootProjectReferences = (options: Options) => {
             return fs.existsSync(tsconfigFilePath);
         })
         .map((pkg) => {
+            const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
+            const pathComponents = [path.relative(options.rootDir, pkg.location)];
+            // If the file name is not tsconfig.json (the default),
+            // then append it to the generated path
+            const tsConfigFileName = path.basename(tsConfigPath);
+            if (tsConfigFileName !== DEFAULT_TSCONFIGPATH) {
+                pathComponents.push(tsConfigFileName);
+            }
             return {
-                path: path.relative(options.rootDir, pkg.location)
+                path: path.join(...pathComponents)
             };
         });
     if (options.checkOnly) {

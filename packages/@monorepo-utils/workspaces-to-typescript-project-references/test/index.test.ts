@@ -3,10 +3,24 @@ import fs from "fs";
 import { toProjectReferences, toRootProjectReferences } from "../src";
 
 describe("toRootProjectReferences", function () {
-    it("support lerna.json", () => {
+    it("update root tsconfig with references to all projects", () => {
         const result = toRootProjectReferences({
             rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
             checkOnly: true
+        });
+        expect(result.ok).toBe(true);
+    });
+
+    it("respect tsconfigPath", () => {
+        const tsConfigPath = "tsconfig.build.json";
+        const customTsConfigFinder = (location: string) => {
+            return path.join(location, tsConfigPath);
+        };
+        const result = toRootProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
+            checkOnly: true,
+            tsConfigPath,
+            tsConfigPathFinder: customTsConfigFinder
         });
         expect(result.ok).toBe(true);
     });

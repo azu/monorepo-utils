@@ -49,7 +49,7 @@ This tool provides updating feature and testing feature.
       --tsconfigPath     [Path:string] Use alternative config path inside the package. e.g.: tsconfig.test.json
                          Default: tsconfig.json
 
-      --includesRoot     If set the flag, update <root>/<tsConfigPath> with all project references.
+      --includesRoot     If set the flag, update <root>/<tsconfigPath> with all project references.
                          It is useful to check all packages at once.
 
 
@@ -65,7 +65,7 @@ This tool provides updating feature and testing feature.
 
 :memo: Tips `--includesRoot`
 
-If `--includesRoot` is passed, this tool also update `references` in `<root>/<tsConfigPath>`.
+If `--includesRoot` is passed, this tool also update `references` in `<root>/<tsconfigPath>`.
 
 For example. You can update `<root>/tsconfig.json` to following.
 

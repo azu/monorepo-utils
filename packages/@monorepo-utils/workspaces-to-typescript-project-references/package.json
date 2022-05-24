@@ -1,6 +1,6 @@
 {
   "name": "@monorepo-utils/workspaces-to-typescript-project-references",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "description": "Convert Workspaces to TypeScript's Project References",
   "keywords": [
     "yarn",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/azu/monorepo-utils/compare/v2.8.1...v2.8.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* Respect tsconfigPath when using includeRoot ([#62](https://github.com/azu/monorepo-utils/issues/62)) ([0d6d122](https://github.com/azu/monorepo-utils/commit/0d6d12208440dca03a62f396274a0034aae1281a))
+
+
+
+
+
 ## [2.8.1](https://github.com/azu/monorepo-utils/compare/v2.8.0...v2.8.1) (2022-05-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@monorepo-utils/package-utils",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "description": "Package utility for monorepo.",
   "keywords": [
     "lerna",

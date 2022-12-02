@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/azu/monorepo-utils/compare/v2.8.2...v2.9.0) (2022-12-02)
+
+
+### Features
+
+* support pnpm workspaces [#30](https://github.com/azu/monorepo-utils/issues/30) ([#64](https://github.com/azu/monorepo-utils/issues/64)) ([0cb0ad4](https://github.com/azu/monorepo-utils/commit/0cb0ad41490a7a17f9d1e897bce83c8815940eb2))
+
+
+
+
+
 ## [2.8.1](https://github.com/azu/monorepo-utils/compare/v2.8.0...v2.8.1) (2022-05-16)
 
 

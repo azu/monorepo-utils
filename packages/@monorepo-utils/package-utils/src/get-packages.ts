@@ -5,6 +5,7 @@ const globby = require("globby");
 import loadJsonFile = require("load-json-file");
 import * as path from "upath";
 import * as fs from "fs";
+import * as yaml from "yaml";
 
 const loadPackage = (packagePath: string): object => {
     const pkgJsonPath = path.join(packagePath, "package.json");
@@ -71,6 +72,16 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
                 // "workspaces": { "packages": [] }
                 return findPackages(pkgJson.workspaces.packages, rootDirectory);
             }
+        }
+    }
+
+    const pnpmYamlPath = path.join(rootDirectory, "pnpm-workspace.yaml");
+    if (fs.existsSync(pnpmYamlPath)) {
+        const contents = fs.readFileSync(pnpmYamlPath, "utf8");
+        const pnpmConfig = yaml.parse(contents);
+
+        if ("packages" in pnpmConfig && Array.isArray(pnpmConfig.packages)) {
+            return findPackages(pnpmConfig.packages, rootDirectory);
         }
     }
 

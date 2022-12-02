@@ -85,4 +85,23 @@ Array [
 ]
 `);
     });
+    it("should support PNPM workspaces via the pnpm-workspace.yaml file", () => {
+        const LERNA_PATH = path.join(__dirname, "fixtures/pnpm");
+        expect(getPackages(LERNA_PATH)).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "location": "<cwd>/test/fixtures/pnpm/packages/bar",
+    "packageJSON": Object {
+      "name": "bar",
+    },
+  },
+  Object {
+    "location": "<cwd>/test/fixtures/pnpm/packages/foo",
+    "packageJSON": Object {
+      "name": "foo",
+    },
+  },
+]
+`);
+    });
 });

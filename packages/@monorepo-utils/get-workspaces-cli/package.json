@@ -21,7 +21,7 @@
   "main": "./index.mjs",
   "exports": "./index.mjs",
   "bin": {
-    "get-workspaces-cli": "./index.mjs"
+    "monorepo-utils-get-workspaces-cli": "./index.mjs"
   },
   "directories": {
     "lib": "lib",

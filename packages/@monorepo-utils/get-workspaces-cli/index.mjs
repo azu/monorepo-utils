@@ -9,6 +9,7 @@ Options:
     --help, -h        Show this help message
     --cwd <path>      Current working directory (default: process.cwd())
     --format <format> Output format (default: line) Supported formats: line, json
+    --filter <filter> Filter packages by package's name (default: undefined)
     
 Examples:
     $ npx @monorepo-utils/get-workspaces-cli
@@ -31,6 +32,10 @@ const parsed = util.parseArgs({
         format: {
             type: "string",
             default: "line" // line, json
+        },
+        filter: {
+            type: "string",
+            default: undefined
         }
     }
 });
@@ -40,10 +45,16 @@ if (parsed.values.help) {
 }
 
 const packages = getPackages(parsed.values.cwd);
+const filteredPackages = packages.filter((pkg) => {
+    if (parsed.values.filter) {
+        return pkg.packageJSON.name.includes(parsed.values.filter);
+    }
+    return true;
+});
 if (parsed.values.format === "json") {
-    console.log(JSON.stringify(packages, null, 4));
+    console.log(JSON.stringify(filteredPackages, null, 4));
 } else {
-    packages.forEach((pkg) => {
+    filteredPackages.forEach((pkg) => {
         console.log(pkg.location);
     });
 }

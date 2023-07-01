@@ -26,6 +26,15 @@ You can keep package dependencies synchronized between lerna/npm/yarn workspaces
 [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) get change from each package's `CHANGELOG.md`.
 It help to collect changelog in lerna's [Independent mode](https://github.com/lerna/lerna#independent-mode---independent).
 
+### [@monorepo-utils/get-workspaces-cli](./packages/@monorepo-utils/get-workspaces-cli)
+
+[@monorepo-utils/get-workspaces-cli](./packages/@monorepo-utils/get-workspaces-cli) is a simple CLI for getting workspace list.
+It allows get file path of packages.
+
+```shell
+$ npx @monorepo-utils/get-workspaces-cli
+```
+
 ## Deprecated Packages
 
 ### **Deprecated** <del>[@monorepo-utils/publish](./packages/@monorepo-utils/publish)</del>

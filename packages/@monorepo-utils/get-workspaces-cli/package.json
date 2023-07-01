@@ -1,0 +1,43 @@
+{
+  "name": "@monorepo-utils/get-workspaces-cli",
+  "version": "2.9.0",
+  "description": "A CLI that get each package paths in a monorepo",
+  "keywords": [
+    "lerna",
+    "monorepo",
+    "util",
+    "cli",
+    "npm"
+  ],
+  "homepage": "https://github.com/azu/monorepo-utils/tree/master/packages/@monorepo-utils/get-workspaces-cli/",
+  "bugs": {
+    "url": "https://github.com/azu/monorepo-utils/issues"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "files": [
+    "index.mjs"
+  ],
+  "main": "./index.mjs",
+  "exports": "./index.mjs",
+  "bin": {
+    "get-workspaces-cli": "./index.mjs"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/monorepo-utils.git"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+    "@monorepo-utils/package-utils": "^2.9.0"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

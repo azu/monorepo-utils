@@ -1,11 +1,13 @@
 {
   "name": "@monorepo-utils/get-workspaces-cli",
   "version": "2.9.0",
-  "description": "A CLI that get workspaces paths",
+  "description": "A CLI that get package paths in a monorepo",
   "keywords": [
     "lerna",
     "monorepo",
-    "util"
+    "util",
+    "cli",
+    "npm"
   ],
   "homepage": "https://github.com/azu/monorepo-utils/tree/master/packages/@monorepo-utils/get-workspaces-cli/",
   "bugs": {

@@ -13,6 +13,8 @@ Options:
     
 Examples:
     $ npx @monorepo-utils/get-workspaces-cli
+    # Filter packages by package's name
+    $ npx @monorepo-utils/get-workspaces-cli --filter example-name
 `;
 
 /**

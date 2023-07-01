@@ -17,6 +17,8 @@ A CLI that get "workspaces" package locations from monorepo.
     $ npx -y -q @monorepo-utils/get-workspaces-cli
     # Filter packages by package's name
     $ npx -y -q @monorepo-utils/get-workspaces-cli --filter example-name
+    # Execute command for each package
+    $ npx -y -q @monorepo-utils/get-workspaces-cli | xargs -I{} sh -c 'cd {}; pwd'
 
 
 ## Changelog

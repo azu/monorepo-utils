@@ -4,7 +4,19 @@ A CLI that get "workspaces" package locations from monorepo.
 
 ## Usage
 
-
+    Usage: npx @monorepo-utils/get-workspaces-cli [options]
+    
+    Options:
+    --help, -h        Show this help message
+    --cwd <path>      Current working directory (default: process.cwd())
+    --format <format> Output format (default: line) Supported formats: line, json
+    --filter <filter> Filter packages by package's name (default: undefined)
+    
+    Examples:
+    # Get parsable workspace paths
+    $ npx -y -q @monorepo-utils/get-workspaces-cli
+    # Filter packages by package's name
+    $ npx -y -q @monorepo-utils/get-workspaces-cli --filter example-name
 
 
 ## Changelog

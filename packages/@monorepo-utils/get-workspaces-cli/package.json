@@ -1,7 +1,7 @@
 {
   "name": "@monorepo-utils/get-workspaces-cli",
   "version": "2.9.0",
-  "description": "A CLI that get package paths in a monorepo",
+  "description": "A CLI that get each package paths in a monorepo",
   "keywords": [
     "lerna",
     "monorepo",

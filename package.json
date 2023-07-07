@@ -52,11 +52,5 @@
     "*.{js,jsx,ts,tsx,css}": [
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "post-commit": "git reset",
-      "pre-commit": "lint-staged"
-    }
   }
 }

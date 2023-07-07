@@ -40,7 +40,7 @@ const cli = meow(
         },
         autoHelp: true,
         autoVersion: true,
-    }
+    },
 );
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");

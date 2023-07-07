@@ -47,7 +47,7 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
         const hasWorkspacesInPackageJson = (
-            v: any
+            v: any,
         ): v is {
             workspaces: { packages: string[] } | string[];
         } => {

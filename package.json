@@ -8,7 +8,7 @@
     "yarn": ">=1.5.0"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap && yarn run build",
+    "bootstrap": "yarn run build",
     "test": "npm run reference:test && lerna run test",
     "updateSnapshot": "lerna run test:updateSnapshot",
     "reference:update": "workspaces-to-typescript-project-references --includesRoot",

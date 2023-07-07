@@ -39,7 +39,7 @@
   "devDependencies": {
     "lerna": "^7.1.1",
     "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0",
+    "prettier": "^2.8.8",
     "typescript": "^5.1.6"
   },
   "prettier": {

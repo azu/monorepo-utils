@@ -16,21 +16,21 @@
     "build": "lerna run build",
     "type-check": "tsc -b .",
     "clean": "lerna run clean",
-    "versionup": "lerna version --conventional-commits",
-    "versionup:patch": "lerna version patch --conventional-commits",
-    "versionup:minor": "lerna version minor --conventional-commits",
-    "versionup:major": "lerna version minor --conventional-commits",
+    "ci:versionup:patch": "lerna version patch --no-push --no-git-tag-version --yes && npm run commit-version",
+    "ci:versionup:minor": "lerna version minor --no-push --no-git-tag-version --yes && npm run commit-version",
+    "ci:versionup:major": "lerna version major --no-push --no-git-tag-version --yes && npm run commit-version",
+    "commit-version": "git add . && git commit -m \"chore(release): v$(node -p 'require(\"./lerna.json\").version')\"",
     "release": "lerna publish from-package",
+    "ci:release": "lerna publish from-package --yes",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "prepare": "git config --local core.hooksPath .githooks",
+    "versionup": "lerna version"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "packages/@monorepo-utils/*"
-    ]
-  },
+  "workspaces": [
+    "packages/*",
+    "packages/@monorepo-utils/*"
+  ],
   "keywords": [
     "monorepot"
   ],

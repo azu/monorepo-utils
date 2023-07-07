@@ -25,12 +25,10 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "packages/@monorepo-utils/*"
-    ]
-  },
+  "workspaces": [
+    "packages/*",
+    "packages/@monorepo-utils/*"
+  ],
   "keywords": [
     "monorepot"
   ],

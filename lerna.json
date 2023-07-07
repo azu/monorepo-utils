@@ -1,8 +1,4 @@
 {
-  "packages": [
-    "packages/*",
-    "packages/@monorepo-utils/*"
-  ],
   "version": "2.10.1",
   "npmClient": "yarn",
   "useWorkspaces": true

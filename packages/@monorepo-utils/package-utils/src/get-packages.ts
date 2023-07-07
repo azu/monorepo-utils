@@ -42,19 +42,8 @@ export interface PackageResult {
 }
 
 export const getPackages = (rootDirectory: string): PackageResult[] => {
-    const lernaJsonPath = path.join(rootDirectory, "lerna.json");
-    // prefer to use yarn workspace instead of lerna.json
-    if (fs.existsSync(lernaJsonPath)) {
-        const lernaJson = loadJsonFile.sync(lernaJsonPath);
-        const hasNotWorkspacesInLernaJson = (v: any): v is { packages: string[] } => {
-            return !("useWorkspaces" in v);
-        };
-        if (hasNotWorkspacesInLernaJson(lernaJson)) {
-            return findPackages(lernaJson.packages, rootDirectory);
-        }
-    }
-
     const pkgJsonPath = path.join(rootDirectory, "package.json");
+    // npm 7+/yarn workspaces support
     if (fs.existsSync(pkgJsonPath)) {
         const pkgJson = loadJsonFile.sync(pkgJsonPath);
         const hasWorkspacesInPackageJson = (
@@ -75,6 +64,7 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
         }
     }
 
+    // pnpm workspaces support
     const pnpmYamlPath = path.join(rootDirectory, "pnpm-workspace.yaml");
     if (fs.existsSync(pnpmYamlPath)) {
         const contents = fs.readFileSync(pnpmYamlPath, "utf8");
@@ -82,6 +72,22 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
 
         if ("packages" in pnpmConfig && Array.isArray(pnpmConfig.packages)) {
             return findPackages(pnpmConfig.packages, rootDirectory);
+        }
+    }
+
+    // legacy lerna(pre workspaces) support
+    // leran 7+ does not have "useWorkspaces" option
+    // if non-useWorkspaces and packages is defined, use it
+    const lernaJsonPath = path.join(rootDirectory, "lerna.json");
+    // prefer to use yarn workspace instead of lerna.json
+    if (fs.existsSync(lernaJsonPath)) {
+        const lernaJson = loadJsonFile.sync(lernaJsonPath);
+        // useWorkspaces is removed in lerna 7
+        const hasNotWorkspacesInLernaJson = (v: any): v is { packages: string[] } => {
+            return !("useWorkspaces" in v);
+        };
+        if (hasNotWorkspacesInLernaJson(lernaJson) && lernaJson.packages) {
+            return findPackages(lernaJson.packages, rootDirectory);
         }
     }
 

@@ -54,6 +54,6 @@ You should use lerna 3 directly.
 2. Review and Merge release PR
 3. Published
 
-See alow
+See also:
 
-- https://github.com/azu/monorepo-github-releases
+- [azu/monorepo-github-releases: monorepo release flow: lerna + GitHub Release's Automatically generated release notes](https://github.com/azu/monorepo-github-releases)

@@ -50,8 +50,10 @@ You should use lerna 3 directly.
 
 ## Release Flow
 
-Following command release changed packaged and created release note to [Releases](https://github.com/azu/monorepo-utils/releases).
+1. Create Release PR via dispatching "Create Release" action
+2. Review and Merge release PR
+3. Published
 
-```
-$ GH_TOKEN="${YOUR_GITHUB_TOKEN}" npm run versionup -- --create-release=github && npm run release --yes
-```
+See alow
+
+- https://github.com/azu/monorepo-github-releases

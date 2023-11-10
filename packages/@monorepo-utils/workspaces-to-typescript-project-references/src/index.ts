@@ -174,10 +174,7 @@ export const toProjectReferences = (options: Options) => {
         } else {
             // update
             if (errors.length === 0) {
-                if (
-                    currentProjectReferences.length === 0 &&
-                    newProjectReferences.length === 0
-                ) {
+                if (currentProjectReferences.length === 0 && newProjectReferences.length === 0) {
                     // As to not add `references: []` needlessly
                     return;
                 }

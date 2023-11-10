@@ -20,6 +20,53 @@ A CLI that get "workspaces" package locations from monorepo.
     # Execute command for each package
     $ npx -y -q @monorepo-utils/get-workspaces-cli | xargs -I{} sh -c 'cd {}; pwd'
 
+## Examples
+
+In https://github.com/textlint/textlint
+
+```bash
+$ npx -y -q @monorepo-utils/get-workspaces-cli
+~/workspace/github.com/textlint/textlint/packages/gulp-textlint
+~/workspace/github.com/textlint/textlint/packages/textlint
+~/workspace/github.com/textlint/textlint/packages/textlint-scripts
+~/workspace/github.com/textlint/textlint/packages/textlint-tester
+~/workspace/github.com/textlint/textlint/examples/cli
+~/workspace/github.com/textlint/textlint/examples/config-file
+~/workspace/github.com/textlint/textlint/examples/config-in-package-json
+~/workspace/github.com/textlint/textlint/examples/filter
+~/workspace/github.com/textlint/textlint/examples/fix
+~/workspace/github.com/textlint/textlint/examples/fix-dry-run
+~/workspace/github.com/textlint/textlint/examples/html-plugin
+~/workspace/github.com/textlint/textlint/examples/perf
+~/workspace/github.com/textlint/textlint/examples/plugin-extensions-option
+~/workspace/github.com/textlint/textlint/examples/preset
+~/workspace/github.com/textlint/textlint/examples/rulesdir
+~/workspace/github.com/textlint/textlint/examples/use-as-module
+~/workspace/github.com/textlint/textlint/examples/use-as-ts-module
+~/workspace/github.com/textlint/textlint/packages/@textlint/ast-node-types
+~/workspace/github.com/textlint/textlint/packages/@textlint/ast-tester
+~/workspace/github.com/textlint/textlint/packages/@textlint/ast-traverse
+~/workspace/github.com/textlint/textlint/packages/@textlint/config-loader
+~/workspace/github.com/textlint/textlint/packages/@textlint/feature-flag
+~/workspace/github.com/textlint/textlint/packages/@textlint/fixer-formatter
+~/workspace/github.com/textlint/textlint/packages/@textlint/kernel
+~/workspace/github.com/textlint/textlint/packages/@textlint/linter-formatter
+~/workspace/github.com/textlint/textlint/packages/@textlint/markdown-to-ast
+~/workspace/github.com/textlint/textlint/packages/@textlint/module-interop
+~/workspace/github.com/textlint/textlint/packages/@textlint/source-code-fixer
+~/workspace/github.com/textlint/textlint/packages/@textlint/text-to-ast
+~/workspace/github.com/textlint/textlint/packages/@textlint/textlint-plugin-markdown
+~/workspace/github.com/textlint/textlint/packages/@textlint/textlint-plugin-text
+~/workspace/github.com/textlint/textlint/packages/@textlint/types
+~/workspace/github.com/textlint/textlint/packages/@textlint/utils
+~/workspace/github.com/textlint/textlint/packages/textlint-scripts/example
+~/workspace/github.com/textlint/textlint/packages/textlint-scripts/example-ts
+~/workspace/github.com/textlint/textlint/packages/textlint-scripts/example-dynamic-import
+~/workspace/github.com/textlint/textlint/test/benchmark
+~/workspace/github.com/textlint/textlint/test/integration-test
+~/workspace/github.com/textlint/textlint/website
+```
+
 
 ## Changelog
 

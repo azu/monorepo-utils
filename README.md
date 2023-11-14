@@ -13,6 +13,7 @@ Supports following package manager's workspaces.
 
 - Lerna(`lerna.json`)
 - Yarn's workspaces
+- pnpm's workspaces
 - npm v7+'s workspaces
 
 ### [@monorepo-utils/workspaces-to-typescript-project-references](./packages/@monorepo-utils/workspaces-to-typescript-project-references)

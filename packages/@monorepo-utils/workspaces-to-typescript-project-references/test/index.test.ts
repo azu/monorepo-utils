@@ -6,6 +6,7 @@ describe("toRootProjectReferences", function () {
     it("update root tsconfig with references to all projects", () => {
         const result = toRootProjectReferences({
             rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(true);
@@ -18,9 +19,19 @@ describe("toRootProjectReferences", function () {
         };
         const result = toRootProjectReferences({
             rootDir: path.join(__dirname, "fixtures/root-tsconfig"),
+            includesLocal: false,
             checkOnly: true,
             tsConfigPath,
             tsConfigPathFinder: customTsConfigFinder
+        });
+        expect(result.ok).toBe(true);
+    });
+    
+    it("with includesLocal", () => {
+        const result = toRootProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/local-tsconfig"),
+            includesLocal: true,
+            checkOnly: true
         });
         expect(result.ok).toBe(true);
     });
@@ -29,6 +40,7 @@ describe("toProjectReferences", function () {
     it("support lerna.json", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/lerna"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(true);
@@ -36,6 +48,7 @@ describe("toProjectReferences", function () {
     it("support yarn workspaces", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/yarn-workspaces"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(true);
@@ -47,6 +60,7 @@ describe("toProjectReferences", function () {
         };
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/yarn-workspaces-src-subdir"),
+            includesLocal: false,
             checkOnly: true,
             tsConfigPath: tsconfigPath,
             tsConfigPathFinder: customTsConfigFinder
@@ -60,6 +74,7 @@ describe("toProjectReferences", function () {
         };
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/yarn-workspaces-tsconfigPath"),
+            includesLocal: false,
             checkOnly: true,
             tsConfigPath: tsconfigPath,
             tsConfigPathFinder: customTsConfigFinder
@@ -69,6 +84,7 @@ describe("toProjectReferences", function () {
     it("support yarn v2 workspaces", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/yarn-v2-workspaces"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(true);
@@ -77,7 +93,7 @@ describe("toProjectReferences", function () {
         const rootDir = path.join(__dirname, "fixtures/yarn-workspaces");
         const tsConfigPathA = path.join(rootDir, "packages/a/tsconfig.json");
         const initialMtime = fs.statSync(tsConfigPathA).mtime;
-        const result = toProjectReferences({ rootDir, checkOnly: false });
+        const result = toProjectReferences({ rootDir, includesLocal: false, checkOnly: false });
         expect(result.ok).toBe(true);
         const newMTime = fs.statSync(tsConfigPathA).mtime;
         expect(newMTime).toEqual(initialMtime);
@@ -85,6 +101,7 @@ describe("toProjectReferences", function () {
     it("ok: false when some package has self-dependency", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/error.self-dependency"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(false);
@@ -100,6 +117,7 @@ describe("toProjectReferences", function () {
     it("ok: false when a same package in `dependencies` and `devDependencies`", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/error.invalid-dependencies"),
+            includesLocal: false,
             checkOnly: true
         });
         expect(result.ok).toBe(false);
@@ -115,6 +133,15 @@ describe("toProjectReferences", function () {
     it("should not includes non-ts package", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/js-ts-mixed-packages"),
+            includesLocal: false,
+            checkOnly: true
+        });
+        expect(result.ok).toBe(true);
+    });
+    it("support includesLocal", () => {
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/local-tsconfig"),
+            includesLocal: true,
             checkOnly: true
         });
         expect(result.ok).toBe(true);

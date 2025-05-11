@@ -18,11 +18,28 @@ const sortReferences = (references: ProjectReference[]) => {
 
 export type Options = {
     rootDir: string;
+    includesLocal: boolean;
     checkOnly: boolean;
     plugins?: PackageManagerPlugin[];
     tsConfigPath?: string;
     tsConfigPathFinder?(location: string): string;
 };
+
+const getReferenceInPackage = (tsconfigFilePath: string) => {
+    try {
+        const dirPath = path.dirname(tsconfigFilePath);
+        const fileName = path.basename(tsconfigFilePath);
+        const files = fs.readdirSync(dirPath);
+    
+        const tsconfigFilePaths = files
+            .filter(file => file !== fileName && file.startsWith('tsconfig.') && file.endsWith('.json'))
+            .map(file => ({ path: `./${file}`}));
+
+        return tsconfigFilePaths;
+    } catch (err) {
+        return [];
+    }
+}
 
 // when tsconfig.json → ../path/to/dir
 // when tsconfig.x.json → ../path/to/dir/tsconfig.x.json
@@ -152,6 +169,12 @@ export const toProjectReferences = (options: Options) => {
                 };
             })
             .filter((r) => Boolean(r)) as ProjectReference[];
+
+        if (options.includesLocal) {
+            const referenceInLocal = getReferenceInPackage(tsconfigFilePath);
+            newProjectReferences.push(...referenceInLocal);
+        }
+
         const currentProjectReferences: { path: string }[] = tsconfigJSON["references"] ?? [];
         if (options.checkOnly) {
             // check
@@ -270,6 +293,12 @@ export const toRootProjectReferences = (options: Options) => {
                 path: path.join(...pathComponents)
             };
         });
+
+    if (options.includesLocal) {
+        const referenceInLocal = getReferenceInPackage(rootTsconfigFilePath);
+        projectReferences.push(...referenceInLocal);
+    }
+
     if (options.checkOnly) {
         // check
         try {

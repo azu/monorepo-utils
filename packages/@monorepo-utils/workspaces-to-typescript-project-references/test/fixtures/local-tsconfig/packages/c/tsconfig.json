@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "strict": true
+  },
+  "references": [
+    {
+      "path": "../a"
+    },
+    {
+      "path": "../b"
+    },
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ]
+}

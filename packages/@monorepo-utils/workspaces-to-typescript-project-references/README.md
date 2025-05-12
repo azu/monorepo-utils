@@ -52,6 +52,7 @@ This tool provides updating feature and testing feature.
       --includesRoot     If set the flag, update <root>/<tsconfigPath> with all project references.
                          It is useful to check all packages at once.
 
+      --includesLocal    If set the flag, includes ./tsconfig.*.json
 
     Examples
       # Update project references in tsconfig.json

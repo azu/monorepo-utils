@@ -23,7 +23,8 @@ export const cli = meow(
 
       --includesRoot     If set the flag, generate <root>/tsconfig.json that includes all references.
                          It is useful to check all packages at once.
-                         
+
+      --includesLocal    If set the flag, includes ./tsconfig.*.json
 
     Examples
       # Update project references in tsconfig.json
@@ -41,6 +42,10 @@ export const cli = meow(
                 default: process.cwd()
             },
             includesRoot: {
+                type: "boolean",
+                default: false
+            },
+            includesLocal: {
                 type: "boolean",
                 default: false
             },
@@ -81,6 +86,7 @@ export const run = async (
     // Update <package>/tsconfig.json
     const projectResult = toProjectReferences({
         rootDir: flags.root,
+        includesLocal: flags.includesLocal,
         checkOnly: flags.check,
         plugins,
         tsConfigPath: flags.tsconfigPath,
@@ -97,6 +103,7 @@ export const run = async (
     if (flags.includesRoot) {
         const rootProjectResult = toRootProjectReferences({
             rootDir: flags.root,
+            includesLocal: flags.includesLocal,
             checkOnly: flags.check,
             plugins,
             tsConfigPath: flags.tsconfigPath,

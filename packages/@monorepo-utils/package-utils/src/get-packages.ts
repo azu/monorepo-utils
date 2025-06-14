@@ -76,7 +76,7 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     }
 
     // legacy lerna(pre workspaces) support
-    // leran 7+ does not have "useWorkspaces" option
+    // lerna 7+ does not have "useWorkspaces" option
     // if non-useWorkspaces and packages is defined, use it
     const lernaJsonPath = path.join(rootDirectory, "lerna.json");
     // prefer to use yarn workspace instead of lerna.json

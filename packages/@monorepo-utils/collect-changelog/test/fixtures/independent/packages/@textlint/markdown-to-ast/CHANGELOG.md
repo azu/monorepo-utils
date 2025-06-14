@@ -164,7 +164,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **markdown-to-ast:** some parse result is changed.
 
-It is correct, but we think that is a breacking change.
+It is correct, but we think that is a breaking change.
 This change have possibilities that the user update patch-version textlint and fail test.
 
 close https://github.com/textlint/markdown-to-ast/issues/14

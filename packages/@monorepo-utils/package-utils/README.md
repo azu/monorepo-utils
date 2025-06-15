@@ -8,6 +8,24 @@ Install with [npm](https://www.npmjs.com/):
 
     npm install @monorepo-utils/package-utils
 
+## Supported Package Managers
+
+This package supports the following monorepo package managers:
+
+- **Lerna** (`lerna.json`)
+- **Yarn workspaces** (package.json `workspaces` field)
+- **npm workspaces** (package.json `workspaces` field)  
+- **pnpm workspaces** (`pnpm-workspace.yaml`)
+
+### pnpm Workspaces Example
+
+```yaml
+# pnpm-workspace.yaml
+packages:
+  - "packages/*"
+  - "apps/*"
+```
+
 ## Usage
 
 ### `getPackages(rootDirectory: string): PackageResult[]`

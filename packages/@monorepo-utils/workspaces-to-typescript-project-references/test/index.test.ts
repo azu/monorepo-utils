@@ -26,7 +26,7 @@ describe("toRootProjectReferences", function () {
         });
         expect(result.ok).toBe(true);
     });
-    
+
     it("with includesLocal", () => {
         const result = toRootProjectReferences({
             rootDir: path.join(__dirname, "fixtures/local-tsconfig"),
@@ -145,5 +145,17 @@ describe("toProjectReferences", function () {
             checkOnly: true
         });
         expect(result.ok).toBe(true);
+    });
+    it("support pnpm workspaces", () => {
+        const fixtureDir = path.join(__dirname, "fixtures/pnpm");
+        const actualFilePath = path.join(fixtureDir, "packages/a/tsconfig.json");
+        const result = toProjectReferences({
+            rootDir: fixtureDir,
+            checkOnly: false,
+            includesLocal: false
+        });
+        expect(result.ok).toBe(true);
+        const actual = fs.readFileSync(actualFilePath, "utf-8");
+        expect(actual).toMatchSnapshot();
     });
 });

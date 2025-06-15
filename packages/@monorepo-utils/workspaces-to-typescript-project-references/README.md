@@ -18,8 +18,7 @@ This monorepo use this tool as self-integration.
 - [x] [Yarn's workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)
     - [x] [Workspace ranges (workspace:)](https://yarnpkg.com/features/workspaces#workspace-ranges-workspace) [#29](https://github.com/azu/monorepo-utils/issues/29)
 - [x] [npm's workspaces](https://github.com/npm/rfcs/blob/26e8ac6ee176943d6522d5d057fab05e37655e1c/accepted/0000-workspaces.md)
-- [ ] pnpm workspaces
-    - Refer to <https://github.com/Bessonov/set-project-references>
+- [x] [pnpm workspaces](https://pnpm.io/workspaces)
 - [x] Custom workspaces
     - Plugin support
 
@@ -158,6 +157,17 @@ For more details, See [Plugin interface](./src/manager/PackageManagerPlugin.ts)
 
 For example, [monorepo-utils](https://github.com/azu/monorepo-utils) it-self use this tool.
 [monorepo-utils](https://github.com/azu/monorepo-utils) use lerna and yarn workspaces.
+
+### pnpm Workspaces Example
+
+```yaml
+# pnpm-workspace.yaml
+packages:
+  - "packages/*"
+  - "apps/*"
+```
+
+The tool will automatically detect pnpm workspaces and convert them to TypeScript project references.
 
 - [workspaces definition](https://github.com/azu/monorepo-utils/blob/99fcc68078fae56a8c84f4a9bf4bdff7a3d4cc76/package.json#L26-L31) on root's package.json
 

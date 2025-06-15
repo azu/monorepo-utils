@@ -123,4 +123,62 @@ describe("getPackages", () => {
             ]
         `);
     });
+    it("should handle pnpm workspaces with multiple glob patterns", () => {
+        const PNPM_PATH = path.join(__dirname, "fixtures/pnpm-multiple-patterns");
+        expect(getPackages(PNPM_PATH)).toMatchInlineSnapshot(`
+            [
+              {
+                "location": "<cwd>/test/fixtures/pnpm-multiple-patterns/packages/bar",
+                "packageJSON": {
+                  "name": "bar",
+                },
+              },
+              {
+                "location": "<cwd>/test/fixtures/pnpm-multiple-patterns/packages/foo",
+                "packageJSON": {
+                  "name": "foo",
+                },
+              },
+              {
+                "location": "<cwd>/test/fixtures/pnpm-multiple-patterns/apps/web",
+                "packageJSON": {
+                  "name": "web",
+                },
+              },
+            ]
+        `);
+    });
+    it("should handle pnpm workspaces with empty packages array", () => {
+        const PNPM_PATH = path.join(__dirname, "fixtures/pnpm-empty");
+        expect(getPackages(PNPM_PATH)).toMatchInlineSnapshot(`[]`);
+    });
+    it("should handle malformed pnpm-workspace.yaml gracefully", () => {
+        const PNPM_PATH = path.join(__dirname, "fixtures/pnpm-malformed");
+        expect(getPackages(PNPM_PATH)).toMatchInlineSnapshot(`[]`);
+    });
+    it("should handle pnpm workspaces with nested patterns", () => {
+        const PNPM_PATH = path.join(__dirname, "fixtures/pnpm-nested");
+        expect(getPackages(PNPM_PATH)).toMatchInlineSnapshot(`
+            [
+              {
+                "location": "<cwd>/test/fixtures/pnpm-nested/packages/bar",
+                "packageJSON": {
+                  "name": "bar",
+                },
+              },
+              {
+                "location": "<cwd>/test/fixtures/pnpm-nested/packages/foo",
+                "packageJSON": {
+                  "name": "foo",
+                },
+              },
+              {
+                "location": "<cwd>/test/fixtures/pnpm-nested/libs/shared/utils",
+                "packageJSON": {
+                  "name": "utils",
+                },
+              },
+            ]
+        `);
+    });
 });

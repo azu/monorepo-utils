@@ -67,11 +67,15 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     // pnpm workspaces support
     const pnpmYamlPath = path.join(rootDirectory, "pnpm-workspace.yaml");
     if (fs.existsSync(pnpmYamlPath)) {
-        const contents = fs.readFileSync(pnpmYamlPath, "utf8");
-        const pnpmConfig = yaml.parse(contents);
+        try {
+            const contents = fs.readFileSync(pnpmYamlPath, "utf8");
+            const pnpmConfig = yaml.parse(contents);
 
-        if ("packages" in pnpmConfig && Array.isArray(pnpmConfig.packages)) {
-            return findPackages(pnpmConfig.packages, rootDirectory);
+            if ("packages" in pnpmConfig && Array.isArray(pnpmConfig.packages)) {
+                return findPackages(pnpmConfig.packages, rootDirectory);
+            }
+        } catch (error) {
+            return [];
         }
     }
 

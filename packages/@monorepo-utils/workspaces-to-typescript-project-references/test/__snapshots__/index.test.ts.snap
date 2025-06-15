@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toProjectReferences support pnpm workspaces 1`] = `
+"{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "lib"
+  },
+  "references": [
+    {
+      "path": "../c"
+    }
+  ]
+}
+"
+`;

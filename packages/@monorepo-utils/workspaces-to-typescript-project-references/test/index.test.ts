@@ -1,6 +1,7 @@
 import path from "upath";
 import fs from "fs";
 import { toProjectReferences, toRootProjectReferences } from "../src";
+import ts from "typescript";
 
 describe("toRootProjectReferences", function () {
     it("update root tsconfig with references to all projects", () => {
@@ -59,7 +60,7 @@ describe("toProjectReferences", function () {
             return path.join(location, tsconfigPath);
         };
         const result = toProjectReferences({
-            rootDir: path.join(__dirname, "fixtures/yarn-workspaces-src-subdir"),
+            rootDir: path.join(__dirname, "fixtures/ts-packages-without-composite"),
             includesLocal: false,
             checkOnly: true,
             tsConfigPath: tsconfigPath,
@@ -138,6 +139,28 @@ describe("toProjectReferences", function () {
         });
         expect(result.ok).toBe(true);
     });
+    it("should not include non-composite packages", () => {
+        const rootDir = path.join(__dirname, "fixtures/ts-packages-without-composite");
+
+        const result = toProjectReferences({
+            rootDir: rootDir,
+            includesLocal: false,
+            checkOnly: true
+        });
+        expect(result.aggregateError).toBeUndefined();
+        expect(result.ok).toBe(true);
+
+        const tsConfigPathB = path.join(rootDir, "packages/b/tsconfig.json");
+        const tsConfigPathC = path.join(rootDir, "packages/c/tsconfig.json");
+
+        const { config: tsConfigB } = ts.readConfigFile(tsConfigPathB, ts.sys.readFile);
+        const { config: tsConfigC } = ts.readConfigFile(tsConfigPathC, ts.sys.readFile);
+        expect(tsConfigB.references).toHaveLength(0);
+        expect(tsConfigC.references).toHaveLength(1);
+
+        expect(tsConfigC.references[0].path).toBe("../b");
+    });
+
     it("support includesLocal", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/local-tsconfig"),

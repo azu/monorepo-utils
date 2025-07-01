@@ -42,18 +42,19 @@ const getReferenceInPackage = (tsconfigFilePath: string) => {
     }
 };
 
-function getCompilerOptionsJSONFollowExtends(filename: string): { [key: string]: any } {
-    let compilerOptions: ts.CompilerOptions = {};
-    const config = ts.readConfigFile(filename, ts.sys.readFile).config;
-    if (config.extends) {
-        const rqrpath = require.resolve(config.extends, { paths: [path.dirname(filename)] });
-        compilerOptions = getCompilerOptionsJSONFollowExtends(rqrpath);
-    }
-    compilerOptions = {
-        ...compilerOptions,
-        ...config.compilerOptions
-    };
-    return compilerOptions;
+function isCompositeProject(tsConfigFilename: string): boolean {
+    // getParsedCommandLineOfConfigFile returns the amalgamation of the config file and any extended config files
+    const parsedCommandLine = ts.getParsedCommandLineOfConfigFile(
+        tsConfigFilename,
+        {},
+        {
+            ...ts.sys,
+            onUnRecoverableConfigFileDiagnostic: (diagnostic) => {
+                throw new Error(ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"));
+            }
+        }
+    );
+    return parsedCommandLine?.options.composite ?? false;
 }
 
 // when tsconfig.json → ../path/to/dir
@@ -126,8 +127,7 @@ export const toProjectReferences = (options: Options) => {
             return;
         }
 
-        const compilerOptions = getCompilerOptionsJSONFollowExtends(tsconfigFilePath);
-        if (compilerOptions && compilerOptions.composite) {
+        if (!isCompositeProject(tsconfigFilePath)) {
             // Skip non-composite project
             return;
         }
@@ -170,9 +170,8 @@ export const toProjectReferences = (options: Options) => {
                 if (!fs.existsSync(referencePackageTsConfigFilePath)) {
                     return;
                 }
-                const referenceCompilerOptions = getCompilerOptionsJSONFollowExtends(referencePackageTsConfigFilePath);
 
-                if (referenceCompilerOptions && !referenceCompilerOptions.composite) {
+                if (!isCompositeProject(referencePackageTsConfigFilePath)) {
                     // Don't add non-composite project
                     return;
                 }
@@ -311,8 +310,7 @@ export const toRootProjectReferences = (options: Options) => {
         .filter((pkg) => {
             const tsconfigFilePath =
                 options.tsConfigPathFinder?.(pkg.location) ?? path.join(pkg.location, DEFAULT_TSCONFIGPATH);
-            const compilerOptions = getCompilerOptionsJSONFollowExtends(tsconfigFilePath);
-            if (compilerOptions && !compilerOptions.composite) {
+            if (!isCompositeProject(tsconfigFilePath)) {
                 // Don't add non-composite project
                 return false;
             }

@@ -59,7 +59,7 @@ describe("toProjectReferences", function () {
             return path.join(location, tsconfigPath);
         };
         const result = toProjectReferences({
-            rootDir: path.join(__dirname, "fixtures/yarn-workspaces-src-subdir"),
+            rootDir: path.join(__dirname, "fixtures/ts-packages-without-composite"),
             includesLocal: false,
             checkOnly: true,
             tsConfigPath: tsconfigPath,
@@ -138,6 +138,16 @@ describe("toProjectReferences", function () {
         });
         expect(result.ok).toBe(true);
     });
+    it("should not include non-composite packages", () => {
+        const result = toProjectReferences({
+            rootDir: path.join(__dirname, "fixtures/yarn-workspaces"),
+            includesLocal: false,
+            checkOnly: false
+        });
+        expect(result.aggregateError).toBeUndefined();
+        expect(result.ok).toBe(true);
+    });
+
     it("support includesLocal", () => {
         const result = toProjectReferences({
             rootDir: path.join(__dirname, "fixtures/local-tsconfig"),

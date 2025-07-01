@@ -4,6 +4,7 @@ import commentJSON from "comment-json";
 import { plugin as workspacesPlugin } from "./manager/workspaces";
 import assert from "assert";
 import { PackageManagerPlugin, PackageReference } from "./manager/PackageManagerPlugin";
+import ts from "typescript";
 
 export const DEFAULT_TSCONFIGPATH = "tsconfig.json";
 
@@ -30,15 +31,29 @@ const getReferenceInPackage = (tsconfigFilePath: string) => {
         const dirPath = path.dirname(tsconfigFilePath);
         const fileName = path.basename(tsconfigFilePath);
         const files = fs.readdirSync(dirPath);
-    
+
         const tsconfigFilePaths = files
-            .filter(file => file !== fileName && file.startsWith('tsconfig.') && file.endsWith('.json'))
-            .map(file => ({ path: `./${file}`}));
+            .filter((file) => file !== fileName && file.startsWith("tsconfig.") && file.endsWith(".json"))
+            .map((file) => ({ path: `./${file}` }));
 
         return tsconfigFilePaths;
     } catch (err) {
         return [];
     }
+};
+
+function getCompilerOptionsJSONFollowExtends(filename: string): { [key: string]: any } {
+    let compilerOptions: ts.CompilerOptions = {};
+    const config = ts.readConfigFile(filename, ts.sys.readFile).config;
+    if (config.extends) {
+        const rqrpath = require.resolve(config.extends, { paths: [path.dirname(filename)] });
+        compilerOptions = getCompilerOptionsJSONFollowExtends(rqrpath);
+    }
+    compilerOptions = {
+        ...compilerOptions,
+        ...config.compilerOptions
+    };
+    return compilerOptions;
 }
 
 // when tsconfig.json → ../path/to/dir
@@ -110,6 +125,13 @@ export const toProjectReferences = (options: Options) => {
             // Skip has not tsconfig.json
             return;
         }
+
+        const compilerOptions = getCompilerOptionsJSONFollowExtends(tsconfigFilePath);
+        if (compilerOptions && compilerOptions.composite) {
+            // Skip non-composite project
+            return;
+        }
+
         const tsconfigJSON = commentJSON.parse(fs.readFileSync(tsconfigFilePath, "utf-8"));
         const references = supportPlugin.getDependencies(packageInfo.packageJSON);
         const resolvedReferences = references
@@ -146,6 +168,12 @@ export const toProjectReferences = (options: Options) => {
                     options.tsConfigPath ?? DEFAULT_TSCONFIGPATH
                 );
                 if (!fs.existsSync(referencePackageTsConfigFilePath)) {
+                    return;
+                }
+                const referenceCompilerOptions = getCompilerOptionsJSONFollowExtends(referencePackageTsConfigFilePath);
+
+                if (referenceCompilerOptions && !referenceCompilerOptions.composite) {
+                    // Don't add non-composite project
                     return;
                 }
                 // { path } value
@@ -280,6 +308,16 @@ export const toRootProjectReferences = (options: Options) => {
             // Skip if the package has not tsconfig.json
             return fs.existsSync(tsconfigFilePath);
         })
+        .filter((pkg) => {
+            const tsconfigFilePath =
+                options.tsConfigPathFinder?.(pkg.location) ?? path.join(pkg.location, DEFAULT_TSCONFIGPATH);
+            const compilerOptions = getCompilerOptionsJSONFollowExtends(tsconfigFilePath);
+            if (compilerOptions && !compilerOptions.composite) {
+                // Don't add non-composite project
+                return false;
+            }
+            return true;
+        })
         .map((pkg) => {
             const tsConfigPath = options.tsConfigPath ?? DEFAULT_TSCONFIGPATH;
             const pathComponents = [path.relative(options.rootDir, pkg.location)];
@@ -292,7 +330,8 @@ export const toRootProjectReferences = (options: Options) => {
             return {
                 path: path.join(...pathComponents)
             };
-        });
+        })
+        .filter(Boolean) as ProjectReference[];
 
     if (options.includesLocal) {
         const referenceInLocal = getReferenceInPackage(rootTsconfigFilePath);

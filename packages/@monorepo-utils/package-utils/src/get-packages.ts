@@ -1,16 +1,34 @@
 "use strict";
 // Based on https://github.com/azz/get-monorepo-packages
 // MIT (c) 2018 Lucas Azzola
-const globby = require("globby");
-import loadJsonFile = require("load-json-file");
-import * as path from "upath";
-import * as fs from "fs";
+import * as fs from "node:fs";
+import * as nodePath from "node:path";
 import * as yaml from "yaml";
 
+/**
+ * Join paths and always use "/" as separator, even on Windows
+ */
+const joinPath = (...paths: string[]): string => {
+    return nodePath.join(...paths).replace(/\\/g, "/");
+};
+
+/**
+ * Return true if the pattern includes glob special characters
+ */
+const hasMagic = (pattern: string): boolean => {
+    return /[*?[\]{}()!]/.test(pattern);
+};
+
+const readJsonFile = (filePath: string): any => {
+    const content = fs.readFileSync(filePath, "utf8");
+    // strip BOM
+    return JSON.parse(content.charCodeAt(0) === 0xfeff ? content.slice(1) : content);
+};
+
 const loadPackage = (packagePath: string): object => {
-    const pkgJsonPath = path.join(packagePath, "package.json");
+    const pkgJsonPath = joinPath(packagePath, "package.json");
     if (fs.existsSync(pkgJsonPath)) {
-        return loadJsonFile.sync(pkgJsonPath);
+        return readJsonFile(pkgJsonPath);
     }
     return {};
 };
@@ -18,12 +36,12 @@ const loadPackage = (packagePath: string): object => {
 export const findPackages = (packageSpecs: string[], rootDirectory: string): PackageResult[] => {
     return packageSpecs
         .reduce((pkgDirs, pkgGlob) => {
-            const target = path.join(rootDirectory, pkgGlob);
-            const filePathList = globby.hasMagic(pkgGlob)
-                ? globby.sync(target, {
-                      onlyFiles: false,
-                  })
-                : [target];
+            const filePathList = hasMagic(pkgGlob)
+                ? fs
+                      .globSync(pkgGlob, { cwd: rootDirectory })
+                      .sort()
+                      .map((filePath) => joinPath(rootDirectory, filePath))
+                : [joinPath(rootDirectory, pkgGlob)];
             return pkgDirs.concat(filePathList);
         }, [] as string[])
         .map((location: string) => {
@@ -42,10 +60,10 @@ export interface PackageResult {
 }
 
 export const getPackages = (rootDirectory: string): PackageResult[] => {
-    const pkgJsonPath = path.join(rootDirectory, "package.json");
+    const pkgJsonPath = joinPath(rootDirectory, "package.json");
     // npm 7+/yarn workspaces support
     if (fs.existsSync(pkgJsonPath)) {
-        const pkgJson = loadJsonFile.sync(pkgJsonPath);
+        const pkgJson = readJsonFile(pkgJsonPath);
         const hasWorkspacesInPackageJson = (
             v: any,
         ): v is {
@@ -65,7 +83,7 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     }
 
     // pnpm workspaces support
-    const pnpmYamlPath = path.join(rootDirectory, "pnpm-workspace.yaml");
+    const pnpmYamlPath = joinPath(rootDirectory, "pnpm-workspace.yaml");
     if (fs.existsSync(pnpmYamlPath)) {
         try {
             const contents = fs.readFileSync(pnpmYamlPath, "utf8");
@@ -82,10 +100,10 @@ export const getPackages = (rootDirectory: string): PackageResult[] => {
     // legacy lerna(pre workspaces) support
     // lerna 7+ does not have "useWorkspaces" option
     // if non-useWorkspaces and packages is defined, use it
-    const lernaJsonPath = path.join(rootDirectory, "lerna.json");
+    const lernaJsonPath = joinPath(rootDirectory, "lerna.json");
     // prefer to use yarn workspace instead of lerna.json
     if (fs.existsSync(lernaJsonPath)) {
-        const lernaJson = loadJsonFile.sync(lernaJsonPath);
+        const lernaJson = readJsonFile(lernaJsonPath);
         // useWorkspaces is removed in lerna 7
         const hasNotWorkspacesInLernaJson = (v: any): v is { packages: string[] } => {
             return !("useWorkspaces" in v);

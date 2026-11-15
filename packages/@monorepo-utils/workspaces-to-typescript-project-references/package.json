@@ -40,7 +40,7 @@
   ],
   "scripts": {
     "build": "tsc -b . && tsc -b tsconfig.module.json",
-    "clean": "rimraf lib/ module/ && tsc -b --clean && tsc -b tsconfig.module.json --clean",
+    "clean": "node -e \"for (const d of ['lib', 'module']) require('node:fs').rmSync(d, { recursive: true, force: true })\" && tsc -b --clean && tsc -b tsconfig.module.json --clean",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepublish": "npm run clean && npm run build",
     "test": "jest",
@@ -73,16 +73,15 @@
   "dependencies": {
     "@monorepo-utils/package-utils": "^3.0.1",
     "comment-json": "^3.0.3",
-    "semver": "^7.5.4"
+    "semver": "^7.8.6"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.2",
-    "@types/node": "^22.17.0",
-    "@types/semver": "^7.5.8",
-    "jest": "^29.6.1",
-    "prettier": "^3.0.3",
-    "rimraf": "^5.0.1",
-    "typescript": "^5.1.6"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.20.5",
+    "@types/semver": "^7.8.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3"
   },
   "publishConfig": {
     "access": "public"

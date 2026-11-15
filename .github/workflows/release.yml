@@ -59,6 +59,10 @@ jobs:
     timeout-minutes: 30
     needs: check
     if: always() && (needs.check.outputs.EXISTS_TAG == 'false')
+    # require approval by Deployment protection rules before publishing
+    # npm Trusted Publisher should be configured with the same environment name
+    environment:
+      name: npm
     permissions:
       contents: write
       issues: write
@@ -89,24 +93,11 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Build
-        run: pnpm run build
+        run: pnpm -r run build
       - name: Staged Publish to npm
-        # publish each package that is not published yet
+        # submit each package that is not published yet to npm staging area
         # approve the staged packages on npmjs.com after this step
-        run: |
-          for dir in packages/@monorepo-utils/*/; do
-            name=$(jq -r .name "${dir}package.json")
-            version=$(jq -r .version "${dir}package.json")
-            if [ "$(jq -r '.private // false' "${dir}package.json")" = "true" ]; then
-              continue
-            fi
-            if npm view "${name}@${version}" version > /dev/null 2>&1; then
-              echo "${name}@${version} is already published"
-              continue
-            fi
-            echo "Publish ${name}@${version}"
-            (cd "$dir" && npm stage publish)
-          done
+        run: pnpm -r exec "${GITHUB_WORKSPACE}/scripts/stage-publish.sh"
       - name: Create Git Tag
         uses: pkgdeps/git-tag-action@a5a161774bace8b4e1969dd850c67a7421f1b710 # v3.0.1
         with:

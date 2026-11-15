@@ -6,3 +6,6 @@ linkWorkspacePackages: true
 allowBuilds:
   '@parcel/watcher': false
   nx: false
+# fix vulnerabilities of transitive dependencies (undici via lerna > nx)
+overrides:
+  'undici@7': '^7.30.2'

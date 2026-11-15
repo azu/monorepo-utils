@@ -33,9 +33,6 @@
   "exclude": [],
   "references": [
     {
-      "path": "packages/@monorepo-utils/collect-changelog"
-    },
-    {
       "path": "packages/@monorepo-utils/package-utils"
     },
     {

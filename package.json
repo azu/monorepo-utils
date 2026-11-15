@@ -21,7 +21,6 @@
     "commit-version": "pnpm install --lockfile-only && git add . && git commit -m \"chore(release): v$(node -p 'require(\"./lerna.json\").version')\"",
     "release": "lerna publish from-package",
     "ci:release": "lerna publish from-package --yes",
-    "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks",
     "versionup": "lerna version"
@@ -33,12 +32,11 @@
   "license": "MIT",
   "packageManager": "pnpm@12.16.1",
   "devDependencies": {
-    "@monorepo-utils/collect-changelog": "workspace:*",
     "@monorepo-utils/workspaces-to-typescript-project-references": "workspace:*",
-    "lerna": "^7.4.2",
-    "lint-staged": "^15.0.2",
-    "prettier": "^3.0.3",
-    "typescript": "^5.1.6"
+    "lerna": "^10.1.1",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3"
   },
   "prettier": {
     "singleQuote": false,

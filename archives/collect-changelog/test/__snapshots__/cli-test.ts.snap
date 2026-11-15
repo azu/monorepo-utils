@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`cli when fixed mode get 0.13.0 from CHANGELOG.md 1`] = `
 "## package@0.13.0

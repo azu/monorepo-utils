@@ -22,11 +22,6 @@ This tool converts lerna/npm workspaces/yarn workspaces to [TypeScript's Project
 
 You can keep package dependencies synchronized between lerna/npm/yarn workspaces and TypeScript.
 
-### [@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog)
-
-[@monorepo-utils/collect-changelog](./packages/@monorepo-utils/collect-changelog) get change from each package's `CHANGELOG.md`.
-It help to collect changelog in lerna's [Independent mode](https://github.com/lerna/lerna#independent-mode---independent).
-
 ### [@monorepo-utils/get-workspaces-cli](./packages/@monorepo-utils/get-workspaces-cli)
 
 [@monorepo-utils/get-workspaces-cli](./packages/@monorepo-utils/get-workspaces-cli) is a simple CLI for getting workspace list.
@@ -37,6 +32,14 @@ $ npx @monorepo-utils/get-workspaces-cli
 ```
 
 ## Deprecated Packages
+
+### **Deprecated** <del>[@monorepo-utils/collect-changelog](./archives/collect-changelog)</del>
+
+[@monorepo-utils/collect-changelog](./archives/collect-changelog) get change from each package's `CHANGELOG.md`.
+
+:warning: Notes:
+
+Use [GitHub's automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) instead.
 
 ### **Deprecated** <del>[@monorepo-utils/publish](./packages/@monorepo-utils/publish)</del>
 

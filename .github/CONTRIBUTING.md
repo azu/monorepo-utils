@@ -58,18 +58,7 @@ pnpm run versionup:patch
 pnpm run versionup
 ```
 
-3. Copy Changelog
-
-Copy CHANGELOG from the bump tags.
-
-```
-pnpm run copy-changelog
-# git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy
-```
-
-This is alias of [packages/@monorepo-utils/collect-changelog](../packages/@monorepo-utils/collect-changelog).
-
-4. Submit Pull Request
+3. Submit Pull Request
 
 Submit Pull Request and paste the CHANGELOG.
 
@@ -77,7 +66,7 @@ Example: [2018 07 22 release by azu · Pull Request #1 · azu/monorepo-utils](ht
 
 **Note**: Reviewers should review it and approve it.
 
-5. Publish to npm
+4. Publish to npm
 
 Finally, publish new version to npm
 

@@ -1,5 +1,7 @@
 # @monorepo-utils/collect-changelog
 
+> **Deprecated**: This package is no longer maintained. Use [GitHub's automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) instead.
+
 Collect CHANGELOG from tags.
 
 ## Feature

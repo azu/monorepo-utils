@@ -169,9 +169,6 @@ importers:
 
   .:
     devDependencies:
-      '@monorepo-utils/collect-changelog':
-        specifier: workspace:*
-        version: link:packages/@monorepo-utils/collect-changelog
       '@monorepo-utils/workspaces-to-typescript-project-references':
         specifier: workspace:*
         version: link:packages/@monorepo-utils/workspaces-to-typescript-project-references
@@ -184,37 +181,6 @@ importers:
       prettier:
         specifier: ^3.10.1
         version: 3.10.1
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-
-  packages/@monorepo-utils/collect-changelog:
-    dependencies:
-      '@monorepo-utils/package-utils':
-        specifier: ^3.0.1
-        version: link:../package-utils
-      cclog-parser:
-        specifier: ^1.1.1
-        version: 1.1.1
-      handlebars:
-        specifier: ^4.7.10
-        version: 4.7.10
-    devDependencies:
-      '@types/jest':
-        specifier: ^30.0.0
-        version: 30.0.0
-      '@types/node':
-        specifier: ^22.20.5
-        version: 22.20.5
-      jest:
-        specifier: ^30.5.2
-        version: 30.5.2(@types/node@22.20.5)(supports-color@8.1.1)
-      prettier:
-        specifier: ^3.10.1
-        version: 3.10.1
-      ts-jest:
-        specifier: ^29.4.15
-        version: 29.4.15(@babel/core@7.29.13(supports-color@8.1.1))(@jest/transform@30.5.2(supports-color@8.1.1))(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.13(supports-color@8.1.1))(supports-color@8.1.1))(jest-util@30.5.1)(jest@30.5.2(@types/node@22.20.5)(supports-color@8.1.1))(typescript@5.9.3)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1405,9 +1371,6 @@ packages:
 
   caniuse-lite@1.0.30001826:
     resolution: {integrity: sha512-wTB+9tIbLro/BCXwLuNV1meHE4L9dS6dArMDwgYfNBPMYScqClHyGunhkCSDtHhe/69Xl0sHlKgBVZ+fNsYtWA==}
-
-  cclog-parser@1.1.1:
-    resolution: {integrity: sha512-IsnWRC1zqs7h5+Xoocw7cYmlL5t2ysB0/SQB6C3Arr+S2pc2Rbhzp0hXaK36Ew+428in1085slsGtxsJwQB9RA==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -4219,8 +4182,6 @@ snapshots:
   camelcase@6.3.0: {}
 
   caniuse-lite@1.0.30001826: {}
-
-  cclog-parser@1.1.1: {}
 
   chalk@4.1.2:
     dependencies:

@@ -3,7 +3,7 @@
 
 import * as fs from "fs";
 
-import * as path from "upath";
+import * as path from "node:path";
 import { findChangelog, getChangelog } from "./collect-changelog-from-tag";
 import Handlebars = require("handlebars");
 

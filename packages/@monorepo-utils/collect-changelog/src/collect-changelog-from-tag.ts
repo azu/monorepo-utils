@@ -1,6 +1,6 @@
 // MIT © 2017 azu
 "use strict";
-import * as path from "upath";
+import * as path from "node:path";
 import * as fs from "fs";
 import { getPackages } from "@monorepo-utils/package-utils";
 

@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "upath";
+import path from "./path";
 import commentJSON from "comment-json";
 import { plugin as workspacesPlugin } from "./manager/workspaces";
 import assert from "assert";
@@ -30,16 +30,16 @@ const getReferenceInPackage = (tsconfigFilePath: string) => {
         const dirPath = path.dirname(tsconfigFilePath);
         const fileName = path.basename(tsconfigFilePath);
         const files = fs.readdirSync(dirPath);
-    
+
         const tsconfigFilePaths = files
-            .filter(file => file !== fileName && file.startsWith('tsconfig.') && file.endsWith('.json'))
-            .map(file => ({ path: `./${file}`}));
+            .filter((file) => file !== fileName && file.startsWith("tsconfig.") && file.endsWith(".json"))
+            .map((file) => ({ path: `./${file}` }));
 
         return tsconfigFilePaths;
     } catch (err) {
         return [];
     }
-}
+};
 
 // when tsconfig.json → ../path/to/dir
 // when tsconfig.x.json → ../path/to/dir/tsconfig.x.json

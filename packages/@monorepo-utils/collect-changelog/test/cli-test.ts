@@ -1,4 +1,4 @@
-import * as path from "upath";
+import * as path from "node:path";
 import { execute } from "../src/cli";
 
 const independentDir = path.join(__dirname, "fixtures/independent");

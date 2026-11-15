@@ -188,7 +188,7 @@ importers:
   packages/@monorepo-utils/get-workspaces-cli:
     dependencies:
       '@monorepo-utils/package-utils':
-        specifier: ^3.0.1
+        specifier: ^3.0.2
         version: link:../package-utils
 
   packages/@monorepo-utils/package-utils:
@@ -219,7 +219,7 @@ importers:
   packages/@monorepo-utils/workspaces-to-typescript-project-references:
     dependencies:
       '@monorepo-utils/package-utils':
-        specifier: ^3.0.1
+        specifier: ^3.0.2
         version: link:../package-utils
       comment-json:
         specifier: ^3.0.3

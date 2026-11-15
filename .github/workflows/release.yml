@@ -18,30 +18,37 @@ on:
     types: [ closed ]
   workflow_dispatch: # force release
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   check:
     permissions:
       contents: read
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     # when release PR is merged or workflow_dispatch is triggered, run this job
     if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     outputs:
       EXISTS_TAG: ${{ steps.tag_check.outputs.EXISTS_TAG }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
       - name: Set PACKAGE_VERSION
-        run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(jq -r .version lerna.json)" >> "$GITHUB_ENV"
       - name: Tag Check
         id: tag_check
         run: |
           GET_API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG_NAME}"
-          http_status_code=$(curl -LI $GET_API_URL -o /dev/null -w '%{http_code}\n' -s \
+          http_status_code=$(curl -LI "$GET_API_URL" -o /dev/null -w '%{http_code}\n' -s \
             -H "Authorization: token ${GITHUB_TOKEN}")
           if [ "$http_status_code" -ne "404" ] ; then
-            echo "EXISTS_TAG=true" >> $GITHUB_OUTPUT
+            echo "EXISTS_TAG=true" >> "$GITHUB_OUTPUT"
           else
-            echo "EXISTS_TAG=false" >> $GITHUB_OUTPUT
+            echo "EXISTS_TAG=false" >> "$GITHUB_OUTPUT"
           fi
         env:
           TAG_NAME: v${{ env.PACKAGE_VERSION }}
@@ -49,6 +56,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: check
     if: always() && (needs.check.outputs.EXISTS_TAG == 'false')
     permissions:
@@ -58,11 +66,13 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          node-version: 18
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
 #          registry-url: 'https://npm.pkg.github.com'  
           # for publishing packages to npm
           registry-url: https://registry.npmjs.org
@@ -70,13 +80,13 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set PACKAGE_VERSION
-        run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(jq -r .version lerna.json)" >> "$GITHUB_ENV"
       - name: Install
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Publish
         run: npm run ci:release
         env:
@@ -87,7 +97,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Git Tag
-        uses: pkgdeps/git-tag-action@v2
+        uses: pkgdeps/git-tag-action@a5a161774bace8b4e1969dd850c67a7421f1b710 # v3.0.1
         with:
           version: ${{ env.PACKAGE_VERSION }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -95,19 +105,18 @@ jobs:
           git_commit_sha: ${{ github.sha }}
           git_tag_prefix: "v"
       - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+        # Copy Pull Request's body to Release Note
+        # if the body is empty, generate release notes
+        run: |
+          if [ -n "$PR_BODY" ]; then
+            gh release create "v${PACKAGE_VERSION}" --repo "$GITHUB_REPOSITORY" --notes "$PR_BODY"
+          else
+            gh release create "v${PACKAGE_VERSION}" --repo "$GITHUB_REPOSITORY" --generate-notes
+          fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ env.PACKAGE_VERSION }}
-          # Copy Pull Request's tile and body to Release Note
-          release_name: ${{ github.event.pull_request.title }}
-          body: ${{ github.event.pull_request.body }}
-          draft: false
-          prerelease: false
-          generate_release_notes: ${{ !github.event.pull_request.body }}
-      - uses: actions/github-script@v6
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         if: github.event_name != 'workflow_dispatch'
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}

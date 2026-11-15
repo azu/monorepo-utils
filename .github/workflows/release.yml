@@ -63,7 +63,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-      packages: write
+      id-token: write # npm trusted publishing (OIDC)
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -74,9 +74,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
-          node-version: 22
-#          registry-url: 'https://npm.pkg.github.com'  
-          # for publishing packages to npm
+          # Node.js 24 bundles npm 11 that supports trusted publishing (OIDC) and `npm stage publish`
+          node-version: 24
           registry-url: https://registry.npmjs.org
       - name: Git Identity
         run: |
@@ -89,15 +88,25 @@ jobs:
         run: echo "PACKAGE_VERSION=$(jq -r .version lerna.json)" >> "$GITHUB_ENV"
       - name: Install
         run: pnpm install --frozen-lockfile
-      - name: Publish
-        run: pnpm run ci:release
-        env:
-          # actions/setup-node create .npmrc with `NODE_AUTH_TOKEN` env if `registry-url` is defined
-          # === `echo "${ registry-url }/:_authToken=${ NODE_AUTH_TOKEN }" > .npmrc`
-#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-          # for publishing packages to npm
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: pnpm run build
+      - name: Staged Publish to npm
+        # publish each package that is not published yet
+        # approve the staged packages on npmjs.com after this step
+        run: |
+          for dir in packages/@monorepo-utils/*/; do
+            name=$(jq -r .name "${dir}package.json")
+            version=$(jq -r .version "${dir}package.json")
+            if [ "$(jq -r '.private // false' "${dir}package.json")" = "true" ]; then
+              continue
+            fi
+            if npm view "${name}@${version}" version > /dev/null 2>&1; then
+              echo "${name}@${version} is already published"
+              continue
+            fi
+            echo "Publish ${name}@${version}"
+            (cd "$dir" && npm stage publish)
+          done
       - name: Create Git Tag
         uses: pkgdeps/git-tag-action@a5a161774bace8b4e1969dd850c67a7421f1b710 # v3.0.1
         with:

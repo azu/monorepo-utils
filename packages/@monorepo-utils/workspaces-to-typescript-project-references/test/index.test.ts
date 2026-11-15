@@ -1,4 +1,4 @@
-import path from "upath";
+import path from "../src/path";
 import fs from "fs";
 import { toProjectReferences, toRootProjectReferences } from "../src";
 

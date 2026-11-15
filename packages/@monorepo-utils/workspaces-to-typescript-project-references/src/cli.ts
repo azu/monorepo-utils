@@ -1,9 +1,8 @@
-import meow from "meow";
-import path from "upath";
+import { parseArgs } from "node:util";
+import path from "./path";
 import { DEFAULT_TSCONFIGPATH, toProjectReferences, toRootProjectReferences } from "./index";
 
-export const cli = meow(
-    `
+const helpText = `
     Usage
       $ workspaces-to-typescript-project-references
  
@@ -34,9 +33,12 @@ export const cli = meow(
       # Update <root>/tsconfig.json that includes all references to packages
       $ workspaces-to-typescript-project-references --includesRoot
       $ workspaces-to-typescript-project-references --includesRoot --check
-`,
-    {
-        flags: {
+`;
+
+const parseCliArgs = () => {
+    const { values, positionals } = parseArgs({
+        allowPositionals: true,
+        options: {
             root: {
                 type: "string",
                 default: process.cwd()
@@ -55,17 +57,37 @@ export const cli = meow(
             },
             plugin: {
                 type: "string",
-                isMultiple: true
+                multiple: true
             },
             tsconfigPath: {
                 type: "string",
                 default: DEFAULT_TSCONFIGPATH
+            },
+            help: {
+                type: "boolean",
+                default: false
+            },
+            version: {
+                type: "boolean",
+                default: false
             }
-        },
-        autoHelp: true,
-        autoVersion: true
+        }
+    });
+    return { input: positionals, flags: values };
+};
+
+export const cli = (() => {
+    const parsed = parseCliArgs();
+    if (parsed.flags.help) {
+        console.log(helpText);
+        process.exit(0);
     }
-);
+    if (parsed.flags.version) {
+        console.log(require("../package.json").version);
+        process.exit(0);
+    }
+    return parsed;
+})();
 
 export const run = async (
     _input = cli.input,

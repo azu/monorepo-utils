@@ -4,22 +4,21 @@
   "version": "1.0.0",
   "description": "monorepo utilities monorepo",
   "engines": {
-    "node": ">=10.0.0",
-    "yarn": ">=1.5.0"
+    "node": ">=22.17.0"
   },
   "scripts": {
-    "bootstrap": "yarn run build",
-    "test": "npm run reference:test && lerna run test",
+    "bootstrap": "pnpm run build",
+    "test": "pnpm run reference:test && lerna run test",
     "updateSnapshot": "lerna run test:updateSnapshot",
     "reference:update": "workspaces-to-typescript-project-references --includesRoot",
     "reference:test": "workspaces-to-typescript-project-references --includesRoot --check",
     "build": "lerna run build",
     "type-check": "tsc -b .",
     "clean": "lerna run clean",
-    "ci:versionup:patch": "lerna version patch --no-push --no-git-tag-version --yes && npm run commit-version",
-    "ci:versionup:minor": "lerna version minor --no-push --no-git-tag-version --yes && npm run commit-version",
-    "ci:versionup:major": "lerna version major --no-push --no-git-tag-version --yes && npm run commit-version",
-    "commit-version": "git add . && git commit -m \"chore(release): v$(node -p 'require(\"./lerna.json\").version')\"",
+    "ci:versionup:patch": "lerna version patch --no-push --no-git-tag-version --yes && pnpm run commit-version",
+    "ci:versionup:minor": "lerna version minor --no-push --no-git-tag-version --yes && pnpm run commit-version",
+    "ci:versionup:major": "lerna version major --no-push --no-git-tag-version --yes && pnpm run commit-version",
+    "commit-version": "pnpm install --lockfile-only && git add . && git commit -m \"chore(release): v$(node -p 'require(\"./lerna.json\").version')\"",
     "release": "lerna publish from-package",
     "ci:release": "lerna publish from-package --yes",
     "copy-changelog": "git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy",
@@ -27,16 +26,15 @@
     "prepare": "git config --local core.hooksPath .githooks",
     "versionup": "lerna version"
   },
-  "workspaces": [
-    "packages/*",
-    "packages/@monorepo-utils/*"
-  ],
   "keywords": [
     "monorepot"
   ],
   "author": "azu",
   "license": "MIT",
+  "packageManager": "pnpm@12.16.1",
   "devDependencies": {
+    "@monorepo-utils/collect-changelog": "workspace:*",
+    "@monorepo-utils/workspaces-to-typescript-project-references": "workspace:*",
     "lerna": "^7.4.2",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",

@@ -11,15 +11,15 @@
 ## Pull Request
 
 This repository is a monorepo.
-This repository require [Yarn](https://yarnpkg.com/) for setup.
+This repository require [pnpm](https://pnpm.io/) for setup.
 
-- [Yarn Installation](https://yarnpkg.com/)
+- [pnpm Installation](https://pnpm.io/installation)
 
 You should run `bootstrap` script before develop it.
 
 ```
-yarn install
-yarn run bootstrap
+pnpm install
+pnpm run bootstrap
 ```
 
 ### Running Tests
@@ -27,7 +27,7 @@ yarn run bootstrap
 Run tests by following commands:
 
 ```
-yarn test
+pnpm test
 ```
 
 ## Release flow
@@ -45,17 +45,17 @@ git push origin HEAD -u
 
 Run one of following command.
 
-Recommend: `yarn run versionup`
+Recommend: `pnpm run versionup`
 
 ```
 # major update for all
-yarn run versionup:major
+pnpm run versionup:major
 # minor update for all
-yarn run versionup:minor
+pnpm run versionup:minor
 # path update for all
-yarn run versionup:patch
+pnpm run versionup:patch
 # automatic versioning
-yarn run versionup
+pnpm run versionup
 ```
 
 3. Copy Changelog
@@ -63,7 +63,7 @@ yarn run versionup
 Copy CHANGELOG from the bump tags.
 
 ```
-yarn run copy-changelog
+pnpm run copy-changelog
 # git tag --points-at HEAD | xargs -I{} monorepo-utils-collect-changelog {} | pbcopy
 ```
 
@@ -83,10 +83,10 @@ Finally, publish new version to npm
 
 ```
 # publish to npm
-yarn run release
+pnpm run release
 ```
 
-(not `yarn publish`)
+(not `pnpm publish`)
 
 
 FINISH.

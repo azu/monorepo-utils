@@ -1,4 +1,4 @@
-import semverMatch from "semver-match";
+import semver from "semver";
 import { PackageManagerPlugin, PackageReference } from "./PackageManagerPlugin";
 import { getPackages } from "@monorepo-utils/package-utils";
 import { PackageResult } from "@monorepo-utils/package-utils";
@@ -27,7 +27,9 @@ export const plugin: PackageManagerPlugin = (options) => {
             const matchPkg = monorepoPackages.find((info) => {
                 if (info.packageJSON.name !== name) return false;
                 if (version.startsWith("workspace:")) return true;
-                return !!semverMatch(version, [info.packageJSON.version]);
+                if (version === "*") return true;
+                // version is a range like "^1.0.0". if it is not a range(e.g. a tag), it does not match
+                return semver.validRange(version) !== null && semver.satisfies(info.packageJSON.version, version);
             });
             if (!matchPkg) {
                 return null;

@@ -1,47 +1,48 @@
 #!/usr/bin/env node
 "use strict";
-const meow = require("meow");
-const path = require("upath");
+const { parseArgs } = require("node:util");
+const path = require("node:path");
 const execute = require("../lib/cli").execute;
 
-const cli = meow(
-    `
-    Usage
-      $ collect-changelog-from-tag [option] "tag@version"
+const helpText = `
+  Usage
+    $ collect-changelog-from-tag [option] "tag@version"
 
-    Options
-      --changelog the file path of CHANGELOG.md
-      --directory the root directory of monorepo
-      --template  handlebars template path
-      --name set package name if it not defined
+  Options
+    --changelog the file path of CHANGELOG.md
+    --directory the root directory of monorepo
+    --template  handlebars template path
+    --name set package name if it not defined
 
-    Examples
-      $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
-      # current directory is project root for independent mode
-      $ collect-changelog-from-tag "tag@version"
-      # get changelog content from specific CHANGELOG.md for fixed mode
-      $ collect-changelog-from-tag --changelog ./CHANGELOG.md "tag@version"
-      
-`,
-    {
-        flags: {
-            directory: {
-                type: "string",
-            },
-            changelog: {
-                type: "string",
-            },
-            template: {
-                type: "string",
-            },
-            name: {
-                type: "string",
-            },
-        },
-        autoHelp: true,
-        autoVersion: true,
+  Examples
+    $ collect-changelog-from-tag --directory /path/to/monorepo-project/ "tag@version"
+    # current directory is project root for independent mode
+    $ collect-changelog-from-tag "tag@version"
+    # get changelog content from specific CHANGELOG.md for fixed mode
+    $ collect-changelog-from-tag --changelog ./CHANGELOG.md "tag@version"
+`;
+
+const cli = parseArgs({
+    allowPositionals: true,
+    options: {
+        directory: { type: "string" },
+        changelog: { type: "string" },
+        template: { type: "string" },
+        name: { type: "string" },
+        help: { type: "boolean" },
+        version: { type: "boolean" },
     },
-);
+});
+cli.flags = cli.values;
+cli.input = cli.positionals;
+if (cli.flags.help) {
+    console.log(helpText);
+    process.exit(0);
+}
+if (cli.flags.version) {
+    console.log(require("../package.json").version);
+    process.exit(0);
+}
 
 const monorepoDirectory = path.resolve(process.cwd(), cli.flags.directory || "");
 const name = cli.flags.name;

@@ -11,30 +11,46 @@ on:
           - patch
           - minor
           - major
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
+      - name: Install
+        run: pnpm install --frozen-lockfile
       - name: Update Version
         run: |
           git config --global user.email "${GIT_AUTHOR_EMAIL}"
           git config --global user.name "${GIT_AUTHOR_NAME}"
-          npm run ci:versionup:${SEMVER} --yes
+          pnpm run "ci:versionup:${SEMVER}"
         env:
           SEMVER: ${{ github.event.inputs.semver }}
           GIT_AUTHOR_NAME: ${{ github.actor }}
           GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
       - name: Set PACKAGE_VERSION
-        run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(jq -r .version lerna.json)" >> "$GITHUB_ENV"
       - name: Set GitHub Release Note
         id: release_note
-        uses: actions/github-script@v6
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const result = await exec.getExecOutput(`gh api "/repos/{owner}/{repo}/releases/generate-notes" -f tag_name="${process.env.PACKAGE_VERSION}" --jq .body`, [], {
@@ -46,7 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(release): v${{ env.PACKAGE_VERSION }}"

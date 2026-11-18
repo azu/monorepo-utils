@@ -78,7 +78,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
-          # Node.js 24 bundles npm 11 that supports trusted publishing (OIDC) and `npm stage publish`
+          # pnpm stage publish supports trusted publishing (OIDC) natively
           node-version: 24
           registry-url: https://registry.npmjs.org
       - name: Git Identity
@@ -95,19 +95,10 @@ jobs:
       - name: Build
         run: pnpm -r run build
       - name: Staged Publish to npm
-        # submit each package that is not published yet to npm staging area
-        # approve the staged packages on npmjs.com after this step
-        # skip packages that are already published, because lerna fixed mode does not bump unchanged packages
-        run: |
-          # shellcheck disable=SC2016 # expand in each package, not here
-          pnpm -r exec sh -c '
-            version=$(jq -r .version package.json)
-            if npm view "${PNPM_PACKAGE_NAME}@${version}" version > /dev/null 2>&1; then
-              echo "${PNPM_PACKAGE_NAME}@${version} is already published"
-            else
-              npm stage publish --access public
-            fi
-          '
+        # submit packages to npm staging area, and approve them on npmjs.com after this step
+        # it skips packages whose version is already published
+        # (lerna fixed mode does not bump unchanged packages)
+        run: pnpm -r stage publish --no-git-checks --access public
       - name: Create Git Tag
         uses: pkgdeps/git-tag-action@a5a161774bace8b4e1969dd850c67a7421f1b710 # v3.0.1
         with:
